@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Latchpoint Studios
 
-## Getting Started
+Marketing site for Latchpoint Studios, built with Next.js 16, Tailwind CSS v4, and Motion.
 
-First, run the development server:
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Contact form
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`/contact` posts to `src/app/api/contact/route.ts`. Until the environment
+variables below are set, submissions are accepted and logged to the server
+console but not emailed.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Set these in `.env.local` (and in Vercel's project settings for production)
+to enable real delivery via [Resend](https://resend.com):
 
-## Learn More
+```
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=you@yourdomain.com
+```
 
-To learn more about Next.js, take a look at the following resources:
+The `from` address in the API route (`site@latchpointstudios.com`) needs to
+be on a domain verified in Resend before delivery will work.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Before going live
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **`hello@latchpointstudios.com`** is a placeholder used in the footer,
+  contact page, and API route. Swap it for a real inbox you control, or
+  register the domain.
+- **About page bio** is a first draft inferred from limited context. Review
+  and personalize the copy in `src/app/about/page.tsx` before publishing.
+- **Portfolio screenshots** in `public/work/` were captured from the live
+  sites at build time. Re-capture them if those sites change meaningfully.

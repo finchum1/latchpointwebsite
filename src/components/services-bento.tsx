@@ -1,0 +1,80 @@
+import {
+  Browser,
+  ChartBar,
+  Devices,
+  House,
+  UsersThree,
+} from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./reveal";
+
+const services = [
+  {
+    icon: Browser,
+    name: "Websites",
+    description:
+      "Marketing sites and landing pages built to load fast and convert, from the first pixel to the last analytics event.",
+    span: "lg:col-span-2",
+    tint: true,
+  },
+  {
+    icon: Devices,
+    name: "Web apps",
+    description:
+      "Full products with accounts, data, and billing, the kind your customers use every day, not just visit once.",
+    span: "lg:col-span-1",
+    tint: true,
+  },
+  {
+    icon: ChartBar,
+    name: "Dashboards",
+    description: "Internal tools that turn a spreadsheet habit into a real, permission-aware system.",
+    span: "lg:col-span-1",
+  },
+  {
+    icon: House,
+    name: "Personal apps",
+    description: "Small, private tools built around exactly one household's or one team's workflow.",
+    span: "lg:col-span-1",
+  },
+  {
+    icon: UsersThree,
+    name: "CRMs",
+    description: "Lead and customer tracking shaped around how your team actually follows up.",
+    span: "lg:col-span-1",
+  },
+];
+
+export function ServicesBento() {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+      <Reveal>
+        <h2 className="max-w-xl text-3xl font-medium tracking-tight text-text sm:text-4xl">
+          What we build
+        </h2>
+        <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
+          One studio, five kinds of software. Whatever your business needs
+          next, it starts as a conversation, not a form.
+        </p>
+      </Reveal>
+
+      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s, i) => (
+          <Reveal key={s.name} delay={i * 0.06} className={s.span}>
+            <div
+              className={`group relative h-full overflow-hidden rounded-[20px] border border-border p-7 transition-colors duration-300 hover:border-border-strong ${
+                s.tint ? "bg-gradient-to-br from-accent-soft to-bg-elevated" : "bg-bg-elevated"
+              }`}
+            >
+              <s.icon
+                weight="light"
+                className="size-8 text-accent"
+              />
+              <h3 className="mt-6 text-lg font-medium text-text">{s.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-muted">{s.description}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}

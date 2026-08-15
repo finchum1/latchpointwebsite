@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+/*
+  Latchpoint Studios design tokens.
+
+  Theme: locked dark. This is a deliberate brand choice -- the whole site is
+  one continuous dark surface, no per-section flips to light.
+
+  Shape rule (documented, so it stays consistent everywhere):
+    - Buttons: full pill radius
+    - Cards / panels: 20px  (--radius-card)
+    - Inputs: 10px          (--radius-input)
+
+  Color rule: one accent, "ember" (a desaturated burnt orange), used
+  identically everywhere. No secondary accent hues anywhere on the site.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #08090b;
+  --bg-elevated: #101215;
+  --bg-elevated-2: #17191d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #f5f5f4;
+  --text-muted: #a4a5ac;
+  --text-faint: #6c6e76;
+
+  --accent: #e8623f;
+  --accent-hover: #f2794f;
+  --accent-press: #c94f2e;
+  --accent-soft: rgba(232, 98, 63, 0.14);
+  --accent-foreground: #08090b;
+
+  --radius-card: 20px;
+  --radius-input: 10px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-elevated-2: var(--bg-elevated-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-press: var(--accent-press);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Grain overlay -- fixed, pointer-events-none, never on a scrolling container. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
