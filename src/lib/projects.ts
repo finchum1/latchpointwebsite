@@ -67,8 +67,20 @@ export const projects: Project[] = [
     description:
       "A conversion-focused site for a solo home inspection business: clear credentials, a service-area map, and a schedule flow that turns a nervous home buyer into a booked inspection.",
     image: "/work/thrively.png",
-    url: "https://thrively-inspections.vercel.app",
+    url: "https://thrivelyinspections.com",
     tags: ["Next.js", "Vercel", "Lead gen"],
+    year: "2026",
+  },
+  {
+    slug: "terrence-finchum",
+    name: "Terrence Finchum",
+    category: "Real estate agent website",
+    summary: "A personal agent site built around one listing at a time, not a brokerage roster.",
+    description:
+      "The public site for an individual agent under The Agency Oklahoma: a full-bleed featured listing up top, areas served, and a blog, all pointed at one call-to-action instead of splitting attention across a brokerage's full team.",
+    image: "/work/terrencefinchum.png",
+    url: "https://terrencefinchum.com",
+    tags: ["Next.js", "Marketing site"],
     year: "2026",
   },
 ];
