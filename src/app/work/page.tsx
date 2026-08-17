@@ -19,7 +19,7 @@ export default function WorkPage() {
             Work
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
-            Five products, five different problems. Everything below is live
+            Six products, six different problems. Everything below is live
             today, not a mockup.
           </p>
         </Reveal>
