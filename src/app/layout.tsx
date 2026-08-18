@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     template: "%s | Latchpoint Studios",
   },
   description:
-    "Latchpoint Studios designs and builds websites, apps, dashboards, and CRMs for founders and small teams, usually in weeks, not quarters.",
+    "Latchpoint Studios designs and builds websites, apps, dashboards, client portals, and CRMs for founders and small teams, usually in weeks, not quarters.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

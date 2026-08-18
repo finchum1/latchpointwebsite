@@ -54,7 +54,8 @@ export default function AboutPage() {
                 Most small businesses don’t need a twelve-person agency and a
                 six-month timeline. They need one working product: a site
                 that books appointments, a dashboard that replaces a
-                spreadsheet, a CRM that remembers to follow up.
+                spreadsheet, a portal clients log into instead of emailing
+                you for updates.
               </p>
               <p>
                 Latchpoint Studios exists to build exactly that, at a pace
@@ -67,6 +68,12 @@ export default function AboutPage() {
                 use, which is part of why the products that come out of it
                 get judged the same way: does it hold up when someone
                 depends on it.
+              </p>
+              <p>
+                The services page lists six categories because they cover
+                most of what people ask for, not because that’s the limit.
+                If it runs on software, it’s probably something Latchpoint
+                Studios can build.
               </p>
             </div>
           </Reveal>

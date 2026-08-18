@@ -1,5 +1,6 @@
 import {
   Browser,
+  Buildings,
   ChartBar,
   Devices,
   House,
@@ -21,13 +22,19 @@ const services = [
     name: "Web apps",
     description:
       "Full products with accounts, data, and billing, the kind your customers use every day, not just visit once.",
-    span: "lg:col-span-1",
+    span: "lg:col-span-2",
     tint: true,
   },
   {
     icon: ChartBar,
     name: "Dashboards",
     description: "Internal tools that turn a spreadsheet habit into a real, permission-aware system.",
+    span: "lg:col-span-1",
+  },
+  {
+    icon: Buildings,
+    name: "Back office & portals",
+    description: "Quotes, invoices, billing, and a login your clients can check status through themselves.",
     span: "lg:col-span-1",
   },
   {
@@ -52,12 +59,13 @@ export function ServicesBento() {
           What we build
         </h2>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
-          One studio, five kinds of software. Whatever your business needs
-          next, it starts as a conversation, not a form.
+          One studio, six kinds of software, and probably a seventh if
+          that’s not quite what you need. If it runs on code, it starts
+          as a conversation, not a form.
         </p>
       </Reveal>
 
-      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.06} className={s.span}>
             <div

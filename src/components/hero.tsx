@@ -31,8 +31,8 @@ export function Hero() {
             {...fadeUp(0.1)}
             className="mt-6 max-w-md text-base leading-relaxed text-text-muted sm:text-lg"
           >
-            Websites, apps, dashboards, and CRMs, designed and shipped by one
-            studio, usually in weeks, not quarters.
+            Websites, apps, dashboards, client portals, and CRMs, designed
+            and shipped by one studio, usually in weeks, not quarters.
           </motion.p>
 
           <motion.div {...fadeUp(0.2)} className="mt-9 flex flex-wrap items-center gap-4">

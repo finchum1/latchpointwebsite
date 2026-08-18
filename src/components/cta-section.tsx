@@ -11,8 +11,8 @@ export function CTASection() {
             Have a project in mind?
           </h2>
           <p className="relative mx-auto mt-4 max-w-md text-base leading-relaxed text-text-muted">
-            Tell us what you’re trying to build. We’ll reply within a
-            business day with next steps.
+            Tell us what you’re trying to build, however specific or
+            unusual. We’ll reply within a business day with next steps.
           </p>
           <div className="relative mt-9 flex justify-center">
             <Button href="/contact">Start a project</Button>

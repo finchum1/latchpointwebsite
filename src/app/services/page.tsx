@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   Browser,
+  Buildings,
   ChartBar,
   Check,
   Devices,
@@ -14,10 +15,11 @@ import { CTASection } from "@/components/cta-section";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: "Websites, web apps, dashboards, personal apps, and CRMs, designed and built by Latchpoint Studios.",
+  description:
+    "Websites, web apps, dashboards, personal apps, CRMs, back office tools, and client portals, designed and built by Latchpoint Studios.",
 };
 
-const icons = [Browser, Devices, ChartBar, House, UsersThree];
+const icons = [Browser, Devices, ChartBar, House, UsersThree, Buildings];
 
 export default function ServicesPage() {
   return (
@@ -28,9 +30,9 @@ export default function ServicesPage() {
             Services
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
-            Five kinds of software, one team building all of them. Pick a
-            starting point below, or tell us what you’re solving for and
-            we’ll figure out the shape together.
+            Six kinds of software below, one team building all of them. If
+            what you need doesn’t fit neatly into any of them, tell us
+            anyway, that’s usually where the interesting projects start.
           </p>
         </Reveal>
       </section>

@@ -41,4 +41,11 @@ export const services: Service[] = [
       "Lead and customer tracking shaped around how your team actually sells, not a generic pipeline you have to bend around.",
     includes: ["Pipeline stages that match your process", "Notes and history on every contact", "Reminders for the follow-up you'd otherwise forget", "Import from your current spreadsheet"],
   },
+  {
+    name: "Back office & portals",
+    tagline: "The system that runs behind the login",
+    description:
+      "Internal tools and client-facing portals: quotes and invoices, billing, project tracking, anything your business or your customers need behind a sign-in.",
+    includes: ["A login only your team or your clients have", "Quotes, invoices, and billing built in", "Real-time status your clients can check themselves", "Stripe for one-time and recurring payments"],
+  },
 ];

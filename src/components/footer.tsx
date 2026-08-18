@@ -27,8 +27,8 @@ export function Footer() {
           <div className="max-w-sm">
             <Wordmark />
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
-              A small studio that designs and builds websites, apps, dashboards, and CRMs for
-              founders and small teams.
+              A small studio that designs and builds websites, apps, dashboards, portals, and
+              CRMs, and most things in between, for founders and small teams.
             </p>
           </div>
 
