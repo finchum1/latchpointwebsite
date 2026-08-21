@@ -83,16 +83,4 @@ export const projects: Project[] = [
     tags: ["Next.js", "Marketing site"],
     year: "2026",
   },
-  {
-    slug: "karobar-khata",
-    name: "Karobar Khata",
-    category: "Business ledger app",
-    summary: "A cloud ledger that replaces the paper diary small businesses have used for decades.",
-    description:
-      "Customers and receivables, suppliers and payables, and daily expenses, all in one place for small business owners switching off paper. Statements export straight to PDF, so going digital doesn't mean losing the paper trail.",
-    image: "/work/karobar-khata.png",
-    url: "https://karobar-khata.vercel.app",
-    tags: ["React", "Supabase", "PDF export"],
-    year: "2026",
-  },
 ];
