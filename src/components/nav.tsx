@@ -32,7 +32,7 @@ export function Nav() {
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
       <div className="relative w-full max-w-4xl">
         <div className="glass-pill flex items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2">
-          <Link href="/" className="shrink-0">
+          <Link href="/" className="flex shrink-0 items-center">
             <Wordmark />
           </Link>
 
