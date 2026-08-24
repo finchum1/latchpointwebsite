@@ -69,6 +69,53 @@ body {
   color: var(--accent-foreground);
 }
 
+/*
+  Liquid Glass approximation (web, not Apple's native material -- see
+  Apple's HIG for the real thing on Apple platforms). Used for the floating
+  nav pill: blur + saturation + layered borders + a soft highlight, with a
+  solid fallback when the OS asks for reduced transparency.
+
+  Wrapped in @layer components: Tailwind's utilities live in @layer
+  utilities, and an *unlayered* rule beats every layered one regardless of
+  source order or specificity. Without this layer, this class's own
+  `position: relative` would silently win over a `position: absolute`
+  utility applied on the same element.
+*/
+@layer components {
+  .glass-pill {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
+      rgba(8, 9, 11, 0.55);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+      0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .glass-pill::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.16), transparent 45%);
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .glass-pill {
+      background: rgba(8, 9, 11, 0.97);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+}
+
 /* Grain overlay -- fixed, pointer-events-none, never on a scrolling container. */
 .grain {
   position: fixed;

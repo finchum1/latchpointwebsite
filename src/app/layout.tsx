@@ -32,7 +32,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-bg font-sans text-text">
         <div className="grain" />
         <Nav />
-        <main className="flex-1">{children}</main>
+        {/* The nav is now `fixed` (a floating pill) instead of occupying
+            flow height, so this reserves the same clearance every page
+            used to get for free from the old in-flow header. */}
+        <main className="flex-1 pt-[104px] sm:pt-[112px]">{children}</main>
         <Footer />
       </body>
     </html>
