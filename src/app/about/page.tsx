@@ -84,8 +84,8 @@ export default function AboutPage() {
             </h2>
             <div className="mt-5 flex flex-col gap-6">
               {values.map((v) => (
-                <div key={v.name} className="flex gap-4">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] border border-border-strong text-accent">
+                <div key={v.name} className="group flex gap-4">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] border border-border-strong text-accent transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-accent/60 group-hover:bg-accent-soft">
                     <v.icon weight="light" className="size-5" />
                   </div>
                   <div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "@phosphor-icons/react";
-import { motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
+import { motion, useMotionTemplate, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import type { Project } from "@/lib/projects";
 
 /**
@@ -17,6 +17,9 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
   const my = useMotionValue(0.5);
   const rotateX = useTransform(my, [0, 1], [6, -6]);
   const rotateY = useTransform(mx, [0, 1], [-6, 6]);
+  const spotlightX = useTransform(mx, (v) => `${v * 100}%`);
+  const spotlightY = useTransform(my, (v) => `${v * 100}%`);
+  const spotlight = useMotionTemplate`radial-gradient(500px circle at ${spotlightX} ${spotlightY}, var(--accent-soft), transparent 70%)`;
 
   function handleMove(e: React.MouseEvent<HTMLDivElement>) {
     if (reduce) return;
@@ -38,6 +41,13 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         className="relative overflow-hidden rounded-[20px] border border-border bg-bg-elevated transition-colors duration-300 group-hover:border-border-strong"
       >
+        {!reduce && (
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+            style={{ background: spotlight }}
+          />
+        )}
         <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-bg-elevated-2">
           <Image
             src={project.image}

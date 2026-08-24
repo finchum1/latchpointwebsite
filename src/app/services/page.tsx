@@ -44,12 +44,12 @@ export default function ServicesPage() {
             return (
               <Reveal key={s.name} delay={i * 0.04}>
                 <div
-                  className={`grid grid-cols-1 gap-8 py-12 lg:grid-cols-12 ${
+                  className={`group grid grid-cols-1 gap-8 py-12 transition-colors duration-300 lg:grid-cols-12 ${
                     i % 2 === 1 ? "bg-bg-elevated/40" : ""
                   }`}
                 >
                   <div className="lg:col-span-4">
-                    <div className="flex size-12 items-center justify-center rounded-[10px] border border-border-strong text-accent">
+                    <div className="flex size-12 items-center justify-center rounded-[10px] border border-border-strong text-accent transition-all duration-300 group-hover:border-accent/60 group-hover:bg-accent-soft">
                       <Icon weight="light" className="size-6" />
                     </div>
                     <h2 className="mt-5 text-2xl font-medium tracking-tight text-text">{s.name}</h2>

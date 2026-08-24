@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { CheckCircle, WarningCircle } from "@phosphor-icons/react";
 import { motion } from "motion/react";
+import { Magnetic } from "./magnetic";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "w-full rounded-[10px] border border-border-strong bg-bg-elevated px-4 py-3 text-[15px] text-text placeholder:text-text-faint outline-none transition-colors focus:border-accent";
+  "w-full rounded-[10px] border border-border-strong bg-bg-elevated px-4 py-3 text-[15px] text-text placeholder:text-text-faint outline-none transition-all duration-300 focus:border-accent focus:ring-4 focus:ring-accent/10";
 
 const labelClass = "text-sm font-medium text-text";
 
@@ -132,13 +133,15 @@ export function ContactForm() {
         </div>
       )}
 
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="mt-2 inline-flex w-fit items-center justify-center rounded-full bg-accent px-6 py-3 text-[15px] font-medium leading-none text-accent-foreground transition-all duration-300 hover:bg-accent-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        {status === "submitting" ? "Sending..." : "Send message"}
-      </button>
+      <Magnetic strength={0.2}>
+        <button
+          type="submit"
+          disabled={status === "submitting"}
+          className="mt-2 inline-flex w-fit items-center justify-center rounded-full bg-accent px-6 py-3 text-[15px] font-medium leading-none text-accent-foreground transition-all duration-300 hover:bg-accent-hover active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {status === "submitting" ? "Sending..." : "Send message"}
+        </button>
+      </Magnetic>
     </form>
   );
 }

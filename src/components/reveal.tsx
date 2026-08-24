@@ -6,8 +6,9 @@ import type { ReactNode } from "react";
 /**
  * Scroll-triggered entrance. Motivation: hierarchy + storytelling -- content
  * arrives in reading order as the visitor scrolls, instead of dumping the
- * whole page at once. Uses whileInView (no scroll-position React state, no
- * window scroll listeners) so it stays cheap on mobile.
+ * whole page at once. The slight blur-to-sharp adds a touch of focus-pull
+ * polish without being loud. Uses whileInView (no scroll-position React
+ * state, no window scroll listeners) so it stays cheap on mobile.
  */
 export function Reveal({
   children,
@@ -26,8 +27,8 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduce ? false : { opacity: 0, y, filter: "blur(6px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once, amount: 0.3 }}
       transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
     >
@@ -78,8 +79,13 @@ export function RevealItem({
     <motion.div
       className={className}
       variants={{
-        hidden: reduce ? {} : { opacity: 0, y },
-        show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
+        hidden: reduce ? {} : { opacity: 0, y, filter: "blur(6px)" },
+        show: {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+        },
       }}
     >
       {children}

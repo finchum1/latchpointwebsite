@@ -33,15 +33,15 @@ export default function WorkPage() {
                 id={p.slug}
                 className="grid scroll-mt-24 grid-cols-1 items-center gap-8 lg:grid-cols-5 lg:gap-12"
               >
-                <div className="order-2 lg:order-1 lg:col-span-3">
-                  <div className="overflow-hidden rounded-[20px] border border-border bg-bg-elevated-2">
+                <div className="group order-2 lg:order-1 lg:col-span-3">
+                  <div className="overflow-hidden rounded-[20px] border border-border bg-bg-elevated-2 transition-colors duration-300 group-hover:border-border-strong">
                     <Image
                       src={p.image}
                       alt={`${p.name} screenshot`}
                       width={1440}
                       height={900}
                       priority={i === 0}
-                      className="w-full object-cover object-top"
+                      className="w-full object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
                     />
                   </div>
                 </div>

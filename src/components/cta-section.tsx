@@ -1,4 +1,5 @@
 import { Button } from "./button";
+import { Magnetic } from "./magnetic";
 import { Reveal } from "./reveal";
 
 export function CTASection() {
@@ -15,7 +16,9 @@ export function CTASection() {
             unusual. We’ll reply within a business day with next steps.
           </p>
           <div className="relative mt-9 flex justify-center">
-            <Button href="/contact">Start a project</Button>
+            <Magnetic>
+              <Button href="/contact">Start a project</Button>
+            </Magnetic>
           </div>
         </div>
       </Reveal>

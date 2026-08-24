@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
 import { Wordmark } from "./logomark";
 import { Button } from "./button";
+import { Magnetic } from "./magnetic";
 
 const links = [
   { href: "/work", label: "Work" },
@@ -37,23 +38,33 @@ export function Nav() {
           </Link>
 
           <nav className="hidden items-center gap-7 lg:flex">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`text-sm transition-colors ${
-                  pathname === l.href ? "text-text" : "text-text-muted hover:text-text"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {links.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`group relative text-sm transition-colors ${
+                    active ? "text-text" : "text-text-muted hover:text-text"
+                  }`}
+                >
+                  {l.label}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${
+                      active ? "scale-x-100" : ""
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="hidden lg:block">
-            <Button href="/contact" className="!px-5 !py-2 !text-sm">
-              Start a project
-            </Button>
+            <Magnetic strength={0.25}>
+              <Button href="/contact" className="!px-5 !py-2 !text-sm">
+                Start a project
+              </Button>
+            </Magnetic>
           </div>
 
           <button
