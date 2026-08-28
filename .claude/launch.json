@@ -2,10 +2,16 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "latchpoint-studios",
+      "name": "latchpoint-studios-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/terrencefinchum/Desktop/Claude Projects/latchpoint-studios", "--", "-p", "3001"],
+      "port": 3001
+    },
+    {
+      "name": "latchpoint-hq-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/terrencefinchum/Desktop/Claude Projects/latchpoint-hq", "--", "-p", "3002"],
+      "port": 3002
     }
   ]
 }
