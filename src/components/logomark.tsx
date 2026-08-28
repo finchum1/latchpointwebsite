@@ -1,7 +1,7 @@
 export function Logomark({ className = "" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 28 28"
+      viewBox="2.5 1.2 20.3 20.3"
       fill="none"
       className={className}
       aria-hidden="true"
