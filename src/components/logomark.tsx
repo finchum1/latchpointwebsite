@@ -15,7 +15,7 @@ export function Logomark({ className = "" }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="2"
       />
-      <circle cx="21" cy="7" r="4" fill="var(--accent)" />
+      <rect x="17" y="3" width="8" height="8" rx="2.8" fill="var(--accent)" />
     </svg>
   );
 }
