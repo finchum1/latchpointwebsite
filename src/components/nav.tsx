@@ -105,24 +105,31 @@ export function Nav() {
             })}
           </nav>
 
-          <ThemeToggle />
+          {/* Grouped together (not spread by justify-between on the pill)
+              so the toggle sits right next to whichever trailing control is
+              visible at the current breakpoint -- the CTA on desktop, the
+              hamburger on mobile -- instead of floating alone mid-pill once
+              the nav links and CTA collapse away below lg. */}
+          <div className="flex shrink-0 items-center gap-2">
+            <ThemeToggle />
 
-          <div className="hidden lg:block">
-            <Magnetic strength={0.25}>
-              <Button href="/contact" className="!px-5 !py-2 !text-sm">
-                Start a project
-              </Button>
-            </Magnetic>
+            <div className="hidden lg:block">
+              <Magnetic strength={0.25}>
+                <Button href="/contact" className="!px-5 !py-2 !text-sm">
+                  Start a project
+                </Button>
+              </Magnetic>
+            </div>
+
+            <button
+              className="flex size-9 shrink-0 items-center justify-center text-text lg:hidden"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+              aria-expanded={open}
+            >
+              {open ? <X size={20} /> : <List size={20} />}
+            </button>
           </div>
-
-          <button
-            className="flex size-9 shrink-0 items-center justify-center text-text lg:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-            aria-expanded={open}
-          >
-            {open ? <X size={20} /> : <List size={20} />}
-          </button>
         </div>
 
         {/* Rendered as a sibling of .glass-pill, not a child of it -- that
