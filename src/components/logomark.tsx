@@ -1,7 +1,7 @@
 export function Logomark({ className = "" }: { className?: string }) {
   return (
     <svg
-      viewBox="0 0 28 28"
+      viewBox="2.5 1.2 20.3 20.3"
       fill="none"
       className={className}
       aria-hidden="true"
@@ -15,7 +15,7 @@ export function Logomark({ className = "" }: { className?: string }) {
         stroke="currentColor"
         strokeWidth="2"
       />
-      <circle cx="21" cy="7" r="4" fill="var(--accent)" />
+      <rect x="14.8" y="1.2" width="8" height="8" rx="2.7" fill="var(--accent)" />
     </svg>
   );
 }
