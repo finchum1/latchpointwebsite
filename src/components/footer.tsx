@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { Wordmark } from "./logomark";
+import { solutions } from "@/lib/solutions";
 
 const columns = [
+  {
+    title: "Solutions",
+    links: solutions.map((s) => ({ href: `/solutions/${s.slug}`, label: s.name })),
+  },
   {
     title: "Studio",
     links: [
@@ -28,11 +33,12 @@ export function Footer() {
             <Wordmark />
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
               A small studio that designs and builds websites, apps, dashboards, portals, and
-              CRMs, and most things in between, for founders and small teams.
+              CRMs, for businesses, nonprofits and ministries, and the occasional personal
+              project.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-12 sm:gap-20">
+          <div className="grid grid-cols-2 gap-12 sm:grid-cols-3 sm:gap-16">
             {columns.map((col) => (
               <div key={col.title}>
                 <h3 className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">

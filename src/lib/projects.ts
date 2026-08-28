@@ -1,3 +1,5 @@
+export type Audience = "small-business" | "real-estate" | "personal" | "nonprofit";
+
 export type Project = {
   slug: string;
   name: string;
@@ -8,6 +10,7 @@ export type Project = {
   url: string;
   tags: string[];
   year: string;
+  audience: Audience;
 };
 
 export const projects: Project[] = [
@@ -22,6 +25,7 @@ export const projects: Project[] = [
     url: "https://oaksteadly-sooty-three.vercel.app",
     tags: ["Next.js", "Supabase", "Auth"],
     year: "2026",
+    audience: "personal",
   },
   {
     slug: "evertill",
@@ -34,6 +38,7 @@ export const projects: Project[] = [
     url: "https://evertill-gules.vercel.app",
     tags: ["Next.js", "Postgres", "Drag & drop"],
     year: "2026",
+    audience: "small-business",
   },
   {
     slug: "the-agency-listings",
@@ -46,6 +51,7 @@ export const projects: Project[] = [
     url: "https://the-agency-listings.vercel.app",
     tags: ["Next.js", "Supabase", "Multi-tenant"],
     year: "2026",
+    audience: "real-estate",
   },
   {
     slug: "the-agency-oklahoma",
@@ -58,6 +64,7 @@ export const projects: Project[] = [
     url: "https://the-agency-oklahoma.vercel.app",
     tags: ["Next.js", "Marketing site"],
     year: "2026",
+    audience: "real-estate",
   },
   {
     slug: "thrively-inspections",
@@ -70,6 +77,7 @@ export const projects: Project[] = [
     url: "https://thrivelyinspections.com",
     tags: ["Next.js", "Vercel", "Lead gen"],
     year: "2026",
+    audience: "small-business",
   },
   {
     slug: "terrence-finchum",
@@ -82,5 +90,6 @@ export const projects: Project[] = [
     url: "https://terrencefinchum.com",
     tags: ["Next.js", "Marketing site"],
     year: "2026",
+    audience: "real-estate",
   },
 ];

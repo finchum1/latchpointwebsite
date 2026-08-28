@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { CTASection } from "@/components/cta-section";
 import { Lightning, ChatCircleText, GitBranch } from "@phosphor-icons/react/dist/ssr";
@@ -70,10 +71,14 @@ export default function AboutPage() {
                 depends on it.
               </p>
               <p>
-                The services page lists six categories because they cover
-                most of what people ask for, not because that’s the limit.
-                If it runs on software, it’s probably something Latchpoint
-                Studios can build.
+                Not every project here is a business, either. Some of it
+                is a church keeping track of who gave what, a family
+                budgeting together, a brokerage of one. The services page
+                lists what gets built; the{" "}
+                <Link href="/solutions" className="text-text underline decoration-border-strong underline-offset-4 transition-colors hover:decoration-accent">
+                  solutions page
+                </Link>{" "}
+                is closer to who it gets built for.
               </p>
             </div>
           </Reveal>
