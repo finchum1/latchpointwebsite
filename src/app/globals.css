@@ -3,8 +3,13 @@
 /*
   Latchpoint Studios design tokens.
 
-  Theme: locked dark. This is a deliberate brand choice -- the whole site is
-  one continuous dark surface, no per-section flips to light.
+  Theme: dark by default (the brand's primary, most-designed-for surface),
+  with an explicit light mode a visitor can opt into via the toggle in the
+  nav. Default stays dark rather than following prefers-color-scheme,
+  since dark is the deliberate brand expression here, not just "whichever
+  the OS prefers" -- a visitor's choice is remembered in localStorage and
+  restored before paint (see the inline script in layout.tsx), so there's
+  no flash on repeat visits either direction.
 
   Shape rule (documented, so it stays consistent everywhere):
     - Buttons: full pill radius
@@ -12,7 +17,7 @@
     - Inputs: 10px          (--radius-input)
 
   Color rule: one accent, "ember" (a desaturated burnt orange), used
-  identically everywhere. No secondary accent hues anywhere on the site.
+  identically in both themes. No secondary accent hues anywhere on the site.
 */
 
 :root {
@@ -33,6 +38,46 @@
 
   --radius-card: 20px;
   --radius-input: 10px;
+
+  /* Glass pill material -- see the .glass-pill rule below for how these
+     compose. Kept as tokens (rather than hard-coded in the rule) so light
+     mode can swap the whole material, not just the surface colors. */
+  --glass-grad-1: rgba(255, 255, 255, 0.1);
+  --glass-grad-2: rgba(255, 255, 255, 0.03);
+  --glass-base: rgba(8, 9, 11, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-inset-top: rgba(255, 255, 255, 0.14);
+  --glass-inset-bottom: rgba(255, 255, 255, 0.04);
+  --glass-shadow: rgba(0, 0, 0, 0.35);
+  --glass-highlight: rgba(255, 255, 255, 0.16);
+  --glass-fallback: rgba(8, 9, 11, 0.97);
+}
+
+:root[data-theme="light"] {
+  --bg: #fafafa;
+  --bg-elevated: #f2f2f0;
+  --bg-elevated-2: #e8e8e5;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --text: #16171a;
+  --text-muted: #55565e;
+  --text-faint: #83848c;
+
+  --accent: #e8623f;
+  --accent-hover: #d9522f;
+  --accent-press: #c2461f;
+  --accent-soft: rgba(232, 98, 63, 0.12);
+  --accent-foreground: #08090b;
+
+  --glass-grad-1: rgba(255, 255, 255, 0.75);
+  --glass-grad-2: rgba(255, 255, 255, 0.35);
+  --glass-base: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-inset-top: rgba(255, 255, 255, 0.9);
+  --glass-inset-bottom: rgba(0, 0, 0, 0.04);
+  --glass-shadow: rgba(0, 0, 0, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.6);
+  --glass-fallback: rgba(250, 250, 250, 0.97);
 }
 
 @theme inline {
@@ -59,9 +104,16 @@ html {
   color-scheme: dark;
 }
 
+html[data-theme="light"] {
+  color-scheme: light;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 ::selection {
@@ -86,16 +138,19 @@ body {
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    border: 1px solid var(--glass-border);
     background:
-      linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03)),
-      rgba(8, 9, 11, 0.55);
+      linear-gradient(135deg, var(--glass-grad-1), var(--glass-grad-2)),
+      var(--glass-base);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.14),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-      0 10px 30px rgba(0, 0, 0, 0.35);
+      inset 0 1px 0 var(--glass-inset-top),
+      inset 0 -1px 0 var(--glass-inset-bottom),
+      0 10px 30px var(--glass-shadow);
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease;
   }
 
   .glass-pill::before {
@@ -103,13 +158,13 @@ body {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.16), transparent 45%);
+    background: radial-gradient(circle at 18% 0%, var(--glass-highlight), transparent 45%);
     pointer-events: none;
   }
 
   @media (prefers-reduced-transparency: reduce) {
     .glass-pill {
-      background: rgba(8, 9, 11, 0.97);
+      background: var(--glass-fallback);
       backdrop-filter: none;
       -webkit-backdrop-filter: none;
     }
@@ -124,6 +179,10 @@ body {
   pointer-events: none;
   opacity: 0.025;
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="light"] .grain {
+  opacity: 0.015;
 }
 
 @keyframes marquee {

@@ -92,4 +92,17 @@ export const projects: Project[] = [
     year: "2026",
     audience: "real-estate",
   },
+  {
+    slug: "shine-ministries",
+    name: "Shine Ministries",
+    category: "Ministry website & back office",
+    summary: "A public site for a women's ministry, paired with a private back office for the team running it.",
+    description:
+      "The public face for a women's ministry: events, RSVPs, and ways to get involved. Behind it, a private back office the team actually uses, tracking those same events and giving without a spreadsheet in sight.",
+    image: "/work/shine-ministries.png",
+    url: "https://www.shineministriesok.com",
+    tags: ["Next.js", "Supabase", "Back office"],
+    year: "2026",
+    audience: "nonprofit",
+  },
 ];

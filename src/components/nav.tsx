@@ -8,6 +8,7 @@ import { ArrowRight, CaretDown, List, X } from "@phosphor-icons/react";
 import { Wordmark } from "./logomark";
 import { Button } from "./button";
 import { Magnetic } from "./magnetic";
+import { ThemeToggle } from "./theme-toggle";
 import { solutions } from "@/lib/solutions";
 
 const links = [
@@ -104,6 +105,8 @@ export function Nav() {
             })}
           </nav>
 
+          <ThemeToggle />
+
           <div className="hidden lg:block">
             <Magnetic strength={0.25}>
               <Button href="/contact" className="!px-5 !py-2 !text-sm">
@@ -141,7 +144,7 @@ export function Nav() {
                   <Link
                     key={s.slug}
                     href={`/solutions/${s.slug}`}
-                    className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-white/5"
+                    className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-bg-elevated-2"
                   >
                     <s.icon
                       weight="light"
@@ -180,7 +183,7 @@ export function Nav() {
               <div className="flex flex-col gap-1">
                 <Link
                   href="/solutions"
-                  className="rounded-xl px-3 py-2.5 text-[15px] text-text-muted transition-colors hover:bg-white/5 hover:text-text"
+                  className="rounded-xl px-3 py-2.5 text-[15px] text-text-muted transition-colors hover:bg-bg-elevated-2 hover:text-text"
                 >
                   Solutions
                 </Link>
@@ -189,7 +192,7 @@ export function Nav() {
                     <Link
                       key={s.slug}
                       href={`/solutions/${s.slug}`}
-                      className="rounded-lg px-3 py-2 text-sm text-text-faint transition-colors hover:bg-white/5 hover:text-text"
+                      className="rounded-lg px-3 py-2 text-sm text-text-faint transition-colors hover:bg-bg-elevated-2 hover:text-text"
                     >
                       {s.name}
                     </Link>
@@ -199,7 +202,7 @@ export function Nav() {
                   <Link
                     key={l.href}
                     href={l.href}
-                    className="rounded-xl px-3 py-2.5 text-[15px] text-text-muted transition-colors hover:bg-white/5 hover:text-text"
+                    className="rounded-xl px-3 py-2.5 text-[15px] text-text-muted transition-colors hover:bg-bg-elevated-2 hover:text-text"
                   >
                     {l.label}
                   </Link>
