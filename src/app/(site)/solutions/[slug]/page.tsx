@@ -64,29 +64,45 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       {solution.slug === "real-estate" && (
         <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
           <Reveal>
-            <a
-              href="https://realestate.latchpointstudios.com"
-              className="group flex flex-col gap-4 rounded-[20px] border border-border-strong bg-bg-elevated p-8 transition-colors hover:border-accent/60 sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">
-                  The full picture
-                </p>
-                <p className="mt-2 text-xl font-medium tracking-tight text-text">
-                  See how the website and back office work together.
-                </p>
-                <p className="mt-1 text-sm text-text-muted">
-                  Blog, leads, pipeline, and transactions, with real examples from The Agency Dashboard.
-                </p>
-              </div>
-              <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-accent">
-                realestate.latchpointstudios.com
-                <ArrowUpRight
-                  weight="bold"
-                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                />
-              </span>
-            </a>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {[
+                {
+                  eyebrow: "The full picture",
+                  title: "See how the website and back office work together.",
+                  body: "Blog, leads, pipeline, and transactions, with real examples from The Agency Dashboard.",
+                  href: "https://realestate.latchpointstudios.com",
+                  label: "realestate.latchpointstudios.com",
+                },
+                {
+                  eyebrow: "See it live",
+                  title: "The Agency Dashboard.",
+                  body: "The platform behind The Agency's sites, listings, and back office, in its own words.",
+                  href: "https://theagency.latchpointstudios.com",
+                  label: "theagency.latchpointstudios.com",
+                },
+              ].map((card) => (
+                <a
+                  key={card.href}
+                  href={card.href}
+                  className="group flex h-full flex-col justify-between gap-6 rounded-[20px] border border-border-strong bg-bg-elevated p-8 transition-colors hover:border-accent/60"
+                >
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">
+                      {card.eyebrow}
+                    </p>
+                    <p className="mt-2 text-xl font-medium tracking-tight text-text">{card.title}</p>
+                    <p className="mt-1 text-sm text-text-muted">{card.body}</p>
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-accent">
+                    {card.label}
+                    <ArrowUpRight
+                      weight="bold"
+                      className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                    />
+                  </span>
+                </a>
+              ))}
+            </div>
           </Reveal>
         </section>
       )}

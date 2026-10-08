@@ -41,14 +41,14 @@ export const projects: Project[] = [
     audience: "small-business",
   },
   {
-    slug: "the-agency-listings",
-    name: "The Agency Listings",
+    slug: "the-agency-dashboard",
+    name: "The Agency Dashboard",
     category: "Multi-user SaaS platform",
     summary: "Every listing gets its own site the moment an agent fills out a form.",
     description:
       "A listings manager for a real estate brokerage. Agents create a property site by filling out a form, update status the moment a deal changes, and see every listing across the brokerage in one dashboard, no redeploys.",
-    image: "/work/listings.png",
-    url: "https://the-agency-listings.vercel.app",
+    image: "/work/agency-dashboard.png",
+    url: "https://theagency.latchpointstudios.com",
     tags: ["Next.js", "Supabase", "Multi-tenant"],
     year: "2026",
     audience: "real-estate",

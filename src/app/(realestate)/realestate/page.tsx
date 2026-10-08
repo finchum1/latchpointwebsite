@@ -164,7 +164,7 @@ export default function RealEstatePage() {
                 {[
                   { name: "Terrence Finchum", note: "Agent website", href: "https://terrencefinchum.com" },
                   { name: "The Agency Oklahoma", note: "Brokerage website", href: "https://the-agency-oklahoma.vercel.app" },
-                  { name: "The Agency Dashboard", note: "The back office", href: "https://the-agency-listings.vercel.app" },
+                  { name: "The Agency Dashboard", note: "The back office", href: "https://theagency.latchpointstudios.com" },
                 ].map((p) => (
                   <li key={p.name}>
                     <a href={p.href} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2">
