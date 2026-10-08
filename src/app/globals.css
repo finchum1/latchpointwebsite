@@ -51,6 +51,9 @@
   --glass-shadow: rgba(0, 0, 0, 0.35);
   --glass-highlight: rgba(255, 255, 255, 0.16);
   --glass-fallback: rgba(8, 9, 11, 0.97);
+  /* Dropdown/menu panels: same glass, but nearly opaque so text stays
+     legible over whatever scrolls behind them (bright screenshots, photos). */
+  --glass-dense-base: rgba(13, 14, 17, 0.95);
 }
 
 :root[data-theme="light"] {
@@ -78,6 +81,7 @@
   --glass-shadow: rgba(0, 0, 0, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.6);
   --glass-fallback: rgba(250, 250, 250, 0.97);
+  --glass-dense-base: rgba(251, 251, 250, 0.95);
 }
 
 @theme inline {
@@ -143,7 +147,6 @@ body {
       linear-gradient(135deg, var(--glass-grad-1), var(--glass-grad-2)),
       var(--glass-base);
     backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
     box-shadow:
       inset 0 1px 0 var(--glass-inset-top),
       inset 0 -1px 0 var(--glass-inset-bottom),
@@ -162,11 +165,23 @@ body {
     pointer-events: none;
   }
 
+  /* Modifier for dropdown and menu panels (see --glass-dense-base). */
+  .glass-pill.glass-dense {
+    background:
+      linear-gradient(135deg, var(--glass-grad-1), var(--glass-grad-2)),
+      var(--glass-dense-base);
+  }
+  /* The corner sheen is what makes glass read as glass, but at full strength
+     it lifts the panel's top-left enough to hurt text contrast there. */
+  .glass-pill.glass-dense::before {
+    opacity: 0.45;
+  }
+
   @media (prefers-reduced-transparency: reduce) {
-    .glass-pill {
+    .glass-pill,
+    .glass-pill.glass-dense {
       background: var(--glass-fallback);
       backdrop-filter: none;
-      -webkit-backdrop-filter: none;
     }
   }
 }

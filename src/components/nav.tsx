@@ -144,7 +144,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-pill absolute inset-x-0 top-[calc(100%+0.5rem)] hidden rounded-[20px] p-3 lg:block"
+              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] hidden rounded-[20px] p-3 lg:block"
             >
               <div className="grid grid-cols-2 gap-1">
                 {solutions.map((s) => (
@@ -185,7 +185,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-pill absolute inset-x-0 top-[calc(100%+0.5rem)] rounded-[20px] p-2 lg:hidden"
+              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] rounded-[20px] p-2 lg:hidden"
             >
               <div className="flex flex-col gap-1">
                 <Link
@@ -199,7 +199,7 @@ export function Nav() {
                     <Link
                       key={s.slug}
                       href={`/solutions/${s.slug}`}
-                      className="rounded-lg px-3 py-2 text-sm text-text-faint transition-colors hover:bg-bg-elevated-2 hover:text-text"
+                      className="rounded-lg px-3 py-2 text-sm text-text-muted transition-colors hover:bg-bg-elevated-2 hover:text-text"
                     >
                       {s.name}
                     </Link>
