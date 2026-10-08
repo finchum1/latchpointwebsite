@@ -51,8 +51,10 @@ export async function POST(request: Request) {
       text: [
         `Name: ${body.name}`,
         `Email: ${body.email}`,
+        typeof body.company === "string" && body.company.trim() ? `Company: ${body.company}` : null,
         `Project type: ${projectType}`,
         body.budget ? `Budget: ${body.budget}` : null,
+        typeof body.source === "string" && body.source.trim() ? `Source: ${body.source}` : null,
         "",
         body.message,
       ]

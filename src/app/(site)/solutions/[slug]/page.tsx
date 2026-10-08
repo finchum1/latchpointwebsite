@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Check } from "@phosphor-icons/react/dist/ssr";
+import { ArrowUpRight, Check } from "@phosphor-icons/react/dist/ssr";
 import { solutions, getSolution } from "@/lib/solutions";
 import { projects } from "@/lib/projects";
 import { Reveal } from "@/components/reveal";
@@ -60,6 +60,36 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
           ))}
         </div>
       </section>
+
+      {solution.slug === "real-estate" && (
+        <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
+          <Reveal>
+            <a
+              href="https://realestate.latchpointstudios.com"
+              className="group flex flex-col gap-4 rounded-[20px] border border-border-strong bg-bg-elevated p-8 transition-colors hover:border-accent/60 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">
+                  The full picture
+                </p>
+                <p className="mt-2 text-xl font-medium tracking-tight text-text">
+                  See how the website and back office work together.
+                </p>
+                <p className="mt-1 text-sm text-text-muted">
+                  Blog, leads, pipeline, and transactions, with real examples from The Agency Dashboard.
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-accent">
+                realestate.latchpointstudios.com
+                <ArrowUpRight
+                  weight="bold"
+                  className="size-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </span>
+            </a>
+          </Reveal>
+        </section>
+      )}
 
       {related.length > 0 ? (
         <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-8">

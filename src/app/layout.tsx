@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/nav";
-import { Footer } from "@/components/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,12 +43,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-bg font-sans text-text">
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <div className="grain" />
-        <Nav />
-        {/* The nav is now `fixed` (a floating pill) instead of occupying
-            flow height, so this reserves the same clearance every page
-            used to get for free from the old in-flow header. */}
-        <main className="flex-1 pt-[104px] sm:pt-[112px]">{children}</main>
-        <Footer />
+        {/* Nav, main, and footer live in the route-group layouts -- (site)
+            for the studio site, (realestate) for the real estate landing
+            page -- so each can have its own navigation. */}
+        {children}
       </body>
     </html>
   );
