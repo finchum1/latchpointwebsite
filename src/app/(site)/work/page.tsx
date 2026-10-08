@@ -10,7 +10,12 @@ export const metadata: Metadata = {
   description: "Real products Latchpoint Studios has designed and built, live right now.",
 };
 
+const NUMBER_WORDS = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve"];
+
 export default function WorkPage() {
+  // Spelled out from the real count, so adding a project can't leave the
+  // intro line saying the wrong number.
+  const count = NUMBER_WORDS[projects.length] ?? String(projects.length);
   return (
     <>
       <section className="mx-auto max-w-7xl px-6 pt-16 pb-8 lg:px-8">
@@ -19,7 +24,7 @@ export default function WorkPage() {
             Work
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-text-muted sm:text-lg">
-            Seven products, seven different problems. Everything below is
+            {count} products, {count.toLowerCase()} different problems. Everything below is
             live today, not a mockup.
           </p>
         </Reveal>

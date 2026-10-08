@@ -105,4 +105,17 @@ export const projects: Project[] = [
     year: "2026",
     audience: "nonprofit",
   },
+  {
+    slug: "solo-books",
+    name: "Solo Books",
+    category: "Bookkeeping app",
+    summary: "One ledger for every business you run, with receipts, contractor reports, and a clean P&L.",
+    description:
+      "A private bookkeeping app for owner-operators. Log income and expenses by business and category, drop in receipts, and see exactly what you paid each contractor or received from each client. Profit and Loss reports export as a clean PDF, combined across every business or for just one. Anyone can sign up and gets a fully isolated ledger, and it installs to a phone's home screen like an app.",
+    image: "/work/solo-books.png",
+    url: "https://business-ledger-iota.vercel.app",
+    tags: ["React", "Supabase", "PDF reports"],
+    year: "2026",
+    audience: "small-business",
+  },
 ];
