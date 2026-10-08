@@ -24,14 +24,20 @@ export function RealEstateNav() {
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
-      <div className="relative w-full max-w-4xl">
-        <div className="glass-pill flex items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2">
-          <a href="https://latchpointstudios.com" className="flex shrink-0 items-center gap-2.5">
+      {/* Wider than the studio site's pill (max-w-4xl): this one carries the
+          "Real estate" tag next to the wordmark plus five anchor links, and
+          at 896px that left everything cramped. */}
+      <div className="relative w-full max-w-5xl">
+        <div className="glass-pill flex items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:gap-4 sm:pl-5">
+          <a href="https://latchpointstudios.com" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             <Logomark className="size-6 text-text" />
             <span className="font-medium tracking-tight text-text">
-              Latchpoint<span className="text-text-muted"> Studios</span>
+              Latchpoint
+              {/* Below ~440px there isn't room for the full name and the tag
+                  together, so the tag wins and "Studios" steps aside. */}
+              <span className="hidden text-text-muted min-[440px]:inline"> Studios</span>
             </span>
-            <span className="hidden whitespace-nowrap rounded-full border border-border-strong px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-text-muted xl:inline">
+            <span className="whitespace-nowrap rounded-full border border-border-strong px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted min-[400px]:tracking-[0.12em]">
               Real estate
             </span>
           </a>
