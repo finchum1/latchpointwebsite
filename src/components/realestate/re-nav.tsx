@@ -30,7 +30,7 @@ export function RealEstateNav() {
       <div className="relative w-full max-w-5xl">
         <div className="glass-pill flex items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:gap-4 sm:pl-5">
           <a href="https://latchpointstudios.com" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
-            <Logomark className="size-6 text-text" />
+            <Logomark className="size-6 text-text" animated />
             <span className="font-medium tracking-tight text-text">
               Latchpoint
               {/* Below ~440px there isn't room for the full name and the tag

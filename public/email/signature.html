@@ -41,9 +41,12 @@
             </td>
             <td valign="top" style="padding:0 0 0 16px;border-left:2px solid #e8623f;">
               <div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;">Terrence Finchum</div>
-              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">Latchpoint Studios</div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">Founder, Latchpoint Studios</div>
               <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;padding-top:8px;">
                 <a href="mailto:terrence@latchpointstudios.com" style="color:#e8623f;text-decoration:none;">terrence@latchpointstudios.com</a>
+              </div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">
+                <a href="tel:+14057619988" style="color:#e8623f;text-decoration:none;">405.761.9988</a>
               </div>
               <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">
                 <a href="https://latchpointstudios.com" target="_blank" style="color:#e8623f;text-decoration:none;">latchpointstudios.com</a>
@@ -89,7 +92,7 @@
           await navigator.clipboard.write([
             new ClipboardItem({
               'text/html': new Blob([html], { type: 'text/html' }),
-              'text/plain': new Blob(['Terrence Finchum\nLatchpoint Studios\nterrence@latchpointstudios.com\nlatchpointstudios.com'], { type: 'text/plain' }),
+              'text/plain': new Blob(['Terrence Finchum\nFounder, Latchpoint Studios\nterrence@latchpointstudios.com\n405.761.9988\nlatchpointstudios.com'], { type: 'text/plain' }),
             }),
           ]);
           say('Copied. Now paste it into your signature box.');

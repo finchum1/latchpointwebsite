@@ -55,7 +55,7 @@ export function Nav() {
       <div className="relative w-full max-w-4xl">
         <div className="glass-pill flex items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2">
           <Link href="/" className="flex shrink-0 items-center">
-            <Wordmark />
+            <Wordmark animated />
           </Link>
 
           <nav className="hidden items-center gap-6 lg:flex">
