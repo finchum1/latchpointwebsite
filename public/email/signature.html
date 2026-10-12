@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Email signature | Latchpoint Studios</title>
+    <style>
+      body { margin: 0; padding: 40px 20px 80px; background: #f4f4f2; color: #16171a; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .wrap { max-width: 640px; margin: 0 auto; }
+      h1 { font-size: 20px; font-weight: 600; margin: 0 0 6px; }
+      p.lead { margin: 0 0 24px; color: #55565e; font-size: 14px; line-height: 1.5; }
+      .card { background: #fff; border: 1px solid #e3e3df; border-radius: 12px; padding: 28px; }
+      .card .hint { font-size: 12px; color: #83848c; margin: 0 0 18px; }
+      .actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0 0; }
+      button { font: inherit; font-size: 14px; font-weight: 600; border-radius: 999px; padding: 10px 18px; cursor: pointer; border: 1px solid #16171a; background: #16171a; color: #fff; }
+      button.secondary { background: #fff; color: #16171a; border-color: #cfcfca; }
+      #status { font-size: 13px; color: #1f7a3d; align-self: center; min-height: 18px; }
+      details { margin-top: 22px; }
+      summary { cursor: pointer; font-size: 13px; color: #55565e; }
+      textarea { width: 100%; box-sizing: border-box; height: 220px; margin-top: 10px; padding: 12px; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; border: 1px solid #e3e3df; border-radius: 8px; background: #fafaf8; color: #16171a; }
+      ol { color: #55565e; font-size: 13px; line-height: 1.7; padding-left: 20px; margin: 28px 0 0; }
+      ol b { color: #16171a; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Your email signature</h1>
+      <p class="lead">Click <b>Copy signature</b>, then paste it into your email app's signature box. The logo animates: the ember square pulls back and latches into the corner, then repeats. Instructions for each app are below.</p>
+
+      <div class="card">
+        <p class="hint">Preview</p>
+
+        <!-- ============ SIGNATURE START (copy everything between the markers) ============ -->
+        <table id="signature" cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;">
+          <tr>
+            <td valign="top" style="padding:0 16px 0 0;">
+              <a href="https://latchpointstudios.com" target="_blank" style="text-decoration:none;">
+                <img src="https://latchpointstudios.com/email/latchpoint-mark.gif" alt="Latchpoint Studios" width="64" height="64" style="display:block;width:64px;height:64px;border:0;border-radius:14px;" />
+              </a>
+            </td>
+            <td valign="top" style="padding:0 0 0 16px;border-left:2px solid #e8623f;">
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:20px;font-weight:bold;">Terrence Finchum</div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">Latchpoint Studios</div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;padding-top:8px;">
+                <a href="mailto:terrence@latchpointstudios.com" style="color:#e8623f;text-decoration:none;">terrence@latchpointstudios.com</a>
+              </div>
+              <div style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">
+                <a href="https://latchpointstudios.com" target="_blank" style="color:#e8623f;text-decoration:none;">latchpointstudios.com</a>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <!-- ============ SIGNATURE END ============ -->
+
+        <div class="actions">
+          <button type="button" id="copy">Copy signature</button>
+          <button type="button" class="secondary" id="copyHtml">Copy as HTML code</button>
+          <span id="status" role="status"></span>
+        </div>
+
+        <details>
+          <summary>Show the HTML code</summary>
+          <textarea id="code" readonly></textarea>
+        </details>
+      </div>
+
+      <ol>
+        <li><b>Gmail:</b> Settings (gear) &rarr; See all settings &rarr; General &rarr; Signature &rarr; Create new &rarr; paste &rarr; Save changes at the bottom.</li>
+        <li><b>Apple Mail:</b> Settings &rarr; Signatures &rarr; add one, paste, and untick "Always match my default message font."</li>
+        <li><b>Outlook (desktop):</b> File &rarr; Options &rarr; Mail &rarr; Signatures &rarr; New, then paste.</li>
+        <li><b>Outlook (web):</b> Settings &rarr; Accounts &rarr; Signatures &rarr; New signature, then paste.</li>
+        <li><b>Anything that takes raw HTML:</b> use <b>Copy as HTML code</b>.</li>
+        <li><b>About the animation:</b> Gmail, Apple Mail, and most phones play it on a loop. Outlook for Windows shows only the first frame, which is the complete logo, so it still looks right there.</li>
+      </ol>
+    </div>
+
+    <script>
+      var sig = document.getElementById('signature');
+      var statusEl = document.getElementById('status');
+      // Fragment of just the table, so what's copied has no page chrome around it.
+      var html = sig.outerHTML;
+      document.getElementById('code').value = html;
+
+      function say(msg) { statusEl.textContent = msg; setTimeout(function () { statusEl.textContent = ''; }, 3500); }
+
+      document.getElementById('copy').addEventListener('click', async function () {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({
+              'text/html': new Blob([html], { type: 'text/html' }),
+              'text/plain': new Blob(['Terrence Finchum\nLatchpoint Studios\nterrence@latchpointstudios.com\nlatchpointstudios.com'], { type: 'text/plain' }),
+            }),
+          ]);
+          say('Copied. Now paste it into your signature box.');
+        } catch (e) {
+          // Older browsers: select the rendered signature so Cmd/Ctrl+C copies it with formatting.
+          var range = document.createRange();
+          range.selectNode(sig);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          say('Selected. Press Cmd+C (or Ctrl+C) to copy.');
+        }
+      });
+
+      document.getElementById('copyHtml').addEventListener('click', async function () {
+        try { await navigator.clipboard.writeText(html); say('HTML code copied.'); }
+        catch (e) { var t = document.getElementById('code'); t.parentElement.open = true; t.select(); say('Press Cmd+C (or Ctrl+C) to copy.'); }
+      });
+    </script>
+  </body>
+</html>
