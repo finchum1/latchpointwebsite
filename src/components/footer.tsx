@@ -30,7 +30,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
-            <Wordmark />
+            <Wordmark animated />
             <p className="mt-4 text-sm leading-relaxed text-text-muted">
               A small studio that designs and builds websites, apps, dashboards, portals, and
               CRMs, for businesses, nonprofits and ministries, and the occasional personal

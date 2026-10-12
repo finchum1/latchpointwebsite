@@ -13,7 +13,7 @@ export function RealEstateFooter() {
       <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 px-6 py-12 sm:flex-row sm:items-end lg:px-8">
         <div className="max-w-sm">
           <a href="https://latchpointstudios.com">
-            <Wordmark />
+            <Wordmark animated />
           </a>
           <p className="mt-4 text-sm leading-relaxed text-text-muted">
             Websites and back offices for real estate agents and brokerages. Edmond, Oklahoma.
