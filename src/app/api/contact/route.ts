@@ -16,6 +16,20 @@ const BUDGETS: Record<string, string> = {
   "25k-plus": "$25,000+",
 };
 
+// Sites other than this one that post their start-a-project form here.
+const ALLOWED_ORIGINS = ["https://theagency.latchpointstudios.com"];
+
+function corsHeaders(request: Request): Record<string, string> {
+  const origin = request.headers.get("origin");
+  if (!origin || !ALLOWED_ORIGINS.includes(origin)) return {};
+  return {
+    "Access-Control-Allow-Origin": origin,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    Vary: "Origin",
+  };
+}
+
 const FALLBACK_ERROR =
   "We couldn't send your message. Please email terrence@latchpointstudios.com directly and we'll get right back to you.";
 
@@ -98,14 +112,25 @@ async function sendEmail(inquiry: Inquiry): Promise<boolean> {
   return true;
 }
 
+export function OPTIONS(request: Request) {
+  return new NextResponse(null, { status: 204, headers: corsHeaders(request) });
+}
+
 export async function POST(request: Request) {
+  const headers = corsHeaders(request);
   const body = await request.json().catch(() => null);
+
+  // Honeypot: real visitors never see or fill this field, bots usually do.
+  // Look like a success so they don't retry, but keep nothing.
+  if (typeof body?.hp === "string" && body.hp.trim()) {
+    return NextResponse.json({ ok: true }, { headers });
+  }
 
   const name = clean(body?.name, 200);
   const email = clean(body?.email, 320);
   const message = clean(body?.message, 10000);
   if (!name || !email || !message || !email.includes("@")) {
-    return NextResponse.json({ error: "Please fill in your name, email and a message." }, { status: 400 });
+    return NextResponse.json({ error: "Please fill in your name, email and a message." }, { status: 400, headers });
   }
 
   const inquiry: Inquiry = {
@@ -127,8 +152,8 @@ export async function POST(request: Request) {
 
   if (!saved && !emailed) {
     console.error("[contact] inquiry NOT delivered anywhere:", inquiry);
-    return NextResponse.json({ error: FALLBACK_ERROR }, { status: 502 });
+    return NextResponse.json({ error: FALLBACK_ERROR }, { status: 502, headers });
   }
 
-  return NextResponse.json({ ok: true, saved, emailed });
+  return NextResponse.json({ ok: true, saved, emailed }, { headers });
 }
