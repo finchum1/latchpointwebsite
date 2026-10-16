@@ -4,7 +4,6 @@ const links = [
   { href: "https://app.latchpointstudios.com", label: "Sign in" },
   { href: "https://app.latchpointstudios.com/privacy", label: "Privacy" },
   { href: "https://app.latchpointstudios.com/terms", label: "Terms" },
-  { href: "https://emailsignature.latchpointstudios.com", label: "Free email signature tool" },
   { href: "https://latchpointstudios.com", label: "Latchpoint Studios" },
   { href: "mailto:hello@latchpointstudios.com", label: "hello@latchpointstudios.com" },
 ];
