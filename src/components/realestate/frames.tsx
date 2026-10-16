@@ -40,24 +40,43 @@ export function BrowserFrame({
   );
 }
 
-/** A real screenshot in a phone bezel. */
+/** A real screenshot in a phone bezel. `statusBar` (a CSS color) adds a status-bar strip with a small
+ *  camera pill above the screenshot, for screens that start with a flat header and would otherwise sit
+ *  right against the bezel; leave it off for full-bleed photos. */
 export function PhoneFrame({
   src,
   alt,
   className = "",
   sizes = "240px",
+  statusBar,
 }: {
   src: string;
   alt: string;
   className?: string;
   sizes?: string;
+  statusBar?: string;
 }) {
   return (
     <figure
       className={`overflow-hidden rounded-[28px] border-[5px] border-[#1d1f23] bg-[#1d1f23] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] ${className}`}
     >
       <div className="relative aspect-[416/900] overflow-hidden rounded-[22px]">
-        <Image src={src} alt={alt} fill sizes={sizes} className="object-cover object-top" />
+        {statusBar ? (
+          <>
+            <div
+              className="absolute inset-x-0 top-0 flex h-[5.5%] items-center justify-center"
+              style={{ background: statusBar }}
+              aria-hidden="true"
+            >
+              <span className="block h-[38%] w-[26%] rounded-full bg-[#1d1f23]" />
+            </div>
+            <div className="absolute inset-x-0 bottom-0 top-[5.5%]">
+              <Image src={src} alt={alt} fill sizes={sizes} className="object-cover object-top" />
+            </div>
+          </>
+        ) : (
+          <Image src={src} alt={alt} fill sizes={sizes} className="object-cover object-top" />
+        )}
       </div>
     </figure>
   );

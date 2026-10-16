@@ -145,6 +145,7 @@ export default function RealEstatePage() {
             <PhoneFrame
               src="/realestate/dash-home-mobile.png"
               alt="The dashboard home page on a phone: today's schedule, shortcuts, and tasks"
+              statusBar="#ffffff"
               className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
               sizes="150px"
             />
