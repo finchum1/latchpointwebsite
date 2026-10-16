@@ -10,10 +10,10 @@ import { Magnetic } from "../magnetic";
 import { ThemeToggle } from "../theme-toggle";
 
 const links = [
+  { href: "#home", label: "Your day" },
   { href: "#website", label: "Website" },
   { href: "#back-office", label: "Back office" },
-  { href: "#who", label: "Who it's for" },
-  { href: "#process", label: "Process" },
+  { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },
 ];
 
@@ -29,16 +29,11 @@ export function RealEstateNav() {
           at 896px that left everything cramped. */}
       <div className="relative w-full max-w-5xl">
         <div className="glass-pill flex items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:gap-4 sm:pl-5">
-          <a href="https://latchpointstudios.com" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          <a href="/" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             <Logomark className="size-6 text-text" animated />
             <span className="font-medium tracking-tight text-text">
               Latchpoint
-              {/* Below ~440px there isn't room for the full name and the tag
-                  together, so the tag wins and "Studios" steps aside. */}
-              <span className="hidden text-text-muted min-[440px]:inline"> Studios</span>
-            </span>
-            <span className="whitespace-nowrap rounded-full border border-border-strong px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.08em] text-text-muted min-[400px]:tracking-[0.12em]">
-              Real estate
+              <span className="text-text-muted"> Real Estate</span>
             </span>
           </a>
 
@@ -54,8 +49,8 @@ export function RealEstateNav() {
             <ThemeToggle />
             <div className="hidden lg:block">
               <Magnetic strength={0.25}>
-                <Button href="#start" className="!px-5 !py-2 !text-sm">
-                  Start a project
+                <Button href="#early-access" className="!px-5 !py-2 !text-sm">
+                  Request early access
                 </Button>
               </Magnetic>
             </div>
@@ -90,8 +85,8 @@ export function RealEstateNav() {
                     {l.label}
                   </Link>
                 ))}
-                <Button href="#start" onClick={() => setOpen(false)} className="mt-1 w-full">
-                  Start a project
+                <Button href="#early-access" onClick={() => setOpen(false)} className="mt-1 w-full">
+                  Request early access
                 </Button>
               </div>
             </motion.div>

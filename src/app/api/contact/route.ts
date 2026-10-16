@@ -6,6 +6,7 @@ const PROJECT_TYPES: Record<string, string> = {
   dashboard: "Dashboard",
   personal: "Personal app",
   crm: "CRM",
+  "early-access": "Latchpoint Real Estate early access",
   other: "Not sure yet",
 };
 
@@ -74,6 +75,43 @@ async function saveToHq(inquiry: Inquiry): Promise<boolean> {
   return true;
 }
 
+const isEarlyAccess = (inquiry: Inquiry) => inquiry.project_type === PROJECT_TYPES["early-access"];
+
+/** "Name <a@b.com>" -> a@b.com, so the visitor's confirmation can come from the same verified address under the product's name. */
+function senderAddress(): string {
+  const from = process.env.CONTACT_FROM_EMAIL ?? "site@latchpointstudios.com";
+  return from.match(/<([^>]+)>/)?.[1] ?? from;
+}
+
+/** A short thank-you to someone who asked for early access. Best effort: it never decides whether the request counts as delivered. */
+async function sendConfirmation(inquiry: Inquiry): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from: `Latchpoint Real Estate <${senderAddress()}>`,
+        to: [inquiry.email],
+        reply_to: process.env.CONTACT_TO_EMAIL,
+        subject: "You're on the Latchpoint Real Estate early-access list",
+        text: [
+          `Hi ${inquiry.name.split(" ")[0]},`,
+          "",
+          "Thanks for your interest in Latchpoint Real Estate. We're inviting people in a few at a time, by hand.",
+          "When there's a spot for you, we'll email you to set up a short call. If you want to add anything in the meantime, just reply to this email.",
+          "",
+          "Latchpoint Studios",
+        ].join("\n"),
+      }),
+    });
+    if (!res.ok) console.error("[contact] confirmation error:", res.status, await res.text().catch(() => ""));
+  } catch (err) {
+    console.error("[contact] confirmation threw:", err);
+  }
+}
+
 /** Notification email to the studio inbox, via Resend. */
 async function sendEmail(inquiry: Inquiry): Promise<boolean> {
   const apiKey = process.env.RESEND_API_KEY;
@@ -90,7 +128,9 @@ async function sendEmail(inquiry: Inquiry): Promise<boolean> {
       from: process.env.CONTACT_FROM_EMAIL ?? "Latchpoint Studios <site@latchpointstudios.com>",
       to: [to],
       reply_to: inquiry.email,
-      subject: `New project inquiry: ${inquiry.name}`,
+      subject: isEarlyAccess(inquiry)
+        ? `New early-access request: ${inquiry.name}`
+        : `New project inquiry: ${inquiry.name}`,
       text: [
         `Name: ${inquiry.name}`,
         `Email: ${inquiry.email}`,
@@ -149,6 +189,8 @@ export async function POST(request: Request) {
     saveToHq(inquiry).catch((err) => (console.error("[contact] HQ save threw:", err), false)),
     sendEmail(inquiry).catch((err) => (console.error("[contact] email threw:", err), false)),
   ]);
+
+  if ((saved || emailed) && isEarlyAccess(inquiry)) await sendConfirmation(inquiry);
 
   if (!saved && !emailed) {
     console.error("[contact] inquiry NOT delivered anywhere:", inquiry);
