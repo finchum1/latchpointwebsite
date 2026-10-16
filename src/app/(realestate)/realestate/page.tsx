@@ -143,10 +143,10 @@ export default function RealEstatePage() {
               sizes="(min-width: 1024px) 58vw, 100vw"
             />
             <PhoneFrame
-              src="/realestate/agent-site-mobile.jpg"
-              alt="A real estate agent's website on a phone"
-              className="absolute -bottom-6 right-0 w-[88px] sm:right-2 sm:w-[108px] lg:-right-5 lg:w-[112px]"
-              sizes="112px"
+              src="/realestate/dash-home-mobile.png"
+              alt="The dashboard home page on a phone: today's schedule, shortcuts, and tasks"
+              className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
+              sizes="150px"
             />
             <p className="mt-3 max-w-[60%] text-xs text-text-faint">{SAMPLE}</p>
           </Reveal>
