@@ -10,7 +10,7 @@ import { EarlyAccessForm } from "@/components/realestate/early-access-form";
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Real Estate: your website and back office, built and maintained" },
   description:
-    "A real estate website with a dashboard behind it: blog, leads, pipeline, transactions, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running.",
+    "A real estate website with a dashboard behind it: blog, leads, pipeline, transactions, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $200 a month, no contracts.",
   alternates: { canonical: "https://realestate.latchpointstudios.com" },
   openGraph: {
     title: "Latchpoint Real Estate",
@@ -127,6 +127,12 @@ export default function RealEstatePage() {
                   See how it works
                 </Button>
               </div>
+              <p className="mt-5 text-sm text-text-faint">
+                $500 to set up, then $200 a month. No contracts.{" "}
+                <a href="#pricing" className="underline underline-offset-4 hover:text-text-muted">
+                  What&rsquo;s included
+                </a>
+              </p>
             </Reveal>
           </div>
 
@@ -493,6 +499,53 @@ export default function RealEstatePage() {
         </div>
       </section>
 
+      {/* ----------------------------- Pricing ---------------------------- */}
+      <section id="pricing" className="scroll-mt-28 border-y border-border bg-bg-elevated/30">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <Reveal>
+            <Eyebrow>Pricing</Eyebrow>
+            <h2 className="mt-3 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
+              A setup fee, then one monthly price.
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
+              No contracts. You pay month to month, and the setup fee is paid once.
+            </p>
+          </Reveal>
+
+          <RevealGroup className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {[
+              {
+                price: "$500",
+                unit: "to set up",
+                items: [
+                  "Your website built and live on your own domain",
+                  "Your blog posts and old URLs moved over, so you keep your search rankings",
+                  "Your dashboard set up with your logo and colors",
+                ],
+              },
+              {
+                price: "$200",
+                unit: "a month",
+                items: [
+                  "Hosting, upkeep, and updates for your site and dashboard",
+                  "New features as they ship",
+                  "A studio to call when you want something changed",
+                ],
+              },
+            ].map((tier) => (
+              <RevealItem key={tier.price}>
+                <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 sm:p-8">
+                  <p className="text-4xl font-medium tracking-tight text-text">
+                    {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
+                  </p>
+                  <Bullets items={tier.items} />
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </section>
+
       {/* ------------------------------ Who ------------------------------ */}
       <section id="who" className="mx-auto max-w-7xl scroll-mt-28 px-6 py-24 lg:px-8">
         <Reveal>
@@ -576,6 +629,10 @@ export default function RealEstatePage() {
 
         <Reveal delay={0.1} className="mt-10 divide-y divide-border border-y border-border">
           {[
+            {
+              q: "What does it cost?",
+              a: "$500 to set up, then $200 a month. There are no contracts, so you pay month to month.",
+            },
             {
               q: "When can I get in?",
               a: "We're inviting people in a few at a time, by hand. Request early access and we'll email you to set up a short call when there's a spot.",
