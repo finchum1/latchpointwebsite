@@ -10,12 +10,12 @@ import { EarlyAccessForm } from "@/components/realestate/early-access-form";
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Real Estate: your website and back office, built and maintained" },
   description:
-    "A real estate website with a dashboard behind it: blog, leads, pipeline, transactions, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $200 a month, no contracts.",
+    "A real estate website with a dashboard behind it: templates, blog, contacts, leads, pipeline, deals, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $200 a month, no contracts.",
   alternates: { canonical: "https://realestate.latchpointstudios.com" },
   openGraph: {
     title: "Latchpoint Real Estate",
     description:
-      "The website and back office for real estate agents and brokerages: blog, leads, pipeline, transactions, and your schedule in one dashboard.",
+      "The website and back office for real estate agents and brokerages: contacts, leads, pipeline, deals, and your schedule in one dashboard.",
     url: "https://realestate.latchpointstudios.com",
     siteName: "Latchpoint Real Estate",
     type: "website",
@@ -116,8 +116,8 @@ export default function RealEstatePage() {
                 Your website and your back office, built and maintained for you.
               </h1>
               <p className="mt-6 max-w-md text-base leading-relaxed text-text-muted sm:text-lg">
-                Latchpoint Real Estate is a real estate website with a dashboard behind it: your blog, leads, pipeline,
-                transactions, and schedule in one place. We build it, move you over, and keep it running.
+                Latchpoint Real Estate is a real estate website with a dashboard behind it: your contacts, leads,
+                pipeline, deals, and schedule in one place. We build it, move you over, and keep it running.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Magnetic>
@@ -138,17 +138,16 @@ export default function RealEstatePage() {
 
           <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
             <BrowserFrame
-              src="/realestate/dash-home.png"
-              alt="The Latchpoint Real Estate dashboard home page: schedule, shortcuts, new inquiries, and tasks"
+              src="/realestate/dash-home.jpg"
+              alt="The Latchpoint Real Estate dashboard home page: an hourly schedule, tasks waiting to be scheduled, and today's follow-ups"
               url="yourbrokerage.com/dashboard"
               ratio="aspect-[16/10]"
               priority
               sizes="(min-width: 1024px) 58vw, 100vw"
             />
             <PhoneFrame
-              src="/realestate/dash-home-mobile.png"
-              alt="The dashboard home page on a phone: today's schedule, shortcuts, and tasks"
-              statusBar="#ffffff"
+              src="/realestate/m-home.jpg"
+              alt="The dashboard home page on a phone: today's schedule and tasks"
               className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
               sizes="150px"
             />
@@ -207,20 +206,22 @@ export default function RealEstatePage() {
               icon: <Browser weight="regular" className="size-5" />,
               title: "The website",
               items: [
-                "Agent and brokerage sites on your own domain",
-                "A property site for every listing, from a form",
-                "A blog with a post calendar, a publish checklist, and a formatting menu right on your text",
-                "Areas, bios, and testimonials you edit yourself",
+                "Agent and brokerage sites on your own domain, from three starter templates",
+                "Six headers, five footers, and live previews of your site in every layout",
+                "Seller, buyer, and home value pages, plus a Recently Sold section",
+                "A property site for every listing, with video, visitor analytics, and printable flyers",
+                "A blog with a post calendar and pinned posts",
               ],
             },
             {
               icon: <Kanban weight="regular" className="size-5" />,
               title: "The back office",
               items: [
-                "A home page for your day: schedule, new inquiries, tasks, and your goal",
-                "Leads and a pipeline, tagged buyer, seller, or both",
-                "Transactions with key dates, checklists, and progress rings",
-                "Open houses, flyers, and upcoming listings",
+                "A home page for your day: an hourly schedule, new inquiries, tasks, and your goal",
+                "A private contacts database with tags and keep-in-touch reminders",
+                "Leads and a pipeline with a follow-up rhythm for every column",
+                "Deals with key dates, checklists, a coordinator, and compliance review",
+                "Timeline and vendor links you can send to a client",
               ],
             },
           ].map((card) => (
@@ -249,34 +250,30 @@ export default function RealEstatePage() {
         <div className="mt-16">
           <Feature
             eyebrow="Home"
-            title="Your schedule, in sync with Google Calendar."
-            body="Connect your Google account and your calendars show up on the dashboard, in day, week, and month views. Add or change an appointment here and it changes in Google Calendar, and the other way around."
+            title="Your day, hour by hour, in sync with Google Calendar."
+            body="Connect your Google account and your calendars show up on the dashboard, in day, week, and month views. Block time for a task by dragging it onto the grid. Add or change an appointment here and it changes in Google Calendar, and the other way around."
             bullets={[
               "Pick which calendars to show; calendars you can only view stay view-only",
-              "Your deal dates and tasks appear on the same schedule",
+              "Tasks, deal dates, and appointments share one schedule, with a tray of tasks waiting for a time",
               "New website inquiries are waiting right below, with call, text, and email buttons",
               "Repeating tasks and a scorecard that tracks your year against your goal",
             ]}
             visual={
               <div className="relative pb-6 pr-0 sm:pr-24">
-                <figure className="overflow-hidden rounded-[16px] border border-border-strong bg-[#faf9f7] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)]">
+                <BrowserFrame
+                  src="/realestate/dash-home-week.jpg"
+                  alt="The week view of the schedule, with appointments, tasks, and deal dates on an hourly grid"
+                  url="yourbrokerage.com/dashboard"
+                  ratio="aspect-[16/10]"
+                />
+                <figure className="absolute -bottom-2 right-0 hidden w-[200px] overflow-hidden rounded-[14px] border border-border-strong bg-white shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] sm:block lg:w-[240px]">
                   <Image
-                    src="/realestate/dash-calendar-sync.png"
-                    alt="The schedule with a connected Google account and the calendars shown on the dashboard"
-                    width={1500}
-                    height={1600}
+                    src="/realestate/dash-add.jpg"
+                    alt="Adding a task to the schedule with a start and end time"
+                    width={1700}
+                    height={1065}
                     className="h-auto w-full"
-                    sizes="(min-width: 1024px) 40vw, 90vw"
-                  />
-                </figure>
-                <figure className="absolute -bottom-2 right-0 hidden w-[200px] overflow-hidden rounded-[14px] border border-border-strong bg-white shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] sm:block lg:w-[230px]">
-                  <Image
-                    src="/realestate/dash-event.png"
-                    alt="Adding an appointment to Google Calendar from the dashboard"
-                    width={896}
-                    height={1352}
-                    className="h-auto w-full"
-                    sizes="230px"
+                    sizes="240px"
                   />
                 </figure>
               </div>
@@ -298,13 +295,92 @@ export default function RealEstatePage() {
 
           <div className="mt-16 flex flex-col gap-24">
             <Feature
+              eyebrow="Agent sites"
+              title="Your own site, from a template you pick."
+              body="Start from one of three finished looks, then make it yours: your photos, your logo, your accent color, and the pages and sections you want. Every site is built phone-first, because that's where your clients are."
+              bullets={[
+                "Three starter templates: luxury minimal, warm editorial, and guide cards",
+                "Six header styles and five footers, with the menu in the order you choose",
+                "Your own domain, with old URLs redirected so you keep your search rankings",
+                "Inquiry forms that filter spam, confirm to the visitor, and land straight in your leads",
+              ]}
+              visual={
+                <div className="grid grid-cols-5 gap-3">
+                  {[
+                    { src: "/realestate/site-luxury.jpg", name: "Luxury minimal", cls: "col-span-3 self-stretch" },
+                    { src: "/realestate/site-warm.jpg", name: "Warm editorial", cls: "col-span-2 aspect-[16/10]" },
+                    { src: "/realestate/site-guide.jpg", name: "Guide cards", cls: "col-span-2 col-start-4 aspect-[16/10]" },
+                  ].map((t, i) => (
+                    <figure
+                      key={t.name}
+                      className={`relative overflow-hidden rounded-[10px] border border-border-strong bg-bg-elevated shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)] ${t.cls} ${i === 0 ? "row-span-2 row-start-1" : ""}`}
+                    >
+                      <Image src={t.src} alt={`The ${t.name} template, shown on a sample agent site`} fill sizes="(min-width: 1024px) 34vw, 90vw" className="object-cover object-top" />
+                      <figcaption className="absolute bottom-2 left-2 rounded-full bg-black/65 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur">{t.name}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              }
+              caption={SAMPLE}
+              flip
+            />
+
+            <Feature
+              eyebrow="Compare templates"
+              title="Let your agents choose their own look."
+              body="Make a private link and the agent sees their own site in every layout, with a choice of colors, header, and footer. They scroll around, pick the one they like, and you get an email with their choice. No sign-in, and it works while the site is still a draft."
+              bullets={[
+                "Live previews with their real photo, bio, and listings, not stock mockups",
+                "Looking changes nothing; the site only changes when you apply their pick",
+                "Apply a whole template in one click, then save; your photos and words stay",
+              ]}
+              visual={
+                <BrowserFrame
+                  src="/realestate/dash-site-compare.jpg"
+                  alt="Compare templates: a site shown in every layout, with color, header, and footer choices"
+                  url="yourbrokerage.com/dashboard/site/compare"
+                  ratio="aspect-[16/10]"
+                />
+              }
+              caption={SAMPLE}
+            />
+
+            <Feature
+              flip
+              eyebrow="Pages that bring in leads"
+              title="Sellers, buyers, and a home value page, ready to go."
+              body="Every agent site comes with guide-style pages for sellers and buyers and a home value page with an address box. Each form lands in your leads tagged with the page it came from, and a home value request adds a 'pull comps' task to your list for the next day."
+              bullets={[
+                "A step-by-step seller and buyer journey that is ready on day one",
+                "Buyer and seller cards on the home page, in the order you pick",
+                "A Recently Sold section and a Past Sales page, copied from your closed listings",
+                "Up to three pinned blog posts leading your blog page",
+              ]}
+              visual={
+                <div className="relative pb-6 pr-0 sm:pr-20">
+                  <BrowserFrame
+                    src="/realestate/site-sellers.jpg"
+                    alt="A seller's page on an agent site, with a guide to the selling journey"
+                    url="youragent.com/sellers"
+                    ratio="aspect-[16/10]"
+                  />
+                  <figure className="absolute -bottom-2 right-0 hidden w-[44%] overflow-hidden rounded-[12px] border border-border-strong bg-white shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] sm:block">
+                    <Image src="/realestate/site-past-sales.jpg" alt="The Past Sales page, a grid of recently sold homes" width={2400} height={1500} className="h-auto w-full" sizes="(min-width: 1024px) 22vw, 44vw" />
+                  </figure>
+                </div>
+              }
+              caption={SAMPLE}
+            />
+
+            <Feature
               eyebrow="Listings"
               title="A property site for every listing."
-              body="Fill out a form and the listing has its own site: hero photo, gallery, features, map, and a tour request. No new repo, no redeploy, no waiting on a developer."
+              body="Fill out a form and the listing has its own site: hero photo or video, gallery, features, map, and a tour request. No new repo, no redeploy, no waiting on a developer."
               bullets={[
                 "Change a listing's status and the live site updates the moment you do",
+                "One video per listing, playing behind the hero or above the gallery",
                 "Open houses appear as a banner on the listing",
-                "Printable flyers generated from the same listing",
+                "A live check on each property's custom domain, with an alert if it stops responding",
               ]}
               visual={
                 <BrowserFrame
@@ -317,29 +393,59 @@ export default function RealEstatePage() {
 
             <Feature
               flip
-              eyebrow="Agent sites"
-              title="Your own site, on your own domain."
-              body="A bio, your areas of expertise, testimonials, your listings, and a blog, in a look you pick and an accent color that matches your brand. It's built phone-first, because that's where your clients are."
+              eyebrow="Visitor analytics"
+              title="Know who's looking at every listing."
+              body="Every property site reports how many people looked, where they came from, and what they did. Give each place you share a listing its own link, and you'll see which one is working. Sellers get a private report page with the same numbers."
               bullets={[
-                "Six looks to start from, then your colors, photos, and square or rounded buttons",
-                "Your own domain, with old URLs redirected so you keep your search rankings",
-                "Inquiry forms that filter spam, confirm to the visitor, and land straight in your leads",
+                "Views, unique visitors, time on page, and how far people scrolled",
+                "Tagged links for Facebook, Instagram, email, text, MLS, and a QR code on the flyer",
+                "A seller report link that never shows inquiry names or contact details",
+                "An optional Monday email to you with last week's numbers",
               ]}
               visual={
-                <div className="relative pb-6 pr-0 sm:pr-16">
+                <div className="relative pb-6 pl-0 sm:pl-16">
                   <BrowserFrame
-                    src="/realestate/agent-site-home.jpg"
-                    alt="An agent's website home page: a full-screen video of a listing with the agent's name and a contact button"
-                    url="terrencefinchum.com"
+                    src="/realestate/dash-analytics.jpg"
+                    alt="A listing's analytics: views by day, where visitors came from, devices, and how far they got"
+                    url="yourbrokerage.com/dashboard/listings/analytics"
+                    ratio="aspect-[2400/1856]"
                   />
                   <PhoneFrame
-                    src="/realestate/agent-site-mobile.jpg"
-                    alt="The same agent website home page on a phone"
-                    className="absolute -bottom-2 right-0 hidden w-[124px] sm:block"
+                    src="/realestate/m-report.jpg"
+                    alt="The seller report page on a phone"
+                    className="absolute -bottom-2 left-0 hidden w-[124px] sm:block"
                     sizes="124px"
                   />
                 </div>
               }
+              caption={SAMPLE}
+            />
+
+            <Feature
+              eyebrow="Flyers"
+              title="Print-ready flyers, in three styles."
+              body="Every listing makes a one-page flyer from the same details as its website. Pick Classic, Minimal editorial, or Luxury dark, choose the photos and features, and the page checks that it all fits on one printed sheet."
+              bullets={[
+                "A QR code that sends scans to the listing site, counted in your analytics",
+                "A fit check that shows how much room is left, and trims the blurb to fit for you",
+                "Print or save as a PDF straight from the page",
+              ]}
+              visual={
+                <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                  {[
+                    { src: "/realestate/flyer-classic.jpg", name: "Classic" },
+                    { src: "/realestate/flyer-editorial.jpg", name: "Minimal editorial" },
+                    { src: "/realestate/flyer-luxury.jpg", name: "Luxury dark" },
+                  ].map((f) => (
+                    <figure key={f.name} className="overflow-hidden rounded-[8px] border border-border-strong bg-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.5)]">
+                      <Image src={f.src} alt={`The ${f.name} flyer`} width={1632} height={2112} className="h-auto w-full" sizes="(min-width: 1024px) 14vw, 30vw" />
+                      <figcaption className="bg-bg-elevated px-2 py-1.5 text-center text-[11px] text-text-muted">{f.name}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              }
+              caption={SAMPLE}
+              flip
             />
 
             <Feature
@@ -374,7 +480,7 @@ export default function RealEstatePage() {
             id="back-office"
             icon={<Kanban weight="regular" className="size-5" />}
             title="The back office"
-            body="Leads, pipeline, and transactions, laid out the way agents think."
+            body="Contacts, leads, pipeline, and deals, laid out the way agents think."
           />
 
           <div className="mt-16 flex flex-col gap-24">
@@ -400,41 +506,42 @@ export default function RealEstatePage() {
 
             <Feature
               flip
-              eyebrow="Leads"
-              title="Every lead has a next step."
-              body="Website inquiries, open house sign-ins, and referrals land on a board. Each card carries a follow-up date, and anything overdue turns red, so the person you meant to call doesn't slip."
+              eyebrow="Contacts"
+              title="Everyone you know, in one private database."
+              body="Your sphere, past clients, referral partners, lenders, and vendors, with tags, notes, and a keep-in-touch reminder for each person. It's yours alone: no one else in your office can see your contacts."
               bullets={[
-                "Tag each person as a buyer, a seller, or both",
-                "Call, text, or email from inside the card",
-                "A second inquiry from the same person joins their existing card",
-                "Columns you can rename, reorder, and add",
+                "Tag people and save a filter as a smart list, like 'Due for a touch' or 'Holiday cards'",
+                "Log a call, text, email, meeting, or showing, and 'last in touch' updates itself",
+                "Import from a spreadsheet and merge duplicates into one record",
+                "Every lead, pipeline, and deal card links back to its contact",
               ]}
               visual={
                 <BrowserFrame
-                  src="/realestate/dash-leads.png"
-                  alt="The Leads board with buyer and seller tags and follow-up dates"
-                  url="yourbrokerage.com/dashboard/people/leads"
-                  ratio="aspect-[1500/640]"
+                  src="/realestate/dash-contacts.jpg"
+                  alt="The Contacts page with tags, relationship, last contact, and saved smart lists"
+                  url="yourbrokerage.com/dashboard/people/contacts"
+                  ratio="aspect-[16/10]"
                 />
               }
               caption={SAMPLE}
             />
 
             <Feature
-              eyebrow="Pipeline"
-              title="A pipeline that looks past this month."
-              body="Your sphere, your someday-buyers, and the sellers who'll list in spring, all in one place and sorted by how soon they're likely to move. The same board, the same follow-up dates, a longer horizon."
+              eyebrow="Leads"
+              title="Every lead has a next step."
+              body="Website inquiries, open house sign-ins, and referrals land on a board. Each column sets its own follow-up rhythm, so fresh leads come up every day and slower ones every couple of weeks. Anything overdue turns red, so the person you meant to call doesn't slip."
               bullets={[
-                "Stages from 12+ months out to active, or whatever fits how you work",
-                "Everyone you're nurturing, visible at a glance",
-                "Move a card as the timeline changes",
+                "Tag each person as a buyer, a seller, or both",
+                "Board or list view, with search and filters, including 'due now'",
+                "Call, text, or email from inside the card, and it counts as a touch",
+                "Columns you can rename, reorder, and add",
               ]}
               visual={
                 <BrowserFrame
-                  src="/realestate/dash-pipeline.png"
-                  alt="The Pipeline board, from 12 months out to active"
-                  url="yourbrokerage.com/dashboard/people/pipeline"
-                  ratio="aspect-[1500/640]"
+                  src="/realestate/dash-leads.jpg"
+                  alt="The Leads board with follow-up cadence on every column, buyer and seller tags, and follow-up dates"
+                  url="yourbrokerage.com/dashboard/people/leads"
+                  ratio="aspect-[2400/1120]"
                 />
               }
               caption={SAMPLE}
@@ -442,30 +549,51 @@ export default function RealEstatePage() {
 
             <Feature
               flip
-              eyebrow="Transactions"
-              title="Under contract, nothing forgotten."
-              body="Each deal gets its key dates, the numbers, the title and lender, and buyer or seller checklists for tasks and documents, with deadlines counted from the contract date. Progress rings show how far along every deal is."
+              eyebrow="Pipeline"
+              title="A pipeline that looks past this month."
+              body="Your sphere, your someday-buyers, and the sellers who'll list in spring, all in one place and sorted by how soon they're likely to move. The same board, the same follow-up rhythm, a longer horizon."
               bullets={[
-                "Contract, inspection, appraisal, financing, and closing dates",
+                "Stages from 12+ months out to active, or whatever fits how you work",
+                "Everyone you're nurturing, visible at a glance",
+                "Move a card as the timeline changes",
+              ]}
+              visual={
+                <BrowserFrame
+                  src="/realestate/dash-pipeline.jpg"
+                  alt="The Pipeline board, from 12 months out to active"
+                  url="yourbrokerage.com/dashboard/people/pipeline"
+                  ratio="aspect-[2400/1120]"
+                />
+              }
+              caption={SAMPLE}
+            />
+
+            <Feature
+              eyebrow="Deals"
+              title="Under contract, nothing forgotten."
+              body="Deals have their own place in the dashboard. Each one gets its key dates, the numbers, the title and lender, and buyer or seller checklists for tasks and documents, with deadlines counted from the contract date. Progress rings show how far along every deal is."
+              bullets={[
+                "An overview of what needs you now and what's coming in the next two weeks",
+                "Contract, inspection, appraisal, financing, and closing dates, plus earnest money",
                 "A task checklist and a document list, with seller and buyer versions you can edit",
                 "Open deals, expected commission, and closed volume on your Overview",
               ]}
               visual={
                 <div className="relative pb-24 sm:pb-28">
                   <BrowserFrame
-                    src="/realestate/dash-transactions.png"
-                    alt="The Transactions board with task and document progress rings on every deal"
-                    url="yourbrokerage.com/dashboard/people/transactions"
-                    ratio="aspect-[1500/640]"
+                    src="/realestate/dash-deals.jpg"
+                    alt="The Deals page with needs-your-attention, coming-up dates, and deal totals"
+                    url="yourbrokerage.com/dashboard/deals"
+                    ratio="aspect-[16/10]"
                   />
-                  <figure className="absolute -bottom-2 right-3 w-[62%] overflow-hidden rounded-[14px] border border-border-strong bg-white shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] sm:w-[54%]">
+                  <figure className="absolute -bottom-2 right-3 w-[62%] overflow-hidden rounded-[14px] border border-border-strong bg-white shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] sm:w-[48%]">
                     <Image
-                      src="/realestate/dash-checklists.png"
-                      alt="A deal's task and document checklists with progress rings"
-                      width={1976}
-                      height={790}
+                      src="/realestate/dash-deal-tasks.jpg"
+                      alt="A deal's task checklist with a progress ring"
+                      width={1700}
+                      height={1517}
                       className="h-auto w-full"
-                      sizes="(min-width: 1024px) 32vw, 60vw"
+                      sizes="(min-width: 1024px) 28vw, 60vw"
                     />
                   </figure>
                 </div>
@@ -474,6 +602,51 @@ export default function RealEstatePage() {
             />
 
             <Feature
+              flip
+              eyebrow="Coordinators and compliance"
+              title="Bring your coordinator and your compliance reviewer in."
+              body="Pick a transaction coordinator for each deal and they see and work just that deal, with the agent kept informed. A compliance reviewer can read every deal's documents, mark each one approved or send it back with a note, and the agent gets an email when something comes back."
+              bullets={[
+                "A coordinator can start a deal on an agent's behalf, and the agent is emailed",
+                "Agents submit a deal for review; reviewers approve it or send it back with a note",
+                "A message thread on each deal keeps the conversation with the paperwork",
+                "Optional milestone emails and a Monday summary from the coordinator keep agents in the loop",
+              ]}
+              visual={
+                <figure className="mx-auto max-w-[520px] overflow-hidden rounded-[16px] border border-border-strong bg-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)]">
+                  <Image
+                    src="/realestate/dash-deal-panel.jpg"
+                    alt="A deal's side panel: the address, stage, closing countdown, and tabs for tasks, documents, messages, and details"
+                    width={1700}
+                    height={1945}
+                    className="h-auto w-full"
+                    sizes="(min-width: 1024px) 40vw, 90vw"
+                  />
+                </figure>
+              }
+              caption={SAMPLE}
+            />
+
+            <Feature
+              eyebrow="For your clients"
+              title="Show clients where they stand."
+              body="Send a buyer or seller a private link that shows their closing timeline: a countdown, what's done, what's still coming, and who's helping. It never shows price, commission, or your checklist. Send a vendor list the same way, and clients get your recommended inspector, mover, or plumber with a tap to call."
+              bullets={[
+                "A timeline page branded with you, with a personal note from you or your coordinator",
+                "Links you can switch off at any time, and that expire on their own",
+                "A preferred-vendor list for the whole office, shared with just the vendors you tick",
+              ]}
+              visual={
+                <div className="flex items-start justify-center gap-4 sm:gap-6">
+                  <PhoneFrame src="/realestate/m-timeline.jpg" alt="A client's closing timeline page on a phone" className="w-[44%] max-w-[210px]" sizes="210px" />
+                  <PhoneFrame src="/realestate/m-vendors.jpg" alt="A vendor list shared with a client, on a phone" className="mt-10 w-[44%] max-w-[210px]" sizes="210px" />
+                </div>
+              }
+              caption={SAMPLE}
+            />
+
+            <Feature
+              flip
               eyebrow="Listings"
               title="One place to manage every listing."
               body="Status, price, photos, and open houses live in a single dashboard. Change a status from the list and the listing's site reflects it right away."
@@ -481,6 +654,7 @@ export default function RealEstatePage() {
                 "Add photos, pick the hero shot, and schedule open houses",
                 "Upcoming listings tracked before they hit the market",
                 "A brokerage-wide view when you manage more than one agent",
+                "An office analytics page for brokers: views, sources, and agent websites, with a CSV export",
               ]}
               visual={
                 <figure className="overflow-hidden rounded-[14px] border border-border-strong shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)]">
@@ -563,11 +737,11 @@ export default function RealEstatePage() {
             },
             {
               title: "Teams",
-              body: "Give each person the access that fits: full website editing, blog only, or none, and switch the leads and pipeline tools on per agent.",
+              body: "Give each person the access that fits: full website editing, blog only, or none, and switch the contacts, leads, pipeline, and deals tools on per agent. Add a transaction coordinator or a compliance reviewer where you need one.",
             },
             {
               title: "Brokerages",
-              body: "A brokerage site with an agent roster, areas, and a blog, and a dashboard for every listing and every agent. Each office gets its own logo, colors, and domain.",
+              body: "A brokerage site with an agent roster, areas, and a blog, and a dashboard for every listing and every agent, plus office analytics for the broker. Each office gets its own logo, colors, and domain.",
             },
           ].map((c) => (
             <RevealItem key={c.title}>
@@ -655,7 +829,19 @@ export default function RealEstatePage() {
             },
             {
               q: "Can people on my team see different things?",
-              a: "Yes. Each person can have full website access, blog-only access, or none, and the leads, pipeline, and transactions tools are switched on per agent.",
+              a: "Yes. Each person can have full website access, blog-only access, or none, and the contacts, leads, pipeline, and deals tools are switched on per agent. Your contacts and leads stay private to you; deals can be shared with a coordinator or a compliance reviewer you choose.",
+            },
+            {
+              q: "Can my clients see where their deal stands?",
+              a: "Yes. You send a private link that shows their closing timeline, with a countdown, what's done, what's coming, and who's helping. It never shows price, commission, or your internal checklist, and you can turn the link off whenever you like.",
+            },
+            {
+              q: "Can I see who's looking at my listings?",
+              a: "Yes. Each property site reports views, visitors, where they came from, and how far they got. Give every place you share a listing its own link and you'll see which one works, and send the seller a private report page with the same numbers.",
+            },
+            {
+              q: "Can I choose how my website looks?",
+              a: "Yes. Start from one of three templates, pick your colors, a header and a footer, and set the order of your pages. You can also send your agents a private link where they see their site in every layout and pick the one they like.",
             },
             {
               q: "Will it look like my brokerage?",
