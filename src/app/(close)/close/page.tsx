@@ -395,7 +395,7 @@ export default function ClosePage() {
           <RevealGroup className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
             {[
               {
-                price: "$395",
+                price: "$300",
                 unit: "per file",
                 items: [
                   "Contract to close, buyer or seller side",
@@ -484,7 +484,7 @@ export default function ClosePage() {
             },
             {
               q: "What does it cost?",
-              a: "$395 per file, paid at closing. If the deal falls through, you don't pay. If you close five or more a month, ask about a volume price.",
+              a: "$300 per file, paid at closing. If the deal falls through, you don't pay. If you close five or more a month, ask about a volume price.",
             },
             {
               q: "Will my client know I use a coordinator?",
