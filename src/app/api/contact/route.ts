@@ -7,6 +7,7 @@ const PROJECT_TYPES: Record<string, string> = {
   personal: "Personal app",
   crm: "CRM",
   "early-access": "Latchpoint Real Estate early access",
+  tc: "Latchpoint TC file",
   other: "Not sure yet",
 };
 
@@ -76,6 +77,7 @@ async function saveToHq(inquiry: Inquiry): Promise<boolean> {
 }
 
 const isEarlyAccess = (inquiry: Inquiry) => inquiry.project_type === PROJECT_TYPES["early-access"];
+const isTc = (inquiry: Inquiry) => inquiry.project_type === PROJECT_TYPES.tc;
 
 /** "Name <a@b.com>" -> a@b.com, so the visitor's confirmation can come from the same verified address under the product's name. */
 function senderAddress(): string {
@@ -130,7 +132,9 @@ async function sendEmail(inquiry: Inquiry): Promise<boolean> {
       reply_to: inquiry.email,
       subject: isEarlyAccess(inquiry)
         ? `New early-access request: ${inquiry.name}`
-        : `New project inquiry: ${inquiry.name}`,
+        : isTc(inquiry)
+          ? `New TC request: ${inquiry.name}`
+          : `New project inquiry: ${inquiry.name}`,
       text: [
         `Name: ${inquiry.name}`,
         `Email: ${inquiry.email}`,

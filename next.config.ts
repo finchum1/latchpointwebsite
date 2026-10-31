@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
-const REALESTATE_HOST = "realestate.latchpointstudios.com";
 const MAIN_ORIGIN = "https://latchpointstudios.com";
+
+// Landing pages that live at a path in this same app, each served at the root
+// of its own subdomain.
+const SUBDOMAIN_PAGES = [
+  { host: "realestate.latchpointstudios.com", path: "/realestate" },
+  { host: "tc.latchpointstudios.com", path: "/tc" },
+];
+
+// Studio-site sections. Requested on a subdomain, they go to the main domain.
+const STUDIO_PATHS = ["work", "services", "about", "contact", "solutions"];
 
 const nextConfig: NextConfig = {
   images: {
@@ -13,39 +22,34 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // The real estate landing page lives at /realestate in this same app, and
-  // the subdomain just serves it at its own root.
   async rewrites() {
     return {
-      beforeFiles: [
-        {
-          source: "/",
-          has: [{ type: "host", value: REALESTATE_HOST }],
-          destination: "/realestate",
-        },
-      ],
+      beforeFiles: SUBDOMAIN_PAGES.map(({ host, path }) => ({
+        source: "/",
+        has: [{ type: "host" as const, value: host }],
+        destination: path,
+      })),
     };
   },
 
   async redirects() {
-    return [
-      // One canonical home for the page: the subdomain, not /realestate on
-      // the main domain.
+    return SUBDOMAIN_PAGES.flatMap(({ host, path }) => [
+      // One canonical home for each page: its subdomain, not the path on the
+      // main domain.
       {
-        source: "/realestate",
-        has: [{ type: "host", value: "(www\\.)?latchpointstudios\\.com" }],
-        destination: `https://${REALESTATE_HOST}`,
+        source: path,
+        has: [{ type: "host" as const, value: "(www\\.)?latchpointstudios\\.com" }],
+        destination: `https://${host}`,
         permanent: false,
       },
-      // The subdomain is a single landing page. Any studio-site path
-      // requested on it goes to the same path on the main domain.
-      ...["work", "services", "about", "contact", "solutions"].map((base) => ({
+      // Each subdomain is a single landing page.
+      ...STUDIO_PATHS.map((base) => ({
         source: `/${base}/:path*`,
-        has: [{ type: "host" as const, value: REALESTATE_HOST }],
+        has: [{ type: "host" as const, value: host }],
         destination: `${MAIN_ORIGIN}/${base}/:path*`,
         permanent: false,
       })),
-    ];
+    ]);
   },
 };
 
