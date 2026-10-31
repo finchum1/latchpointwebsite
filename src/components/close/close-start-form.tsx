@@ -14,9 +14,9 @@ const labelClass = "text-sm font-medium text-text";
 const NEEDS = ["A file under contract now", "One coming up soon", "Just getting to know you"];
 const VOLUME = ["1 to 2 a month", "3 to 5 a month", "6 to 10 a month", "More than 10"];
 
-/** "Send me a file" for Latchpoint TC. Posts to the studio's contact API, which saves it to HQ's
- *  inquiries and emails it, tagged as a TC request so it's counted apart from studio projects. */
-export function TcStartForm() {
+/** "Send me a file" for Close by Latchpoint. Posts to the studio's contact API, which saves it to HQ's
+ *  inquiries and emails it, tagged as a Close request so it's counted apart from studio projects. */
+export function CloseStartForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -36,8 +36,8 @@ export function TcStartForm() {
           name: data.name,
           email: data.email,
           company: data.company,
-          projectType: "tc",
-          source: "tc.latchpointstudios.com/start",
+          projectType: "close",
+          source: "close.latchpointstudios.com/start",
           hp: data.website,
           message: [
             data.phone ? `Phone: ${data.phone}` : null,
@@ -83,46 +83,46 @@ export function TcStartForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-5 text-left">
       {/* Honeypot: real visitors never see or fill this field. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-        <label htmlFor="tc-website">Website</label>
-        <input id="tc-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor="close-website">Website</label>
+        <input id="close-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-name" className={labelClass}>
+          <label htmlFor="close-name" className={labelClass}>
             Name
           </label>
-          <input id="tc-name" name="name" type="text" required className={inputClass} placeholder="Jordan Reyes" />
+          <input id="close-name" name="name" type="text" required className={inputClass} placeholder="Jordan Reyes" />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-email" className={labelClass}>
+          <label htmlFor="close-email" className={labelClass}>
             Email
           </label>
-          <input id="tc-email" name="email" type="email" required className={inputClass} placeholder="jordan@brokerage.com" />
+          <input id="close-email" name="email" type="email" required className={inputClass} placeholder="jordan@brokerage.com" />
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-phone" className={labelClass}>
+          <label htmlFor="close-phone" className={labelClass}>
             Phone <span className="font-normal text-text-faint">(optional)</span>
           </label>
-          <input id="tc-phone" name="phone" type="tel" className={inputClass} placeholder="(405) 555-0100" />
+          <input id="close-phone" name="phone" type="tel" className={inputClass} placeholder="(405) 555-0100" />
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-company" className={labelClass}>
+          <label htmlFor="close-company" className={labelClass}>
             Brokerage <span className="font-normal text-text-faint">(optional)</span>
           </label>
-          <input id="tc-company" name="company" type="text" className={inputClass} placeholder="Reyes Realty Group" />
+          <input id="close-company" name="company" type="text" className={inputClass} placeholder="Reyes Realty Group" />
         </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-need" className={labelClass}>
+          <label htmlFor="close-need" className={labelClass}>
             I have
           </label>
-          <select id="tc-need" name="need" className={inputClass} defaultValue={NEEDS[0]}>
+          <select id="close-need" name="need" className={inputClass} defaultValue={NEEDS[0]}>
             {NEEDS.map((n) => (
               <option key={n} value={n}>
                 {n}
@@ -131,10 +131,10 @@ export function TcStartForm() {
           </select>
         </div>
         <div className="flex flex-col gap-2">
-          <label htmlFor="tc-volume" className={labelClass}>
+          <label htmlFor="close-volume" className={labelClass}>
             Deals I close
           </label>
-          <select id="tc-volume" name="volume" className={inputClass} defaultValue={VOLUME[0]}>
+          <select id="close-volume" name="volume" className={inputClass} defaultValue={VOLUME[0]}>
             {VOLUME.map((v) => (
               <option key={v} value={v}>
                 {v}
@@ -145,11 +145,11 @@ export function TcStartForm() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <label htmlFor="tc-notes" className={labelClass}>
+        <label htmlFor="close-notes" className={labelClass}>
           Anything I should know? <span className="font-normal text-text-faint">(optional)</span>
         </label>
         <textarea
-          id="tc-notes"
+          id="close-notes"
           name="notes"
           rows={3}
           className={`${inputClass} resize-none`}

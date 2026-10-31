@@ -4,21 +4,21 @@ import { Button } from "@/components/button";
 import { Magnetic } from "@/components/magnetic";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { BrowserFrame, PhoneFrame } from "@/components/realestate/frames";
-import { TcStartForm } from "@/components/tc/tc-start-form";
+import { CloseStartForm } from "@/components/close/close-start-form";
 
-const URL = "https://tc.latchpointstudios.com";
+const URL = "https://close.latchpointstudios.com";
 
 export const metadata: Metadata = {
-  title: { absolute: "Latchpoint TC: transaction coordination for Oklahoma agents" },
+  title: { absolute: "Close by Latchpoint: transaction coordination for Oklahoma agents" },
   description:
     "Contract-to-close coordination for Oklahoma real estate agents. You get a private link that shows the whole file, and your client gets a closing timeline in plain English. Flat fee per file.",
   alternates: { canonical: URL },
   openGraph: {
-    title: "Latchpoint TC",
+    title: "Close by Latchpoint",
     description:
       "Transaction coordination for Oklahoma agents, with a live link to the file for you and a closing timeline for your client.",
     url: URL,
-    siteName: "Latchpoint TC",
+    siteName: "Close by Latchpoint",
     type: "website",
   },
   twitter: { card: "summary_large_image" },
@@ -102,7 +102,7 @@ function Cell({ value }: { value: boolean | string }) {
 
 /* -------------------------------- page -------------------------------- */
 
-export default function TcPage() {
+export default function ClosePage() {
   return (
     <>
       {/* ------------------------------ Hero ------------------------------ */}
@@ -142,7 +142,7 @@ export default function TcPage() {
 
           <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
             <BrowserFrame
-              src="/tc/agent-update.jpg"
+              src="/close/agent-update.jpg"
               alt="The agent's deal update page: days to closing, tasks done, documents collected, and a note from the coordinator"
               url="app.latchpointstudios.com/update/…"
               ratio="aspect-[16/10]"
@@ -216,14 +216,14 @@ export default function TcPage() {
             visual={
               <div className="relative pb-8">
                 <BrowserFrame
-                  src="/tc/agent-update-tall.jpg"
+                  src="/close/agent-update-tall.jpg"
                   alt="The full agent update page: needs you, key dates, tasks, documents, signatures, and who's involved"
                   url="app.latchpointstudios.com/update/…"
                   ratio="aspect-[4/5]"
                   sizes="(min-width: 1024px) 50vw, 100vw"
                 />
                 <PhoneFrame
-                  src="/tc/m-agent-update.jpg"
+                  src="/close/m-agent-update.jpg"
                   alt="The agent update page on a phone"
                   className="absolute -bottom-2 -right-2 w-[110px] sm:w-[150px] lg:-right-6 lg:w-[170px]"
                   sizes="170px"
@@ -250,7 +250,7 @@ export default function TcPage() {
             visual={
               <div className="relative pb-8">
                 <BrowserFrame
-                  src="/tc/client-timeline.jpg"
+                  src="/close/client-timeline.jpg"
                   alt="The client's closing timeline page: countdown, progress bar, note from the agent, and what's still coming"
                   url="app.latchpointstudios.com/timeline/…"
                   ratio="aspect-[16/10]"
@@ -548,7 +548,7 @@ export default function TcPage() {
                 </p>
               </div>
               <div className="lg:col-span-7">
-                <TcStartForm />
+                <CloseStartForm />
               </div>
             </div>
           </div>

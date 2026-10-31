@@ -17,15 +17,15 @@ const links = [
   { href: "#faq", label: "FAQ" },
 ];
 
-/** Focused nav for the TC page: anchors down the page instead of
+/** Focused nav for the Close page: anchors down the page instead of
  *  the studio site's section links, with the wordmark leading back out. */
-export function TcNav() {
+export function CloseNav() {
   const [open, setOpen] = useState(false);
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
       {/* Wider than the studio site's pill (max-w-4xl): this one carries the
-          "TC" tag next to the wordmark plus five anchor links, and
+          "by Latchpoint" next to the wordmark plus five anchor links, and
           at 896px that left everything cramped. */}
       <div className="relative w-full max-w-5xl">
         <div className="glass-pill flex items-center justify-between gap-2 rounded-full py-2 pl-4 pr-2 sm:gap-4 sm:pl-5">
@@ -34,8 +34,8 @@ export function TcNav() {
           <a href="/" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             <Logomark className="size-6 text-text" animated />
             <span className="font-medium tracking-tight text-text">
-              Latchpoint
-              <span className="text-text-muted"> TC</span>
+              Close
+              <span className="text-text-muted"> by Latchpoint</span>
             </span>
           </a>
 

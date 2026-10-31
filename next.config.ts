@@ -6,7 +6,7 @@ const MAIN_ORIGIN = "https://latchpointstudios.com";
 // of its own subdomain.
 const SUBDOMAIN_PAGES = [
   { host: "realestate.latchpointstudios.com", path: "/realestate" },
-  { host: "tc.latchpointstudios.com", path: "/tc" },
+  { host: "close.latchpointstudios.com", path: "/close" },
 ];
 
 // Studio-site sections. Requested on a subdomain, they go to the main domain.
@@ -33,23 +33,38 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return SUBDOMAIN_PAGES.flatMap(({ host, path }) => [
-      // One canonical home for each page: its subdomain, not the path on the
-      // main domain.
+    return [
+      // Close by Latchpoint's first working name. Anything on it goes to the
+      // same path on close.
       {
-        source: path,
-        has: [{ type: "host" as const, value: "(www\\.)?latchpointstudios\\.com" }],
-        destination: `https://${host}`,
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "tc.latchpointstudios.com" }],
+        destination: "https://close.latchpointstudios.com/:path*",
         permanent: false,
       },
-      // Each subdomain is a single landing page.
-      ...STUDIO_PATHS.map((base) => ({
-        source: `/${base}/:path*`,
-        has: [{ type: "host" as const, value: host }],
-        destination: `${MAIN_ORIGIN}/${base}/:path*`,
-        permanent: false,
-      })),
-    ]);
+      ...SUBDOMAIN_PAGES.flatMap(({ host, path }) => [
+        // One canonical home for each page: its subdomain, not the path on the
+        // main domain.
+        {
+          source: path,
+          has: [
+            {
+              type: "host" as const,
+              value: "(www\\.)?latchpointstudios\\.com",
+            },
+          ],
+          destination: `https://${host}`,
+          permanent: false,
+        },
+        // Each subdomain is a single landing page.
+        ...STUDIO_PATHS.map((base) => ({
+          source: `/${base}/:path*`,
+          has: [{ type: "host" as const, value: host }],
+          destination: `${MAIN_ORIGIN}/${base}/:path*`,
+          permanent: false,
+        })),
+      ]),
+    ];
   },
 };
 

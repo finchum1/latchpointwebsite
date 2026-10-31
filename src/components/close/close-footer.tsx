@@ -23,7 +23,7 @@ const heading = "font-mono text-[11px] uppercase tracking-[0.14em] text-[#6c6e76
 const link = "text-sm text-[#a4a5ac] transition-colors hover:text-[#f5f5f4]";
 
 /** Always dark, on both themes. */
-export function TcFooter() {
+export function CloseFooter() {
   return (
     <footer className="border-t border-white/10 bg-[#08090b]">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
@@ -31,10 +31,10 @@ export function TcFooter() {
           <div className="max-w-sm">
             {/* A full page load: "/" here is the subdomain root, a host-based rewrite. */}
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/" aria-label="Latchpoint TC, home" className="inline-flex items-center gap-2.5">
+            <a href="/" aria-label="Close by Latchpoint, home" className="inline-flex items-center gap-2.5">
               <Logomark className="size-6 text-[#f5f5f4]" animated />
               <span className="font-medium tracking-tight text-[#f5f5f4]">
-                Latchpoint<span className="text-[#a4a5ac]"> TC</span>
+                Close<span className="text-[#a4a5ac]"> by Latchpoint</span>
               </span>
             </a>
             <p className="mt-4 text-sm leading-relaxed text-[#a4a5ac]">
