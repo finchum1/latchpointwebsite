@@ -10,7 +10,7 @@ import { EarlyAccessForm } from "@/components/realestate/early-access-form";
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Real Estate: your website and back office, built and maintained" },
   description:
-    "A real estate website with a dashboard behind it: templates, blog, contacts, leads, pipeline, deals, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $200 a month, no contracts.",
+    "A real estate website with a dashboard behind it: templates, blog, contacts, leads, pipeline, deals, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $100 a month, no contracts.",
   alternates: { canonical: "https://realestate.latchpointstudios.com" },
   openGraph: {
     title: "Latchpoint Real Estate",
@@ -128,7 +128,7 @@ export default function RealEstatePage() {
                 </Button>
               </div>
               <p className="mt-5 text-sm text-text-faint">
-                $500 to set up, then $200 a month. No contracts.{" "}
+                $500 to set up, then $100 a month. No contracts.{" "}
                 <a href="#pricing" className="underline underline-offset-4 hover:text-text-muted">
                   What&rsquo;s included
                 </a>
@@ -698,7 +698,7 @@ export default function RealEstatePage() {
                 ],
               },
               {
-                price: "$200",
+                price: "$100",
                 unit: "a month",
                 items: [
                   "Hosting, upkeep, and updates for your site and dashboard",
@@ -805,7 +805,7 @@ export default function RealEstatePage() {
           {[
             {
               q: "What does it cost?",
-              a: "$500 to set up, then $200 a month. There are no contracts, so you pay month to month.",
+              a: "$500 to set up, then $100 a month. There are no contracts, so you pay month to month.",
             },
             {
               q: "When can I get in?",
