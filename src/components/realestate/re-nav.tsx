@@ -12,6 +12,7 @@ import { ThemeToggle } from "../theme-toggle";
 const links = [
   { href: "#home", label: "Your day" },
   { href: "#website", label: "Website" },
+  { href: "#ai", label: "AI" },
   { href: "#back-office", label: "Back office" },
   { href: "#pricing", label: "Pricing" },
   { href: "#faq", label: "FAQ" },

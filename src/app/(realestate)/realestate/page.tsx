@@ -6,11 +6,14 @@ import { Magnetic } from "@/components/magnetic";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { BrowserFrame, PhoneFrame } from "@/components/realestate/frames";
 import { EarlyAccessForm } from "@/components/realestate/early-access-form";
+import { HeroVideo } from "@/components/realestate/hero-video";
+import { FeatureScroller } from "@/components/realestate/feature-scroller";
+import { AiSection } from "@/components/realestate/ai-section";
 
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Real Estate: your website and back office, built and maintained" },
   description:
-    "A real estate website with a dashboard behind it: templates, blog, contacts, leads, pipeline, deals, and a schedule that syncs with Google Calendar. We build it, move you over, and keep it running. $500 to set up, then $150 a month, no contracts.",
+    "A real estate website with a dashboard behind it: templates, blog, contacts, leads, pipeline, deals, a schedule that syncs with Google Calendar, and your own AI assistant working inside it. We build it, move you over, and keep it running. $500 to set up, then $150 a month, no contracts.",
   alternates: { canonical: "https://realestate.latchpointstudios.com" },
   openGraph: {
     title: "Latchpoint Real Estate",
@@ -137,13 +140,10 @@ export default function RealEstatePage() {
           </div>
 
           <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
-            <BrowserFrame
-              src="/realestate/dash-home.jpg"
-              alt="The Latchpoint Real Estate dashboard home page: an hourly schedule, tasks waiting to be scheduled, and today's follow-ups"
-              url="yourbrokerage.com/dashboard"
-              ratio="aspect-[16/10]"
-              priority
-              sizes="(min-width: 1024px) 58vw, 100vw"
+            <HeroVideo
+              src="/realestate/hero.mp4"
+              poster="/realestate/hero-poster.jpg"
+              label="A short recording of the Latchpoint Real Estate dashboard: the day's schedule, a lead dragged to the next column on the leads board, the deals board, and the website editor"
             />
             <PhoneFrame
               src="/realestate/m-home.jpg"
@@ -187,55 +187,30 @@ export default function RealEstatePage() {
         </div>
       </section>
 
-      {/* -------------------------- Two halves --------------------------- */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-        <Reveal>
-          <Eyebrow>The system</Eyebrow>
-          <h2 className="mt-3 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
-            Two halves, one login.
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
-            Most agents run a website in one place, leads in a second, and transactions in a spreadsheet. Here it&rsquo;s
-            one dashboard, and what you do in it shows up on your site.
-          </p>
-        </Reveal>
+      {/* ------------------------- What comes with it ------------------------- */}
+      <section id="included" className="scroll-mt-28 overflow-hidden py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <Reveal>
+            <Eyebrow>What comes with it</Eyebrow>
+            <h2 className="mt-3 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
+              A website and a back office, one login.
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
+              Most agents run a website in one place, leads in a second, and deals in a spreadsheet. Here it&rsquo;s one
+              dashboard, and what you do in it shows up on your site. Drag through what&rsquo;s inside.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-12">
+            <FeatureScroller />
+          </Reveal>
+        </div>
+      </section>
 
-        <RevealGroup className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {[
-            {
-              icon: <Browser weight="regular" className="size-5" />,
-              title: "The website",
-              items: [
-                "Agent and brokerage sites on your own domain, from three starter templates",
-                "Six headers, five footers, and live previews of your site in every layout",
-                "Seller, buyer, and home value pages, plus a Recently Sold section",
-                "A property site for every listing, with video, visitor analytics, and printable flyers",
-                "A blog with a post calendar and pinned posts",
-              ],
-            },
-            {
-              icon: <Kanban weight="regular" className="size-5" />,
-              title: "The back office",
-              items: [
-                "A home page for your day: an hourly schedule, new inquiries, tasks, and your goal",
-                "A private contacts database with tags and keep-in-touch reminders",
-                "Leads and a pipeline with a follow-up rhythm for every column",
-                "Deals with key dates, checklists, a coordinator, and compliance review",
-                "Timeline and vendor links you can send to a client",
-              ],
-            },
-          ].map((card) => (
-            <RevealItem key={card.title}>
-              <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 sm:p-8">
-                <span className="flex size-11 items-center justify-center rounded-full bg-accent-soft text-accent">
-                  {card.icon}
-                </span>
-                <h3 className="mt-5 text-xl font-medium tracking-tight text-text">{card.title}</h3>
-                <Bullets items={card.items} />
-              </div>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+      {/* ------------------------------ AI built in ----------------------------- */}
+      <section id="ai" className="scroll-mt-28 border-y border-border bg-bg-elevated/30">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <AiSection />
+        </div>
       </section>
 
       {/* ------------------------------ Your day -------------------------- */}
@@ -810,6 +785,10 @@ export default function RealEstatePage() {
             {
               q: "When can I get in?",
               a: "We're inviting people in a few at a time, by hand. Request early access and we'll email you to set up a short call when there's a spot.",
+            },
+            {
+              q: "Can I use my own AI, like Claude, ChatGPT, or Grok?",
+              a: "Yes. You can connect the assistant you already use to your dashboard, and ask it to draft follow-up texts, add a lead, set a reminder, or write a blog post. It works with your own contacts, leads, and deals. Texts and emails are saved as drafts for you to send yourself, and it can't delete your records. Your admin switches AI access on one agent at a time, and every action is logged.",
             },
             {
               q: "Do I need to be technical?",
