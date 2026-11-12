@@ -162,10 +162,9 @@ export default function RealEstatePage() {
           <Reveal>
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <Eyebrow>Running in production today</Eyebrow>
-              <ul className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-3">
+              <ul className="grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
                 {[
                   { name: "Terrence Finchum", note: "Agent website", href: "https://terrencefinchum.com" },
-                  { name: "The Agency Oklahoma", note: "Brokerage website", href: "https://the-agency-oklahoma.vercel.app" },
                   { name: "Latchpoint Real Estate", note: "The dashboard, in daily use", href: "https://app.latchpointstudios.com" },
                 ].map((p) => (
                   <li key={p.name}>
