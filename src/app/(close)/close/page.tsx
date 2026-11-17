@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     url: URL,
     siteName: "Close by Latchpoint",
     type: "website",
+    images: [{ url: "https://close.latchpointstudios.com/close/og.jpg", width: 2400, height: 1260, alt: "Close by Latchpoint: transaction coordination for Oklahoma agents" }],
   },
   twitter: { card: "summary_large_image" },
 };
