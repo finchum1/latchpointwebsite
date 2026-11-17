@@ -11,7 +11,7 @@ import type { Project } from "@/lib/projects";
  * click it. Driven entirely by motion values, never React state, so it
  * costs nothing on re-render and collapses cleanly under reduced motion.
  */
-export function ProjectCard({ project, priority = false, active = false }: { project: Project; priority?: boolean; active?: boolean }) {
+export function ProjectCard({ project, priority = false }: { project: Project; priority?: boolean }) {
   const reduce = useReducedMotion();
   const mx = useMotionValue(0.5);
   const my = useMotionValue(0.5);
@@ -34,12 +34,12 @@ export function ProjectCard({ project, priority = false, active = false }: { pro
   }
 
   return (
-    <Link href={`/work#${project.slug}`} className="group block" data-active={active}>
+    <Link href={`/work#${project.slug}`} className="group block">
       <motion.div
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ rotateX, rotateY, transformPerspective: 900 }}
-        className="relative overflow-hidden rounded-[20px] border border-border bg-bg-elevated transition-colors duration-300 group-hover:border-border-strong group-data-[active=true]:border-accent/60"
+        className="relative overflow-hidden rounded-[20px] border border-border bg-bg-elevated transition-colors duration-300 group-hover:border-border-strong"
       >
         {!reduce && (
           <motion.div
@@ -55,7 +55,7 @@ export function ProjectCard({ project, priority = false, active = false }: { pro
             fill
             priority={priority}
             sizes="(min-width: 1024px) 33vw, 100vw"
-            className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top group-hover:scale-[1.07] group-hover:-translate-y-[1.5%] group-data-[active=true]:scale-[1.07] group-data-[active=true]:-translate-y-[1.5%]"
+            className="object-cover object-top transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
           />
         </div>
         <div className="p-6">
@@ -66,7 +66,7 @@ export function ProjectCard({ project, priority = false, active = false }: { pro
             </div>
             <ArrowUpRight
               weight="bold"
-              className="mt-1 size-4 shrink-0 text-text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent group-data-[active=true]:-translate-y-0.5 group-data-[active=true]:translate-x-0.5 group-data-[active=true]:text-accent"
+              className="mt-1 size-4 shrink-0 text-text-faint transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
             />
           </div>
           <p className="mt-3 text-sm leading-relaxed text-text-muted">{project.summary}</p>
