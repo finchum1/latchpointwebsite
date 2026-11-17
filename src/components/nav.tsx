@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, CaretDown, List, X } from "@phosphor-icons/react";
@@ -29,6 +29,17 @@ export function Nav() {
   // close, cancelled by either element's onMouseEnter, bridges that gap.
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // At the top of the page the header is just a plain bar across the page's own width; once you scroll it
+  // condenses into the floating glass pill. A passive scroll listener flips one boolean, and every visual
+  // change is a CSS transition.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   function openSolutions() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setSolutionsOpen(true);
@@ -51,9 +62,26 @@ export function Nav() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4 sm:top-6">
-      <div className="relative w-full max-w-4xl">
-        <div className="glass-pill flex items-center justify-between gap-4 rounded-full py-2 pl-5 pr-2">
+    <header className="fixed inset-x-0 top-4 z-50 sm:top-6">
+      {/* The width and side padding animate between the two states: the page's own container at the top, the narrower pill once scrolled. */}
+      <div
+        className={`mx-auto w-full transition-[max-width,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          scrolled ? "max-w-4xl px-4" : "max-w-7xl px-6 lg:px-8"
+        }`}
+      >
+      <div className="relative">
+        <div
+          className={`relative isolate flex items-center justify-between gap-4 rounded-full py-2 transition-[padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            scrolled ? "pl-5 pr-2" : "pl-0 pr-0"
+          }`}
+        >
+          {/* The glass is its own layer that fades in, so the bar doesn't snap between looks. */}
+          <div
+            aria-hidden="true"
+            className={`glass-pill pointer-events-none absolute inset-0 -z-10 rounded-full transition-opacity duration-500 ${
+              scrolled ? "opacity-100" : "opacity-0"
+            }`}
+          />
           <Link href="/" className="flex shrink-0 items-center">
             <Wordmark animated />
           </Link>
@@ -144,7 +172,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] hidden rounded-[20px] p-3 lg:block"
+              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] mx-auto hidden max-w-4xl rounded-[20px] p-3 lg:block"
             >
               <div className="grid grid-cols-2 gap-1">
                 {solutions.map((s) => (
@@ -185,7 +213,7 @@ export function Nav() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -8, scale: 0.98 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] rounded-[20px] p-2 lg:hidden"
+              className="glass-pill glass-dense absolute inset-x-0 top-[calc(100%+0.5rem)] mx-auto max-w-4xl rounded-[20px] p-2 lg:hidden"
             >
               <div className="flex flex-col gap-1">
                 <Link
@@ -221,6 +249,7 @@ export function Nav() {
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
       </div>
     </header>
   );
