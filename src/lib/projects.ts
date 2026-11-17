@@ -7,6 +7,8 @@ export type Project = {
   summary: string;
   description: string;
   image: string;
+  /** A tall capture of the live site, used where the screenshot scrolls on hover. */
+  tall?: { src: string; width: number; height: number };
   url: string;
   tags: string[];
   year: string;
@@ -22,6 +24,7 @@ export const projects: Project[] = [
     description:
       "A real estate website with a full back office behind it: templates, blog, contacts, leads, pipeline, deals, and a schedule that syncs with Google Calendar. Agents get a site that is theirs, and a dashboard that runs the day. Latchpoint builds it, moves the agent over, and keeps it running.",
     image: "/work/latchpoint-real-estate.jpg",
+    tall: { src: "/work/tall/latchpoint-real-estate.jpg", width: 1440, height: 3600 },
     url: "https://realestate.latchpointstudios.com",
     tags: ["Next.js", "Supabase", "Multi-tenant"],
     year: "2026",
@@ -35,6 +38,7 @@ export const projects: Project[] = [
     description:
       "The public site for a company that supplies film productions with on-site services, built around a single request form. Behind it, a private back office keeps vendors, job pricing, and branded quotes and invoices in one place, so a production gets one clean number instead of five vendors' bills.",
     image: "/work/oklahoma-film-solutions.jpg",
+    tall: { src: "/work/tall/oklahoma-film-solutions.jpg", width: 1440, height: 3600 },
     url: "https://oklahoma.film",
     tags: ["Marketing site", "React", "Supabase", "Back office"],
     year: "2026",
@@ -48,6 +52,7 @@ export const projects: Project[] = [
     description:
       "A bookkeeping app for owner-operators. Log income and expenses by business and category, drop in receipts, and see what you paid each contractor or received from each client. Set monthly budgets against actuals, import bank statements and match each line to a ledger entry, then reconcile the month. Run payroll for W-2 employees alongside the books, and bring in a partner or bookkeeper with their own role. Profit and Loss reports export as a clean PDF for one business or all of them, and it installs to a phone's home screen like an app.",
     image: "/work/solo-books.jpg",
+    tall: { src: "/work/tall/solo-books.jpg", width: 1440, height: 3600 },
     url: "https://solobooks.latchpointstudios.com",
     tags: ["React", "Supabase", "Bank import", "Payroll"],
     year: "2026",

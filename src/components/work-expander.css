@@ -1,0 +1,158 @@
+/*
+  Selected work: three cards in a row. On a screen with a pointer, the card you
+  hover grows and the other two make room; its screenshot scrolls down the real
+  page, and its fuller description fades in. Everything is CSS (:hover,
+  :focus-within, :has), so there is no JavaScript and nothing to hydrate.
+  On touch screens and below lg the cards keep a fixed size and show the top
+  of each site.
+*/
+
+.we {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .we {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.we-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-elevated);
+  transition: border-color 0.4s, box-shadow 0.6s;
+}
+.we-item:hover .we-card,
+.we-item:focus-within .we-card {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: 0 30px 70px -40px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* the screenshot window: a fixed height, so the page never reflows when a card grows */
+.we-shot {
+  position: relative;
+  flex: none;
+  height: 14rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated-2);
+  container-type: size;
+}
+.we-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 1.5s cubic-bezier(0.45, 0, 0.2, 1);
+}
+/* a thin fade at the foot of the window hints that there's more page below */
+.we-shot::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2.5rem;
+  background: linear-gradient(to top, color-mix(in srgb, var(--bg-elevated-2) 80%, transparent), transparent);
+  pointer-events: none;
+}
+
+/* the text under the screenshot: also a fixed height, with the summary and the longer description sharing one spot */
+.we-info {
+  position: relative;
+  flex: none;
+  padding: 1.5rem;
+}
+.we-text {
+  display: grid;
+  margin-top: 0.75rem;
+}
+.we-text > * {
+  grid-area: 1 / 1;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+.we-desc {
+  opacity: 0;
+  visibility: hidden;
+}
+.we-foot {
+  position: absolute;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.4s 0.15s, transform 0.5s 0.15s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+}
+
+/* where there's a pointer and room: the row of three that trades width */
+@media (min-width: 1024px) {
+  .we-shot {
+    height: 22rem;
+  }
+}
+@media (min-width: 1024px) and (hover: hover) {
+  .we {
+    display: flex;
+    gap: 1rem;
+    height: calc(22rem + 14rem + 2px);
+  }
+  /* a fixed text height here, so a card can swap its summary for the longer description without the row changing size */
+  .we-info {
+    height: 14rem;
+  }
+  .we-item {
+    flex: 1 1 0;
+    min-width: 0;
+    transition: flex-grow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .we:has(.we-item:hover, .we-item:focus-within) .we-item {
+    flex-grow: 0.9;
+  }
+  .we:has(.we-item:hover, .we-item:focus-within) .we-item:hover,
+  .we:has(.we-item:hover, .we-item:focus-within) .we-item:focus-within {
+    flex-grow: 1.7;
+  }
+
+  /* scroll the screenshot down the real page, slowly; it eases back up quicker when you leave */
+  .we-item:hover .we-shot img,
+  .we-item:focus-within .we-shot img {
+    transform: translateY(calc(-100% + 100cqh));
+    transition: transform 15s cubic-bezier(0.4, 0, 0.25, 1) 0.35s;
+  }
+
+  .we-item:hover .we-sum,
+  .we-item:focus-within .we-sum {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .we-item:hover .we-desc,
+  .we-item:focus-within .we-desc {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.25s;
+  }
+  .we-item:hover .we-foot,
+  .we-item:focus-within .we-foot {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .we *,
+  .we *::before,
+  .we *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
