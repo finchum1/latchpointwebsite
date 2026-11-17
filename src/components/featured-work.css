@@ -1,0 +1,143 @@
+/*
+  Selected work: the rail above the three cards. One orange node, the same one
+  as the hero map, travels between the cards' ports. It cycles on its own
+  while the section is in view, and goes to whichever card you hover or focus.
+  Layout is only for lg and up, where the cards sit side by side; below that
+  the cards just respond to hover on their own.
+*/
+
+.wr {
+  --col: calc((100% - 3rem) / 3); /* column width: three columns, two 1.5rem gaps */
+  position: relative;
+  height: 3rem;
+}
+
+.wr-line,
+.wr-drop {
+  position: absolute;
+  background: var(--border-strong);
+  transition: background 0.4s;
+}
+.wr-line {
+  top: 50%;
+  left: calc(var(--col) * 0.5);
+  right: calc(var(--col) * 0.5);
+  height: 1px;
+}
+.wr-drop {
+  top: 50%;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-0.5px);
+}
+.wr-drop[data-on="true"] {
+  background: var(--accent);
+}
+
+.wr-port {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 9999px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg);
+  transition: border-color 0.4s, background 0.4s;
+}
+.wr-port[data-on="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.wr-port[data-on="true"]::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  animation: wr-ping 1.4s ease-out 0.55s both;
+}
+
+/* the node, with two ghosts that follow a beat behind it */
+.wr-node {
+  position: absolute;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  margin: -5.5px 0 0 -5.5px;
+  border-radius: 9999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 14px color-mix(in srgb, var(--accent) 70%, transparent);
+  transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.4s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+.wr-ghost {
+  z-index: 1;
+  box-shadow: none;
+}
+.wr-ghost-1 {
+  opacity: 0.5;
+  transform: scale(0.8);
+  transition-delay: 0.08s;
+}
+.wr-ghost-2 {
+  opacity: 0.25;
+  transform: scale(0.6);
+  transition-delay: 0.17s;
+}
+.wr[data-hover="true"] .wr-node:not(.wr-ghost) {
+  transform: scale(1.35);
+}
+.wr[data-idle="true"] .wr-node {
+  opacity: 0;
+}
+
+/* the label that rides with the node; it sits beside it (or to its left on the last card) */
+.wr-label {
+  position: absolute;
+  top: 50%;
+  margin-left: 18px;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s;
+  pointer-events: none;
+}
+.wr-label[data-flip="true"] {
+  margin-left: -18px;
+  transform: translate(-100%, -50%);
+}
+.wr-label b {
+  font-weight: 500;
+  color: var(--text);
+}
+.wr[data-hover="true"] .wr-label {
+  opacity: 1;
+  transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s 0.5s;
+}
+
+@keyframes wr-ping {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wr *,
+  .wr *::before,
+  .wr *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}

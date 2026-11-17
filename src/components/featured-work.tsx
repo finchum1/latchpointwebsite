@@ -1,5 +1,5 @@
 import { projects } from "@/lib/projects";
-import { ProjectCard } from "./project-card";
+import { FeaturedWorkGrid } from "./featured-work-grid";
 import { Reveal } from "./reveal";
 import { Button } from "./button";
 
@@ -21,13 +21,7 @@ export function FeaturedWork() {
         </Button>
       </Reveal>
 
-      <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 0.08}>
-            <ProjectCard project={p} priority={i === 0} />
-          </Reveal>
-        ))}
-      </div>
+      <FeaturedWorkGrid projects={featured} />
     </section>
   );
 }
