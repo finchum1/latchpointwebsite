@@ -9,6 +9,10 @@ import { EarlyAccessForm } from "@/components/realestate/early-access-form";
 import { HeroVideo } from "@/components/realestate/hero-video";
 import { FeatureScroller } from "@/components/realestate/feature-scroller";
 import { AiSection } from "@/components/realestate/ai-section";
+import { RealEstateBrain } from "@/components/realestate/re-brain";
+import { RealEstateProcess } from "@/components/realestate/re-process";
+import { OrbitNode } from "@/components/orbit-node";
+import { SpotlightCard } from "@/components/spotlight-card";
 
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Real Estate: your website and back office, built and maintained" },
@@ -111,8 +115,8 @@ export default function RealEstatePage() {
           <div className="absolute left-1/2 top-[-10%] h-[480px] w-[780px] -translate-x-1/2 rounded-full bg-accent/[0.08] blur-[120px]" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 pb-24 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-10 lg:px-8">
-          <div className="lg:col-span-5">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 pb-24 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-6 lg:px-8">
+          <div className="lg:col-span-6">
             <Reveal>
               <Eyebrow>For agents, teams, and brokerages</Eyebrow>
               <h1 className="mt-4 text-4xl font-medium leading-[1.08] tracking-tight text-text sm:text-5xl lg:text-[3.2rem]">
@@ -139,19 +143,8 @@ export default function RealEstatePage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
-            <HeroVideo
-              src="/realestate/hero.mp4"
-              poster="/realestate/hero-poster.jpg"
-              label="A short recording of the Latchpoint Real Estate dashboard: the day's schedule, a lead dragged to the next column on the leads board, the deals board, and the website editor"
-            />
-            <PhoneFrame
-              src="/realestate/m-home.jpg"
-              alt="The dashboard home page on a phone: today's schedule and tasks"
-              className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
-              sizes="150px"
-            />
-            <p className="mt-3 max-w-[60%] text-xs text-text-faint">{SAMPLE}</p>
+          <Reveal delay={0.15} className="flex min-w-0 justify-center lg:col-span-6 lg:justify-end">
+            <RealEstateBrain />
           </Reveal>
         </div>
       </section>
@@ -182,6 +175,36 @@ export default function RealEstatePage() {
                 ))}
               </ul>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ------------------------- See it working ------------------------- */}
+      <section id="see-it" className="mx-auto max-w-7xl scroll-mt-28 px-6 pt-24 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14">
+          <Reveal className="lg:col-span-5">
+            <Eyebrow>See it working</Eyebrow>
+            <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
+              The dashboard, in a minute.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-text-muted">
+              A short recording of the real thing: the day&rsquo;s schedule, a lead dragged to the next column on the
+              leads board, the deals board, and the website editor.
+            </p>
+          </Reveal>
+          <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
+            <HeroVideo
+              src="/realestate/hero.mp4"
+              poster="/realestate/hero-poster.jpg"
+              label="A short recording of the Latchpoint Real Estate dashboard: the day's schedule, a lead dragged to the next column on the leads board, the deals board, and the website editor"
+            />
+            <PhoneFrame
+              src="/realestate/m-home.jpg"
+              alt="The dashboard home page on a phone: today's schedule and tasks"
+              className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
+              sizes="150px"
+            />
+            <p className="mt-3 max-w-[60%] text-xs text-text-faint">{SAMPLE}</p>
           </Reveal>
         </div>
       </section>
@@ -680,13 +703,16 @@ export default function RealEstatePage() {
                   "A studio to call when you want something changed",
                 ],
               },
-            ].map((tier) => (
+            ].map((tier, i) => (
               <RevealItem key={tier.price}>
-                <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 sm:p-8">
-                  <p className="text-4xl font-medium tracking-tight text-text">
-                    {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
-                  </p>
-                  <Bullets items={tier.items} />
+                <div className="orbit-wrap relative h-full">
+                  <SpotlightCard className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 transition-colors duration-300 hover:border-border-strong sm:p-8">
+                    <p className="text-4xl font-medium tracking-tight text-text">
+                      {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
+                    </p>
+                    <Bullets items={tier.items} />
+                  </SpotlightCard>
+                  <OrbitNode duration={17} delay={-(i * 8.5)} />
                 </div>
               </RevealItem>
             ))}
@@ -717,11 +743,14 @@ export default function RealEstatePage() {
               title: "Brokerages",
               body: "A brokerage site with an agent roster, areas, and a blog, and a dashboard for every listing and every agent, plus office analytics for the broker. Each office gets its own logo, colors, and domain.",
             },
-          ].map((c) => (
+          ].map((c, i) => (
             <RevealItem key={c.title}>
-              <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7">
-                <h3 className="text-lg font-medium tracking-tight text-text">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">{c.body}</p>
+              <div className="orbit-wrap relative h-full">
+                <SpotlightCard className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 transition-colors duration-300 hover:border-border-strong">
+                  <h3 className="text-lg font-medium tracking-tight text-text">{c.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-text-muted">{c.body}</p>
+                </SpotlightCard>
+                <OrbitNode duration={12} delay={-(i * 4.3)} />
               </div>
             </RevealItem>
           ))}
@@ -738,31 +767,7 @@ export default function RealEstatePage() {
             </h2>
           </Reveal>
 
-          <RevealGroup className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {[
-              {
-                n: "01",
-                title: "We talk through your day",
-                body: "Where leads come from, what stages your pipeline has, what happens between contract and closing. The back office gets shaped to that, not the other way around.",
-              },
-              {
-                n: "02",
-                title: "We build and move you over",
-                body: "Your site, your dashboard, and your old blog posts. Old URLs are redirected to the new ones so the search ranking you've earned comes with you.",
-              },
-              {
-                n: "03",
-                title: "You run it, we keep it healthy",
-                body: "Edits are forms, not code. And when you want something added later, you have a studio to call instead of a ticket queue.",
-              },
-            ].map((s) => (
-              <RevealItem key={s.n}>
-                <p className="font-mono text-sm text-accent">{s.n}</p>
-                <h3 className="mt-3 text-lg font-medium tracking-tight text-text">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">{s.body}</p>
-              </RevealItem>
-            ))}
-          </RevealGroup>
+          <RealEstateProcess />
         </div>
       </section>
 

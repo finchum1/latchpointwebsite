@@ -1,7 +1,9 @@
 import { Logomark } from "../logomark";
+import { RealEstateWordmark } from "./re-wordmark";
 
 // This footer is deliberately identical to theagency.latchpointstudios.com's (listings-app repo,
 // src/components/marketing/LatchpointFooter.jsx): same wordmark, blurb, two link columns and bottom line. Change them together.
+// The one difference: the huge ghosted REAL ESTATE on the bottom edge (RealEstateWordmark) is only here for now.
 const product = [
   { href: "/#home", label: "Your day" },
   { href: "/#website", label: "Website" },
@@ -27,7 +29,7 @@ const link = "text-sm text-[#a4a5ac] transition-colors hover:text-[#f5f5f4]";
 export function RealEstateFooter() {
   return (
     <footer className="border-t border-white/10 bg-[#08090b]">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-0 pt-14 lg:px-8">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
             <a href="/" aria-label="Latchpoint Real Estate, home" className="inline-flex items-center gap-2.5">
@@ -74,6 +76,7 @@ export function RealEstateFooter() {
           <p className="text-xs text-[#6c6e76]">&copy; {new Date().getFullYear()} Latchpoint Studios. Edmond, Oklahoma.</p>
         </div>
       </div>
+      <RealEstateWordmark />
     </footer>
   );
 }
