@@ -210,6 +210,16 @@ body {
   }
 }
 
+/* Slides a strip of --copies identical blocks left by exactly one block, so the restart is seamless. */
+@keyframes marquee-loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% / var(--copies, 2)));
+  }
+}
+
 .animate-marquee {
   animation: marquee 28s linear infinite;
 }
