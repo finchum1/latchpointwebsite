@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: "https://realestate.latchpointstudios.com",
     siteName: "Latchpoint Real Estate",
     type: "website",
-    images: [{ url: "https://realestate.latchpointstudios.com/realestate/og-hero.jpg", width: 2400, height: 1260, alt: "Latchpoint Real Estate" }],
+    images: [{ url: "https://realestate.latchpointstudios.com/realestate/og-map.jpg", width: 2400, height: 1260, alt: "Latchpoint Real Estate" }],
   },
   twitter: { card: "summary_large_image" },
 };
