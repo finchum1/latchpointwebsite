@@ -1,0 +1,612 @@
+/*
+  How we work: a node walks four steps while a small browser builds up beside them.
+  Everything here moves with CSS transitions and keyframes; React only says which
+  step is current. Colours stay neutral plus the one ember accent.
+*/
+
+/* ---- the rail and the node (the same orange node as the hero map) ---- */
+.pp-rail,
+.pp-ghost,
+.pp-node {
+  position: absolute;
+  left: 24px;
+  pointer-events: none;
+}
+.pp-rail {
+  width: 1px;
+  transform: translateX(-0.5px);
+  background: var(--border-strong);
+}
+.pp-rail-fill {
+  background: var(--accent);
+  transition: height 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: 1;
+}
+.pp-node,
+.pp-ghost {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 9999px;
+  background: var(--accent);
+  transition: top 0.9s cubic-bezier(0.65, 0, 0.35, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+}
+.pp-node {
+  z-index: 3;
+  box-shadow: 0 0 0 5px var(--accent-soft), 0 0 16px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+/* docked: tucked onto the upper-right of the marker ring; moving: back on the rail, full size */
+.pp-node {
+  transform: translate(17px, -17px) scale(0.75);
+}
+.pp-node[data-moving="true"] {
+  transform: none;
+}
+.pp-ghost {
+  z-index: 2;
+  opacity: 0;
+}
+.pp-ghost[data-moving="true"] {
+  transform: none;
+}
+.pp-ghost-1[data-moving="true"] {
+  opacity: 0.45;
+  transform: scale(0.8);
+  transition-delay: 0.08s;
+}
+.pp-ghost-2[data-moving="true"] {
+  opacity: 0.22;
+  transform: scale(0.6);
+  transition-delay: 0.17s;
+}
+
+/* ---- the steps ---- */
+.pp-step {
+  outline: none;
+  cursor: default;
+}
+.pp-marker {
+  /* positioned absolutely by its utility classes; the z-index keeps it above the rail */
+  z-index: 2;
+  transition: border-color 0.5s, background 0.5s, color 0.5s, box-shadow 0.5s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pp-step h3,
+.pp-step p {
+  transition: color 0.5s, opacity 0.5s;
+}
+.pp-step[data-state="next"] h3 {
+  color: var(--text-muted);
+}
+.pp-step[data-state="next"] > p:last-child {
+  opacity: 0.7;
+}
+.pp-step[data-state="done"] .pp-marker {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.pp-step[data-state="now"] .pp-marker {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+  transform: scale(1.06);
+}
+.pp-step[data-state="now"] .pp-num {
+  color: var(--accent);
+}
+.pp-step:focus-visible .pp-marker {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.pp-steps:not([data-ready="true"]) .pp-marker {
+  border-color: var(--border-strong);
+}
+
+/* ---- the browser ---- */
+.pp-browser {
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  background: var(--bg-elevated);
+  box-shadow: 0 30px 80px -40px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 0 1px var(--border);
+}
+.pp-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated-2);
+}
+.pp-bar > i {
+  width: 9px;
+  height: 9px;
+  border-radius: 9999px;
+  background: var(--border-strong);
+}
+.pp-url {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  height: 24px;
+  margin-left: 12px;
+  padding: 0 12px;
+  border-radius: 9999px;
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  overflow: hidden;
+}
+.pp-url > span {
+  position: absolute;
+  left: 12px;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.4s, transform 0.4s;
+  white-space: nowrap;
+}
+.pp[data-stage="0"] .pp-url > span[data-for="0"],
+.pp[data-stage="1"] .pp-url > span[data-for="1"],
+.pp[data-stage="2"] .pp-url > span[data-for="2"],
+.pp[data-stage="3"] .pp-url > span[data-for="3"] {
+  opacity: 1;
+  transform: none;
+}
+.pp[data-stage="3"] .pp-url > span {
+  color: var(--text);
+}
+.pp-live {
+  position: absolute;
+  right: 6px;
+  padding: 1px 8px;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.pp[data-stage="3"] .pp-live {
+  opacity: 1;
+  transform: none;
+  animation: pp-ping 2.4s ease-out 0.6s 2;
+}
+
+.pp-screen {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* step 1: the brief */
+.pp-brief {
+  position: absolute;
+  inset: 0;
+  padding: 26px 28px;
+  transition: opacity 0.5s, transform 0.5s;
+}
+.pp[data-stage="1"] .pp-brief,
+.pp[data-stage="2"] .pp-brief,
+.pp[data-stage="3"] .pp-brief {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+}
+.pp-eyebrow {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.pp-brief ul {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.pp-brief li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 14px;
+}
+.pp-brief li svg {
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.pp-skip-head {
+  margin-top: 22px;
+}
+.pp-skip li {
+  border-style: dashed;
+  color: var(--text-faint);
+  text-decoration: line-through;
+  text-decoration-color: var(--text-faint);
+}
+/* the brief writes itself in while step 1 is current */
+.pp[data-stage="0"] .pp-brief li {
+  animation: pp-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i) * 0.14s + 0.2s) both;
+}
+
+/* steps 2 to 4: the page */
+.pp-page {
+  position: absolute;
+  inset: 0;
+  padding: 18px 24px 62px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  opacity: 0;
+  transform: translateY(10px) scale(0.985);
+  transition: opacity 0.55s, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pp[data-stage="1"] .pp-page,
+.pp[data-stage="2"] .pp-page,
+.pp[data-stage="3"] .pp-page {
+  opacity: 1;
+  transform: none;
+}
+.pp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pp-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 2px solid var(--text);
+  position: relative;
+}
+.pp-logo::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.pp-links {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.pp-links > * {
+  grid-row: 1;
+}
+
+/* "wire" parts are the layout stage; "real" parts are the built stage. They share one grid cell and cross-fade. */
+.pp-stack {
+  display: grid;
+}
+.pp-stack > * {
+  grid-area: 1 / 1;
+}
+.pp-links > .pp-real:nth-of-type(4) {
+  grid-column: 1;
+}
+.pp-links > .pp-real:nth-of-type(5) {
+  grid-column: 2;
+}
+.pp-links > .pp-real:nth-of-type(6) {
+  grid-column: 3;
+}
+.pp-links > .pp-wire:nth-of-type(1) {
+  grid-column: 1;
+}
+.pp-links > .pp-wire:nth-of-type(2) {
+  grid-column: 2;
+}
+.pp-links > .pp-wire:nth-of-type(3) {
+  grid-column: 3;
+}
+.pp-wire {
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--border-strong), color-mix(in srgb, var(--border-strong) 45%, transparent), var(--border-strong));
+  background-size: 200% 100%;
+  animation: pp-shimmer 2.4s linear infinite;
+  transition: opacity 0.5s;
+}
+.pp-real {
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.6s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pp[data-stage="1"] .pp-real {
+  opacity: 0;
+}
+.pp[data-stage="2"] .pp-wire,
+.pp[data-stage="3"] .pp-wire,
+.pp[data-stage="0"] .pp-wire {
+  opacity: 0;
+}
+.pp[data-stage="2"] .pp-real,
+.pp[data-stage="3"] .pp-real {
+  opacity: 1;
+  transform: none;
+}
+.pp-bar-sm {
+  height: 8px;
+  width: 38px;
+}
+.pp-bar-lg {
+  height: 18px;
+  width: 88%;
+  align-self: start;
+}
+.pp-bar-lg:nth-child(2) {
+  margin-top: 26px;
+}
+.pp-short {
+  width: 56%;
+}
+.pp-mid {
+  width: 70%;
+  align-self: start;
+}
+.pp-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 8px;
+}
+.pp-hero h4 {
+  font-size: 26px;
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 21ch;
+}
+.pp-hero p {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.pp-btn-wire {
+  width: 112px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1px dashed var(--border-strong);
+  background: none;
+  animation: none;
+}
+.pp-btn {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 13px;
+  font-weight: 500;
+}
+.pp-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: auto;
+}
+.pp-card {
+  display: grid;
+  min-height: 78px;
+}
+.pp-card > * {
+  grid-area: 1 / 1;
+}
+.pp-card-wire {
+  border-radius: 12px;
+  border: 1px dashed var(--border-strong);
+  background: none;
+  animation: none;
+}
+.pp-card-real {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 11px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  font-size: 12.5px;
+  color: var(--text);
+}
+.pp-card-real svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accent);
+}
+.pp[data-stage="2"] .pp-card-real,
+.pp[data-stage="3"] .pp-card-real {
+  transition-delay: calc(var(--i, 0) * 0.12s);
+}
+.pp[data-stage="3"] .pp-card-real {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border-strong));
+}
+
+/* the strip along the bottom: build progress, then the handoff */
+.pp-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 48px;
+  display: grid;
+  align-items: center;
+  padding: 0 22px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-elevated-2);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pp[data-stage="2"] .pp-strip,
+.pp[data-stage="3"] .pp-strip {
+  opacity: 1;
+  transform: none;
+}
+.pp-strip > div {
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: opacity 0.4s;
+}
+.pp-strip-label {
+  white-space: nowrap;
+}
+.pp-meter {
+  flex: 1;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--border-strong);
+  overflow: hidden;
+}
+.pp-meter > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+.pp[data-stage="2"] .pp-meter > span {
+  animation: pp-fill 3.4s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
+.pp[data-stage="3"] .pp-meter > span {
+  transform: scaleX(1);
+}
+.pp-ticks {
+  display: flex;
+  gap: 10px;
+}
+.pp-ticks em {
+  font-style: normal;
+  padding: 2px 8px;
+  border: 1px solid var(--border-strong);
+  border-radius: 9999px;
+  font-size: 10.5px;
+  color: var(--text-faint);
+  opacity: 0;
+}
+.pp[data-stage="2"] .pp-ticks em {
+  animation: pp-tick 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) calc(var(--i) * 0.9s + 0.9s) forwards;
+}
+.pp[data-stage="3"] .pp-ticks em {
+  opacity: 1;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.pp-strip-ship {
+  opacity: 0;
+  color: var(--text) !important;
+}
+.pp-strip-ship svg {
+  width: 16px;
+  height: 16px;
+  padding: 2px;
+  border-radius: 9999px;
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+.pp[data-stage="3"] .pp-strip-ship {
+  opacity: 1;
+}
+.pp[data-stage="3"] .pp-strip-build {
+  opacity: 0;
+}
+
+.pp-caption {
+  margin-top: 14px;
+  text-align: center;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.pp-caption span {
+  color: var(--accent);
+}
+
+@keyframes pp-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pp-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+@keyframes pp-fill {
+  to {
+    transform: scaleX(0.92);
+  }
+}
+@keyframes pp-tick {
+  to {
+    opacity: 1;
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+@keyframes pp-ping {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  35% {
+    box-shadow: 0 0 0 6px var(--accent-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp *,
+  .pp-steps * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+  .pp[data-stage="0"] .pp-brief li {
+    opacity: 1;
+  }
+  .pp[data-stage="2"] .pp-meter > span {
+    transform: scaleX(0.92);
+  }
+  .pp[data-stage="2"] .pp-ticks em {
+    opacity: 1;
+  }
+}
