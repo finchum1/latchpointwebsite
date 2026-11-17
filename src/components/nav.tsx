@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, CaretDown, List, X } from "@phosphor-icons/react";
+import { NavFrame } from "./nav-frame";
 import { Wordmark } from "./logomark";
 import { Button } from "./button";
 import { Magnetic } from "./magnetic";
@@ -29,17 +30,6 @@ export function Nav() {
   // close, cancelled by either element's onMouseEnter, bridges that gap.
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // At the top of the page the header is just a plain bar across the page's own width; once you scroll it
-  // condenses into the floating glass pill. A passive scroll listener flips one boolean, and every visual
-  // change is a CSS transition.
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   function openSolutions() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     setSolutionsOpen(true);
@@ -62,107 +52,12 @@ export function Nav() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 sm:top-6">
-      {/* The width and side padding animate between the two states: the page's own container at the top, the narrower pill once scrolled. */}
-      <div
-        className={`mx-auto w-full transition-[max-width,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled ? "max-w-4xl px-4" : "max-w-7xl px-6 lg:px-8"
-        }`}
-      >
-      <div className="relative">
-        <div
-          className={`relative isolate flex items-center justify-between gap-4 rounded-full py-2 transition-[padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            scrolled ? "pl-5 pr-2" : "pl-0 pr-0"
-          }`}
-        >
-          {/* The glass is its own layer that fades in, so the bar doesn't snap between looks. */}
-          <div
-            aria-hidden="true"
-            className={`glass-pill pointer-events-none absolute inset-0 -z-10 rounded-full transition-opacity duration-500 ${
-              scrolled ? "opacity-100" : "opacity-0"
-            }`}
-          />
-          <Link href="/" className="flex shrink-0 items-center">
-            <Wordmark animated />
-          </Link>
-
-          <nav className="hidden items-center gap-6 lg:flex">
-            <div
-              onMouseEnter={openSolutions}
-              onMouseLeave={scheduleCloseSolutions}
-              onFocus={openSolutions}
-              onBlur={scheduleCloseSolutions}
-            >
-              <Link
-                href="/solutions"
-                className={`group relative flex items-center gap-1 text-sm transition-colors ${
-                  solutionsActive ? "text-text" : "text-text-muted hover:text-text"
-                }`}
-              >
-                Solutions
-                <CaretDown
-                  weight="bold"
-                  className={`size-3 transition-transform duration-300 ${solutionsOpen ? "rotate-180" : ""}`}
-                />
-                <span
-                  className={`absolute -bottom-1 left-0 h-px w-[calc(100%-1rem)] origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${
-                    solutionsActive ? "scale-x-100" : ""
-                  }`}
-                />
-              </Link>
-            </div>
-
-            {links.map((l) => {
-              const active = pathname === l.href;
-              return (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={`group relative text-sm transition-colors ${
-                    active ? "text-text" : "text-text-muted hover:text-text"
-                  }`}
-                >
-                  {l.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${
-                      active ? "scale-x-100" : ""
-                    }`}
-                  />
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Grouped together (not spread by justify-between on the pill)
-              so the toggle sits right next to whichever trailing control is
-              visible at the current breakpoint -- the CTA on desktop, the
-              hamburger on mobile -- instead of floating alone mid-pill once
-              the nav links and CTA collapse away below lg. */}
-          <div className="flex shrink-0 items-center gap-2">
-            <ThemeToggle />
-
-            <div className="hidden lg:block">
-              <Magnetic strength={0.25}>
-                <Button href="/contact" className="!px-5 !py-2 !text-sm">
-                  Start a project
-                </Button>
-              </Magnetic>
-            </div>
-
-            <button
-              className="flex size-9 shrink-0 items-center justify-center text-text lg:hidden"
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
-              aria-expanded={open}
-            >
-              {open ? <X size={20} /> : <List size={20} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Rendered as a sibling of .glass-pill, not a child of it -- that
-            div's own overflow-hidden (needed to clip the glass highlight to
-            the pill shape) would otherwise clip this panel too. */}
+    <NavFrame
+      gap="gap-4"
+      panels={
+        <>
+        {/* Rendered outside the bar's row (NavFrame's `panels`), because the glass layer clips to the pill
+            shape and would otherwise clip this panel too. */}
         <AnimatePresence>
           {solutionsOpen && (
             <motion.div
@@ -249,8 +144,85 @@ export function Nav() {
             </motion.div>
           )}
         </AnimatePresence>
+        </>
+      }
+    >
+      <Link href="/" className="flex shrink-0 items-center">
+        <Wordmark animated />
+      </Link>
+
+      <nav className="hidden items-center gap-6 lg:flex">
+        <div
+          onMouseEnter={openSolutions}
+          onMouseLeave={scheduleCloseSolutions}
+          onFocus={openSolutions}
+          onBlur={scheduleCloseSolutions}
+        >
+          <Link
+            href="/solutions"
+            className={`group relative flex items-center gap-1 text-sm transition-colors ${
+              solutionsActive ? "text-text" : "text-text-muted hover:text-text"
+            }`}
+          >
+            Solutions
+            <CaretDown
+              weight="bold"
+              className={`size-3 transition-transform duration-300 ${solutionsOpen ? "rotate-180" : ""}`}
+            />
+            <span
+              className={`absolute -bottom-1 left-0 h-px w-[calc(100%-1rem)] origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${
+                solutionsActive ? "scale-x-100" : ""
+              }`}
+            />
+          </Link>
+        </div>
+
+        {links.map((l) => {
+          const active = pathname === l.href;
+          return (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`group relative text-sm transition-colors ${
+                active ? "text-text" : "text-text-muted hover:text-text"
+              }`}
+            >
+              {l.label}
+              <span
+                className={`absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 ${
+                  active ? "scale-x-100" : ""
+                }`}
+              />
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Grouped together (not spread by justify-between on the pill)
+          so the toggle sits right next to whichever trailing control is
+          visible at the current breakpoint -- the CTA on desktop, the
+          hamburger on mobile -- instead of floating alone mid-pill once
+          the nav links and CTA collapse away below lg. */}
+      <div className="flex shrink-0 items-center gap-2">
+        <ThemeToggle />
+
+        <div className="hidden lg:block">
+          <Magnetic strength={0.25}>
+            <Button href="/contact" className="!px-5 !py-2 !text-sm">
+              Start a project
+            </Button>
+          </Magnetic>
+        </div>
+
+        <button
+          className="flex size-9 shrink-0 items-center justify-center text-text lg:hidden"
+          onClick={() => setOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+        >
+          {open ? <X size={20} /> : <List size={20} />}
+        </button>
       </div>
-      </div>
-    </header>
+    </NavFrame>
   );
 }

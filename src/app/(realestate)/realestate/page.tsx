@@ -106,7 +106,7 @@ export default function RealEstatePage() {
   return (
     <>
       {/* ------------------------------ Hero ------------------------------ */}
-      <section className="relative overflow-hidden">
+      <section className="relative -mt-[104px] overflow-hidden pt-[104px] sm:-mt-[112px] sm:pt-[112px]">
         <div className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-[-10%] h-[480px] w-[780px] -translate-x-1/2 rounded-full bg-accent/[0.08] blur-[120px]" />
         </div>
