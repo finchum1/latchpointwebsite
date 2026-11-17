@@ -82,12 +82,11 @@ const dust = Array.from({ length: 22 }, (_, i) => {
   };
 });
 
-type Info = { title: string; blurb: string; tag: string; href?: string; external?: boolean };
+type Info = { title: string; blurb: string; tag?: string; href?: string; external?: boolean };
 
 const DEFAULT_INFO: Info = {
   title: "Everything we build connects.",
   blurb: "Hover or tap a node to see what runs on what. Every product here is live.",
-  tag: "Second brain",
 };
 
 export function HeroBrain() {
@@ -281,8 +280,8 @@ export function HeroBrain() {
       {/* what the highlighted node means, in one stable place so it never gets clipped */}
       <div className="brain-caption" aria-live="polite">
         <div key={active ?? "default"} className="brain-caption-swap">
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">{current.tag}</p>
-          <p className="mt-1.5 text-base font-medium text-text">{current.title}</p>
+          {current.tag && <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">{current.tag}</p>}
+          <p className={`${current.tag ? "mt-1.5 " : ""}text-base font-medium text-text`}>{current.title}</p>
           <p className="mx-auto mt-1 max-w-sm text-sm leading-relaxed text-text-muted">{current.blurb}</p>
           {current.href && (
             <p className="mt-1.5 text-sm font-medium text-text">
