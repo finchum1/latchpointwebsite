@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   },
   description:
     "Latchpoint Studios designs and builds websites, apps, dashboards, client portals, and CRMs for businesses, nonprofits and ministries, and personal projects, usually in weeks, not quarters.",
+  // Link previews. Pages with their own openGraph (the real estate and Close landing pages) replace this wholesale.
+  openGraph: {
+    title: "Latchpoint Studios",
+    description: "We build the software your business runs on: websites, apps, dashboards, client portals, and CRMs, usually in weeks, not quarters.",
+    url: "https://latchpointstudios.com",
+    siteName: "Latchpoint Studios",
+    type: "website",
+    images: [{ url: "https://latchpointstudios.com/og.jpg", width: 2400, height: 1260, alt: "Latchpoint Studios: we build the software your business runs on." }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 // Runs before hydration so a returning light-mode visitor never sees a
