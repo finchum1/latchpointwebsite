@@ -19,7 +19,7 @@ export function WalkingProcess({
 }: {
   steps: WalkStep[];
   preview: (stage: number) => ReactNode;
-  /** Tailwind min-height class for the last step on desktop, so the preview stays in view while it's current. */
+  /** CSS min-height for the last step on desktop, so the preview stays in view while it's current. */
   lastMinHeight?: string;
 }) {
   const wrap = useRef<HTMLDivElement>(null);
@@ -97,7 +97,8 @@ export function WalkingProcess({
             }}
             data-step={i}
             data-state={i < stage ? "done" : i === stage ? "now" : "next"}
-            className={`pp-step relative pb-14 pl-[4.5rem] last:pb-0 lg:min-h-[14rem] lg:pb-0 ${i === steps.length - 1 ? `lg:${lastMinHeight}` : ""}`}
+            className={`pp-step relative pb-14 pl-[4.5rem] last:pb-0 lg:pb-0 ${i === steps.length - 1 ? "lg:min-h-(--last-min)" : "lg:min-h-[14rem]"}`}
+            style={i === steps.length - 1 ? ({ ["--last-min" as string]: lastMinHeight } as React.CSSProperties) : undefined}
             onPointerEnter={(e) => e.pointerType !== "touch" && setHover(i)}
             onPointerLeave={(e) => e.pointerType !== "touch" && setHover((h) => (h === i ? null : h))}
             onFocus={() => setHover(i)}
