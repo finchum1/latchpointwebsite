@@ -1,4 +1,5 @@
 import { Logomark } from "../logomark";
+import { CloseWordmark } from "./close-wordmark";
 
 // Same shape as the real estate footer (components/realestate/re-footer.tsx), with this page's links.
 const service = [
@@ -26,7 +27,7 @@ const link = "text-sm text-[#a4a5ac] transition-colors hover:text-[#f5f5f4]";
 export function CloseFooter() {
   return (
     <footer className="border-t border-white/10 bg-[#08090b]">
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-0 pt-14 lg:px-8">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
             {/* A full page load: "/" here is the subdomain root, a host-based rewrite. */}
@@ -74,6 +75,7 @@ export function CloseFooter() {
           <p className="text-xs text-[#6c6e76]">&copy; {new Date().getFullYear()} Latchpoint Studios. Edmond, Oklahoma.</p>
         </div>
       </div>
+      <CloseWordmark />
     </footer>
   );
 }

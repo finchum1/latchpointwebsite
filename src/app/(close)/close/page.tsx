@@ -5,6 +5,11 @@ import { Magnetic } from "@/components/magnetic";
 import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { BrowserFrame, PhoneFrame } from "@/components/realestate/frames";
 import { CloseStartForm } from "@/components/close/close-start-form";
+import { CloseBrain } from "@/components/close/close-brain";
+import { CloseProcess } from "@/components/close/close-process";
+import { CompareReveal } from "@/components/close/compare-reveal";
+import { OrbitNode } from "@/components/orbit-node";
+import { SpotlightCard } from "@/components/spotlight-card";
 
 const URL = "https://close.latchpointstudios.com";
 
@@ -112,8 +117,8 @@ export default function ClosePage() {
           <div className="absolute left-1/2 top-[-10%] h-[480px] w-[780px] -translate-x-1/2 rounded-full bg-accent/[0.08] blur-[120px]" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 pb-24 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-10 lg:px-8">
-          <div className="lg:col-span-5">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-6 pb-24 pt-12 sm:pt-16 lg:grid-cols-12 lg:gap-6 lg:px-8">
+          <div className="lg:col-span-6">
             <Reveal>
               <Eyebrow>Transaction coordination · Oklahoma</Eyebrow>
               <h1 className="mt-4 text-4xl font-medium leading-[1.08] tracking-tight text-text sm:text-5xl lg:text-[3.2rem]">
@@ -141,22 +146,8 @@ export default function ClosePage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} className="relative min-w-0 pb-10 lg:col-span-7">
-            <BrowserFrame
-              src="/close/agent-update.jpg"
-              alt="The agent's deal update page: days to closing, tasks done, documents collected, and a note from the coordinator"
-              url="app.latchpointstudios.com/update/…"
-              ratio="aspect-[16/10]"
-              priority
-              sizes="(min-width: 1024px) 58vw, 100vw"
-            />
-            <PhoneFrame
-              src="/realestate/m-timeline.jpg"
-              alt="The client's closing timeline on a phone: a countdown to closing and a note from their agent"
-              className="absolute -bottom-6 right-0 w-[104px] sm:right-2 sm:w-[132px] lg:-right-5 lg:w-[150px]"
-              sizes="150px"
-            />
-            <p className="mt-3 max-w-[60%] text-xs text-text-faint">{SAMPLE}</p>
+          <Reveal delay={0.15} className="flex min-w-0 justify-center lg:col-span-6 lg:justify-end">
+            <CloseBrain />
           </Reveal>
         </div>
       </section>
@@ -275,7 +266,7 @@ export default function ClosePage() {
           <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-text-muted">
             Your client sees what helps them relax. You see what helps you work. Neither one shows money.
           </p>
-          <div className="mt-8 overflow-hidden rounded-[20px] border border-border">
+          <CompareReveal>
             <table className="w-full text-left text-sm">
               <thead className="bg-bg-elevated">
                 <tr>
@@ -285,8 +276,8 @@ export default function ClosePage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {COMPARE.map((r) => (
-                  <tr key={r.row}>
+                {COMPARE.map((r, ri) => (
+                  <tr key={r.row} style={{ ["--r" as string]: ri }}>
                     <td className="px-5 py-3.5 text-text-muted">{r.row}</td>
                     <td className="px-3 py-3.5 text-center">
                       <Cell value={r.agent} />
@@ -298,7 +289,7 @@ export default function ClosePage() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </CompareReveal>
         </Reveal>
       </section>
 
@@ -369,11 +360,15 @@ export default function ClosePage() {
               title: "Getting to the table",
               body: "I collect and check the documents, chase signatures, confirm the closing time with title, and schedule the final walk-through. Your file is complete when the keys change hands.",
             },
-          ].map((c) => (
+          ].map((c, i) => (
             <RevealItem key={c.title}>
-              <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7">
-                <h3 className="text-lg font-medium tracking-tight text-text">{c.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-muted">{c.body}</p>
+              {/* The same traveling node and cursor glow as the studio site's cards. */}
+              <div className="orbit-wrap relative h-full">
+                <SpotlightCard className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 transition-colors duration-300 hover:border-border-strong">
+                  <h3 className="text-lg font-medium tracking-tight text-text">{c.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-text-muted">{c.body}</p>
+                </SpotlightCard>
+                <OrbitNode duration={12} delay={-(i * 4.3)} />
               </div>
             </RevealItem>
           ))}
@@ -414,13 +409,16 @@ export default function ClosePage() {
                   "Ask me and I'll quote you",
                 ],
               },
-            ].map((tier) => (
+            ].map((tier, i) => (
               <RevealItem key={tier.price}>
-                <div className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 sm:p-8">
-                  <p className="text-4xl font-medium tracking-tight text-text">
-                    {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
-                  </p>
-                  <Bullets items={tier.items} />
+                <div className="orbit-wrap relative h-full">
+                  <SpotlightCard className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 transition-colors duration-300 hover:border-border-strong sm:p-8">
+                    <p className="text-4xl font-medium tracking-tight text-text">
+                      {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
+                    </p>
+                    <Bullets items={tier.items} />
+                  </SpotlightCard>
+                  <OrbitNode duration={17} delay={-(i * 8.5)} />
                 </div>
               </RevealItem>
             ))}
@@ -437,31 +435,7 @@ export default function ClosePage() {
           </h2>
         </Reveal>
 
-        <RevealGroup className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-          {[
-            {
-              n: "01",
-              title: "You send the executed contract",
-              body: "Use the form below or email it to me. Tell me who your client is and anything unusual about the deal.",
-            },
-            {
-              n: "02",
-              title: "I open the file and send the links",
-              body: "Within a business day you have your link, and your client has their timeline with your name on it. You can send it yourself, or I can.",
-            },
-            {
-              n: "03",
-              title: "I run it to closing",
-              body: "I handle the follow-up and keep both pages current. You hear from me when something needs you, not every time something moves.",
-            },
-          ].map((s) => (
-            <RevealItem key={s.n}>
-              <p className="font-mono text-sm text-accent">{s.n}</p>
-              <h3 className="mt-3 text-lg font-medium tracking-tight text-text">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-text-muted">{s.body}</p>
-            </RevealItem>
-          ))}
-        </RevealGroup>
+        <CloseProcess />
       </section>
 
       {/* ------------------------------- FAQ ------------------------------ */}
