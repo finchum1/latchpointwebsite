@@ -133,9 +133,9 @@ export default function ClosePage() {
                 <Magnetic>
                   <Button href="#start">Send me a file</Button>
                 </Magnetic>
-                <Button href="#agent" variant="secondary" showArrow={false}>
+                <a href="#agent" className="text-[15px] font-medium text-text underline decoration-border-strong decoration-1 underline-offset-[7px] transition-colors duration-300 hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg">
                   See the two links
-                </Button>
+                </a>
               </div>
               <p className="mt-5 text-sm text-text-faint">
                 Flat fee per file, paid at closing.{" "}

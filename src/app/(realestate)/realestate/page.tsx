@@ -130,9 +130,9 @@ export default function RealEstatePage() {
                 <Magnetic>
                   <Button href="#early-access">Request early access</Button>
                 </Magnetic>
-                <Button href="#home" variant="secondary" showArrow={false}>
+                <a href="#home" className="text-[15px] font-medium text-text underline decoration-border-strong decoration-1 underline-offset-[7px] transition-colors duration-300 hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg">
                   See how it works
-                </Button>
+                </a>
               </div>
               <p className="mt-5 text-sm text-text-faint">
                 $500 to set up, then $150 a month. No contracts.{" "}
