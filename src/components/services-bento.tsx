@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "./reveal";
 import { SpotlightCard } from "./spotlight-card";
+import { OrbitNode } from "./orbit-node";
 
 const services = [
   {
@@ -69,18 +70,22 @@ export function ServicesBento() {
       <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {services.map((s, i) => (
           <Reveal key={s.name} delay={i * 0.06} className={s.span}>
-            <SpotlightCard
-              className={`h-full rounded-[20px] border border-border p-7 transition-colors duration-300 hover:border-border-strong ${
-                s.tint ? "bg-gradient-to-br from-accent-soft to-bg-elevated" : "bg-bg-elevated"
-              }`}
-            >
-              <s.icon
-                weight="light"
-                className="size-8 text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
-              />
-              <h3 className="mt-6 text-lg font-medium text-text">{s.name}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-muted">{s.description}</p>
-            </SpotlightCard>
+            <div className="orbit-wrap relative h-full">
+              <SpotlightCard
+                className={`h-full rounded-[20px] border border-border p-7 transition-colors duration-300 hover:border-border-strong ${
+                  s.tint ? "bg-gradient-to-br from-accent-soft to-bg-elevated" : "bg-bg-elevated"
+                }`}
+              >
+                <s.icon
+                  weight="light"
+                  className="size-8 text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110"
+                />
+                <h3 className="mt-6 text-lg font-medium text-text">{s.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-text-muted">{s.description}</p>
+              </SpotlightCard>
+              {/* wide cards have a longer border, so they get a longer lap and every node moves at about the same speed */}
+              <OrbitNode duration={s.tint ? 17 : 11} delay={-(i * 3.7)} />
+            </div>
           </Reveal>
         ))}
       </div>
