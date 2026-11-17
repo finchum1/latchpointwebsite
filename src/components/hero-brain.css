@@ -273,11 +273,18 @@
 
 /* ---- caption under the graph ---- */
 .brain-caption {
+  display: grid;
   margin-top: 0.5rem;
-  min-height: 4.6rem;
   text-align: center;
 }
-.brain-caption-swap {
+.brain-caption-item {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  opacity: 0;
+}
+.brain-caption-item[data-on="true"] {
+  visibility: visible;
+  opacity: 1;
   animation: brain-caption-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

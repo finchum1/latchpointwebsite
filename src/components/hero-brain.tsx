@@ -89,6 +89,8 @@ const DEFAULT_INFO: Info = {
   blurb: "Hover or tap a node to see what runs on what. Every product here is live.",
 };
 
+const captionIds: (string | null)[] = [null, "core", "idea", ...caps.map((c) => c.id), ...products.map((p) => p.id)];
+
 export function HeroBrain() {
   const reduce = useReducedMotion();
   const stage = useRef<HTMLDivElement>(null);
@@ -119,7 +121,6 @@ export function HeroBrain() {
     const p = products.find((x) => x.id === id)!;
     return { title: p.label === "Real Estate" ? "Latchpoint Real Estate" : p.label, blurb: p.blurb, tag: "Live", href: p.href, external: p.external };
   }
-  const current = info(active);
 
   // Pointer parallax: two CSS variables, no animation loop.
   function onMove(e: React.PointerEvent<HTMLDivElement>) {
@@ -277,18 +278,25 @@ export function HeroBrain() {
         </div>
       </div>
 
-      {/* what the highlighted node means, in one stable place so it never gets clipped */}
+      {/* What the highlighted node means. Every caption is laid out in the same grid cell and only the active one is shown, so the
+          box is always as tall as the longest caption and the page below never moves when the pointer changes node. */}
       <div className="brain-caption" aria-live="polite">
-        <div key={active ?? "default"} className="brain-caption-swap">
-          {current.tag && <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">{current.tag}</p>}
-          <p className={`${current.tag ? "mt-1.5 " : ""}text-base font-medium text-text`}>{current.title}</p>
-          <p className="mx-auto mt-1 max-w-sm text-sm leading-relaxed text-text-muted">{current.blurb}</p>
-          {current.href && (
-            <p className="mt-1.5 text-sm font-medium text-text">
-              {current.external ? "Visit the live site" : current.href === "/contact" ? "Start a project" : "See it in our work"} &rarr;
-            </p>
-          )}
-        </div>
+        {captionIds.map((id) => {
+          const c = info(id);
+          const on = (active ?? null) === id;
+          return (
+            <div key={id ?? "default"} className="brain-caption-item" data-on={on} aria-hidden={!on}>
+              {c.tag && <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">{c.tag}</p>}
+              <p className={`${c.tag ? "mt-1.5 " : ""}text-base font-medium text-text`}>{c.title}</p>
+              <p className="mx-auto mt-1 max-w-sm text-sm leading-relaxed text-text-muted">{c.blurb}</p>
+              {c.href && (
+                <p className="mt-1.5 text-sm font-medium text-text">
+                  {c.external ? "Visit the live site" : c.href === "/contact" ? "Start a project" : "See it in our work"} &rarr;
+                </p>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

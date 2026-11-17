@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { Button } from "./button";
@@ -66,9 +67,12 @@ export function Hero() {
             <Magnetic>
               <Button href="/contact">Start a project</Button>
             </Magnetic>
-            <Button href="/work" variant="secondary" showArrow={false}>
+            <Link
+              href="/work"
+              className="text-[15px] font-medium text-text underline decoration-border-strong decoration-1 underline-offset-[7px] transition-colors duration-300 hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+            >
               See our work
-            </Button>
+            </Link>
           </motion.div>
         </div>
 
