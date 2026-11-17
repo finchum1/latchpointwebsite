@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { Button } from "./button";
 import { Magnetic } from "./magnetic";
-import { HeroGraphic } from "./hero-graphic";
+import { HeroBrain } from "./hero-brain";
 
 const headline = "We build the software your business runs on.".split(" ");
 
@@ -32,8 +32,8 @@ export function Hero() {
         <div className="absolute left-1/2 top-[-10%] h-[480px] w-[780px] -translate-x-1/2 rounded-full bg-accent/[0.08] blur-[120px]" />
       </motion.div>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-16 pb-20 sm:pt-20 sm:pb-28 lg:grid-cols-5 lg:gap-8 lg:px-8">
-        <div className="lg:col-span-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 pt-16 pb-20 sm:pt-20 sm:pb-28 lg:grid-cols-12 lg:gap-6 lg:px-8">
+        <div className="lg:col-span-6">
           <h1 className="max-w-2xl text-4xl font-medium leading-[1.1] tracking-tight text-text sm:text-5xl lg:text-[3.4rem]">
             {headline.map((word, i) => (
               <span key={i} className="inline-block overflow-hidden pb-1 align-top">
@@ -76,9 +76,9 @@ export function Hero() {
           initial={reduce ? undefined : { opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-center lg:col-span-2 lg:justify-end"
+          className="flex items-center justify-center lg:col-span-6 lg:justify-end"
         >
-          <HeroGraphic />
+          <HeroBrain />
         </motion.div>
       </div>
     </section>
