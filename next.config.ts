@@ -5,12 +5,12 @@ const MAIN_ORIGIN = "https://latchpointstudios.com";
 // Sites that live in this same app, each served at the root of its own subdomain. A "multi" site also serves its
 // inner pages there: /pricing on the subdomain is /close/pricing inside the app, and so on.
 const SUBDOMAIN_PAGES = [
-  { host: "realestate.latchpointstudios.com", path: "/realestate", multi: false },
+  { host: "realestate.latchpointstudios.com", path: "/realestate", multi: true },
   { host: "close.latchpointstudios.com", path: "/close", multi: true },
   { host: "websites.latchpointstudios.com", path: "/websites", multi: true },
 ];
 
-// Studio-site sections. A single-page site's subdomain sends these to the main domain; a multi-page site has its own.
+// Studio-site sections. A single-page site's subdomain would send these to the main domain; every site here is multi-page now, so this is unused, but kept for any future single-page one.
 const STUDIO_PATHS = ["work", "services", "about", "contact", "solutions"];
 
 const nextConfig: NextConfig = {

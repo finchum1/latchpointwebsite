@@ -2,16 +2,16 @@ import { Logomark } from "../logomark";
 import { RealEstateWordmark } from "./re-wordmark";
 
 // This footer is deliberately identical to theagency.latchpointstudios.com's (listings-app repo,
-// src/components/marketing/LatchpointFooter.jsx): same wordmark, blurb, two link columns and bottom line. Change them together.
+// src/components/marketing/LatchpointFooter.jsx): same wordmark, blurb, two link columns and bottom line. Change them together. (Only the link paths differ: this site is multi-page, The Agency's is one page of anchors.)
 // The one difference: the huge ghosted REAL ESTATE on the bottom edge (RealEstateWordmark) is only here for now.
 const product = [
-  { href: "/#home", label: "Your day" },
-  { href: "/#website", label: "Website" },
-  { href: "/#back-office", label: "Back office" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/#who", label: "Who it's for" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#early-access", label: "Request early access" },
+  { href: "/your-day", label: "Your day" },
+  { href: "/website", label: "Website" },
+  { href: "/ai", label: "AI" },
+  { href: "/back-office", label: "Back office" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/early-access", label: "Request early access" },
 ];
 
 const company = [

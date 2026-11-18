@@ -74,7 +74,8 @@ const NOTES: Record<(typeof ASSISTANTS)[number]["id"], string> = {
   grok: "In daily use here: Grok bots draft follow-up texts for Terrence's own pipeline.",
 };
 
-export function AiSection() {
+export function AiSection({ asH1 = false }: { asH1?: boolean }) {
+  const Heading = asH1 ? "h1" : "h2";
   const reduce = useReducedMotion();
   const [who, setWho] = useState<(typeof ASSISTANTS)[number]["id"]>("claude");
   const [i, setI] = useState(0);
@@ -85,9 +86,9 @@ export function AiSection() {
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-14">
       <div className="lg:col-span-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">AI built in</p>
-        <h2 className="mt-3 text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
+        <Heading className="mt-3 text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
           Bring the AI you already use. It works inside your back office.
-        </h2>
+        </Heading>
         <p className="mt-4 text-base leading-relaxed text-text-muted">
           Connect Claude, ChatGPT, or Grok to your dashboard and just ask. Draft follow-up texts, add a lead, set a
           reminder, write a blog post. It works with your own contacts, leads, and deals, and it asks you before anything

@@ -45,9 +45,10 @@ const config: BrainConfig = {
     at: [83, 198],
     label: "Request access",
     ariaLabel: "Request early access: yours is next",
-    href: "#early-access",
-    info: { title: "Yours is next", blurb: "Tell me about your site and your office, and I'll set you up.", tag: "Start here", href: "#early-access", cta: "Request early access" },
+    href: "/early-access",
+    info: { title: "Yours is next", blurb: "Tell me about your site and your office, and I'll set you up.", tag: "Start here", href: "/early-access", cta: "Request early access" },
   },
+  plainLinks: true,
   defaultInfo: {
     title: "A website and a back office, connected.",
     blurb: "Hover or tap anything to see what it does and what it works with.",

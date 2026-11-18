@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { List, X } from "@phosphor-icons/react";
@@ -11,18 +11,21 @@ import { Magnetic } from "../magnetic";
 import { ThemeToggle } from "../theme-toggle";
 
 const links = [
-  { href: "#home", label: "Your day" },
-  { href: "#website", label: "Website" },
-  { href: "#ai", label: "AI" },
-  { href: "#back-office", label: "Back office" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/your-day", label: "Your day" },
+  { href: "/website", label: "Website" },
+  { href: "/ai", label: "AI" },
+  { href: "/back-office", label: "Back office" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/faq", label: "FAQ" },
 ];
 
-/** Focused nav for the real estate page: anchors down the page instead of
- *  the studio site's section links, with the wordmark leading back out. */
+/** Focused nav for the real estate page: page links instead of
+ *  the studio site's section links, with the wordmark leading back to the top. */
 export function RealEstateNav() {
   const [open, setOpen] = useState(false);
+  // The page you're on. The host rewrite means the path is /pricing in the browser and /realestate/pricing inside the app; accept both.
+  const pathname = usePathname() ?? "/";
+  const here = pathname.replace(/^\/realestate(?=\/|$)/, "") || "/";
 
   return (
     <NavFrame
@@ -41,16 +44,16 @@ export function RealEstateNav() {
             >
               <div className="flex flex-col gap-1">
                 {links.map((l) => (
-                  <Link
+                  <a
                     key={l.href}
                     href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="rounded-xl px-3 py-2.5 text-[15px] text-text-muted transition-colors hover:bg-bg-elevated-2 hover:text-text"
+                    aria-current={here === l.href ? "page" : undefined}
+                    className={`rounded-xl px-3 py-2.5 text-[15px] transition-colors hover:bg-bg-elevated-2 hover:text-text ${here === l.href ? "text-text" : "text-text-muted"}`}
                   >
                     {l.label}
-                  </Link>
+                  </a>
                 ))}
-                <Button href="#early-access" onClick={() => setOpen(false)} className="mt-1 w-full">
+                <Button href="/early-access" plain className="mt-1 w-full">
                   Request early access
                 </Button>
               </div>
@@ -70,7 +73,12 @@ export function RealEstateNav() {
 
       <nav className="hidden items-center gap-5 lg:flex">
         {links.map((l) => (
-          <a key={l.href} href={l.href} className="whitespace-nowrap text-sm text-text-muted transition-colors hover:text-text">
+          <a
+            key={l.href}
+            href={l.href}
+            aria-current={here === l.href ? "page" : undefined}
+            className={`whitespace-nowrap text-sm transition-colors hover:text-text ${here === l.href ? "text-text" : "text-text-muted"}`}
+          >
             {l.label}
           </a>
         ))}
@@ -80,7 +88,7 @@ export function RealEstateNav() {
         <ThemeToggle />
         <div className="hidden lg:block">
           <Magnetic strength={0.25}>
-            <Button href="#early-access" className="!px-5 !py-2 !text-sm">
+            <Button href="/early-access" plain className="!px-5 !py-2 !text-sm">
               Request early access
             </Button>
           </Magnetic>
