@@ -14,18 +14,18 @@ import { SpotlightCard } from "@/components/spotlight-card";
 const URL = "https://close.latchpointstudios.com";
 
 export const metadata: Metadata = {
-  title: { absolute: "Close by Latchpoint: transaction coordination for Oklahoma agents" },
+  title: { absolute: "Latchpoint Close: transaction coordination for Oklahoma agents" },
   description:
     "Contract-to-close coordination for Oklahoma real estate agents. You get a private link that shows the whole file, and your client gets a closing timeline in plain English. Flat fee per file.",
   alternates: { canonical: URL },
   openGraph: {
-    title: "Close by Latchpoint",
+    title: "Latchpoint Close",
     description:
       "Transaction coordination for Oklahoma agents, with a live link to the file for you and a closing timeline for your client.",
     url: URL,
-    siteName: "Close by Latchpoint",
+    siteName: "Latchpoint Close",
     type: "website",
-    images: [{ url: "https://close.latchpointstudios.com/close/og-map.jpg", width: 2400, height: 1260, alt: "Close by Latchpoint: transaction coordination for Oklahoma agents" }],
+    images: [{ url: "https://close.latchpointstudios.com/close/og-latchpoint-close.jpg", width: 2400, height: 1260, alt: "Latchpoint Close: transaction coordination for Oklahoma agents" }],
   },
   twitter: { card: "summary_large_image" },
 };

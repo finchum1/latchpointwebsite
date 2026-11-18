@@ -64,8 +64,8 @@ export function CloseNav() {
       <a href="/" className="flex shrink-0 items-center gap-2 sm:gap-2.5">
         <Logomark className="size-6 text-text" animated />
         <span className="font-medium tracking-tight text-text">
-          Close
-          <span className="text-text-muted"> by Latchpoint</span>
+          Latchpoint
+          <span className="text-text-muted"> Close</span>
         </span>
       </a>
 

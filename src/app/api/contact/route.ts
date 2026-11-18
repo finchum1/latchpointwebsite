@@ -7,7 +7,7 @@ const PROJECT_TYPES: Record<string, string> = {
   personal: "Personal app",
   crm: "CRM",
   "early-access": "Latchpoint Real Estate early access",
-  close: "Close by Latchpoint file",
+  close: "Latchpoint Close file",
   other: "Not sure yet",
 };
 

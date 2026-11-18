@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
-      // Close by Latchpoint's first working name. Anything on it goes to the
+      // Latchpoint Close's first working name. Anything on it goes to the
       // same path on close.
       {
         source: "/:path*",

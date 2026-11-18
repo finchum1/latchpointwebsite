@@ -32,10 +32,10 @@ export function CloseFooter() {
           <div className="max-w-sm">
             {/* A full page load: "/" here is the subdomain root, a host-based rewrite. */}
             {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-            <a href="/" aria-label="Close by Latchpoint, home" className="inline-flex items-center gap-2.5">
+            <a href="/" aria-label="Latchpoint Close, home" className="inline-flex items-center gap-2.5">
               <Logomark className="size-6 text-[#f5f5f4]" animated />
               <span className="font-medium tracking-tight text-[#f5f5f4]">
-                Close<span className="text-[#a4a5ac]"> by Latchpoint</span>
+                Latchpoint<span className="text-[#a4a5ac]"> Close</span>
               </span>
             </a>
             <p className="mt-4 text-sm leading-relaxed text-[#a4a5ac]">

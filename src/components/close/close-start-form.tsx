@@ -14,7 +14,7 @@ const labelClass = "text-sm font-medium text-text";
 const NEEDS = ["A file under contract now", "One coming up soon", "Just getting to know you"];
 const VOLUME = ["1 to 2 a month", "3 to 5 a month", "6 to 10 a month", "More than 10"];
 
-/** "Send me a file" for Close by Latchpoint. Posts to the studio's contact API, which saves it to HQ's
+/** "Send me a file" for Latchpoint Close. Posts to the studio's contact API, which saves it to HQ's
  *  inquiries and emails it, tagged as a Close request so it's counted apart from studio projects. */
 export function CloseStartForm() {
   const [status, setStatus] = useState<Status>("idle");
