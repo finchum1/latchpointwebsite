@@ -7,7 +7,7 @@ const steps: WalkStep[] = [
   {
     marker: "01",
     title: "A short call",
-    body: "We learn what you sell, who buys it, and what you want a visitor to do. About twenty minutes, no jargon, and you get a fixed price.",
+    body: "We learn what you sell, who buys it, and what you want a visitor to do. About twenty minutes, no jargon, and you get the price in writing.",
     caption: "The brief",
   },
   {

@@ -16,15 +16,15 @@ const URL = "https://websites.latchpointstudios.com";
 export const metadata: Metadata = {
   title: { absolute: "Latchpoint Websites: websites for small businesses" },
   description:
-    "Websites for small businesses and anyone with something to share. Designed around your business, fast on phones, easy to find on Google, and yours to keep. A fixed price up front and live in weeks.",
+    "Websites for small businesses and anyone with something to share. Designed around your business, fast on phones, easy to find on Google, and yours to keep. Starts at $500 to set up, then $100 a month, and live in about two weeks.",
   alternates: { canonical: URL },
   openGraph: {
     title: "Latchpoint Websites",
-    description: "Websites for small businesses: designed around your business, built to be found, and yours to keep. A fixed price up front.",
+    description: "Websites for small businesses: designed around your business and built to be found. From $500 to set up, then $100 a month.",
     url: URL,
     siteName: "Latchpoint Websites",
     type: "website",
-    images: [{ url: `${URL}/websites/og-latchpoint-websites.jpg`, width: 2400, height: 1260, alt: "Latchpoint Websites: websites for small businesses" }],
+    images: [{ url: `${URL}/websites/og-websites-2.jpg`, width: 2400, height: 1260, alt: "Latchpoint Websites: websites for small businesses" }],
   },
   twitter: { card: "summary_large_image" },
 };
@@ -72,12 +72,12 @@ const INCLUDED = [
   {
     icon: Check,
     title: "Yours to keep",
-    body: "Your domain and hosting accounts are in your name. At the end you get the access, the files, and a short guide.",
+    body: "Your domain is registered in your name and the content is yours. At the end you get the access and a short guide.",
   },
   {
     icon: Wrench,
     title: "Someone to call afterward",
-    body: "Need a price changed, a page added, or a hand? Ask the studio that built it. An optional care plan keeps it updated and secure.",
+    body: "Need a price changed, a page added, or a hand? Ask the studio that built it. Your monthly plan keeps it updated and secure.",
   },
 ];
 
@@ -116,8 +116,7 @@ export default function WebsitesPage() {
               </h1>
               <p className="mt-6 max-w-md text-base leading-relaxed text-text-muted sm:text-lg">
                 We design and build websites for small businesses, and really anyone with something to share. Fast on
-                phones, easy to find on Google, and built to turn visitors into customers. A fixed price up front, live
-                in weeks, and it&rsquo;s yours to keep.
+                phones, easy to find on Google, and built to turn visitors into customers. Live in about two weeks.
               </p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <Magnetic>
@@ -128,7 +127,7 @@ export default function WebsitesPage() {
                 </a>
               </div>
               <p className="mt-5 text-sm text-text-faint">
-                A short call, then a fixed price in writing.{" "}
+                From $500 to set up, then $100 a month.{" "}
                 <a href="#pricing" className="underline underline-offset-4 hover:text-text-muted">
                   How pricing works
                 </a>
@@ -149,9 +148,9 @@ export default function WebsitesPage() {
             <ul className="grid grid-cols-2 gap-x-10 gap-y-5 sm:grid-cols-4">
               {[
                 { k: "Who", v: "Small businesses and anyone" },
-                { k: "How long", v: "Weeks, not months" },
-                { k: "Price", v: "Fixed quote, up front" },
-                { k: "Ownership", v: "Yours, start to finish" },
+                { k: "How long", v: "About two weeks" },
+                { k: "Price", v: "From $500, then $100/mo" },
+                { k: "Ownership", v: "Your domain and content" },
               ].map((f) => (
                 <li key={f.k}>
                   <span className="block font-mono text-[11px] uppercase tracking-[0.14em] text-text-faint">{f.k}</span>
@@ -285,41 +284,42 @@ export default function WebsitesPage() {
           <Reveal>
             <Eyebrow>Pricing</Eyebrow>
             <h2 className="mt-3 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-text sm:text-4xl">
-              A fixed price, in writing, before we start.
+              $500 to set up, then $100 a month.
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-text-muted">
-              Every site is a little different, so we quote each one after a short call. Whatever we quote is what you
-              pay. No surprise invoices.
+              That&rsquo;s where it starts. Bigger or more custom sites cost more, and we quote those after a short
+              call. Either way, you see the price in writing before we start.
             </p>
           </Reveal>
 
           <RevealGroup className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
             {[
               {
-                title: "The build",
-                unit: "one fixed price",
+                price: "From $500",
+                unit: "to set up",
                 items: [
-                  "Design, build, and launch of your site",
-                  "Your domain and hosting set up in your name",
+                  "Design, build, and launch of your site, in about two weeks",
+                  "Your domain connected and your contact forms sent to your email",
                   "Help with wording and the photos you have",
                   "Hand-off with the access and a short guide",
                 ],
               },
               {
-                title: "The care plan",
-                unit: "optional, monthly",
+                price: "From $100",
+                unit: "a month",
                 items: [
                   "Hosting, backups, and security updates handled",
                   "Small edits and page changes whenever you ask",
                   "A real person to email when something needs fixing",
+                  "Included with every site, so it never goes stale",
                 ],
               },
             ].map((tier, i) => (
-              <RevealItem key={tier.title}>
+              <RevealItem key={tier.price}>
                 <div className="orbit-wrap relative h-full">
                   <SpotlightCard className="h-full rounded-[20px] border border-border bg-bg-elevated p-7 transition-colors duration-300 hover:border-border-strong sm:p-8">
-                    <p className="text-3xl font-medium tracking-tight text-text">
-                      {tier.title} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
+                    <p className="text-4xl font-medium tracking-tight text-text">
+                      {tier.price} <span className="text-base font-normal text-text-muted">{tier.unit}</span>
                     </p>
                     <Bullets items={tier.items} />
                   </SpotlightCard>
@@ -331,7 +331,7 @@ export default function WebsitesPage() {
 
           <Reveal className="mt-8">
             <p className="text-sm text-text-muted">
-              Want a number today?{" "}
+              Need more pages, booking, or something custom?{" "}
               <a href="#start" className="text-text underline decoration-border-strong underline-offset-4 transition-colors hover:decoration-accent">
                 Ask for a free quote
               </a>
@@ -354,15 +354,15 @@ export default function WebsitesPage() {
           {[
             {
               q: "How much does a website cost?",
-              a: "It depends on how many pages you need and what the site has to do, so we quote each one. You get a fixed price in writing before anything starts, and a quote is one short call.",
+              a: "Sites start at $500 to set up, then $100 a month for hosting, updates, and small changes. Bigger or more custom sites cost more, and we quote those after a short call. You see the price in writing before anything starts.",
             },
             {
               q: "How long does it take?",
-              a: "Most small business sites go live in a few weeks. The biggest factor is how quickly we get your photos and the details of what you do.",
+              a: "About two weeks from our first call for a typical small business site. The biggest factor is how quickly we get your photos and the details of what you do. Larger or custom sites take longer, and we tell you up front.",
             },
             {
               q: "Do I own the website?",
-              a: "Yes. Your domain and hosting accounts are in your name, and we hand over the access when we finish. You're never locked in to us.",
+              a: "Your domain is registered in your name and your content is yours. The monthly plan covers hosting and keeping the site running and up to date.",
             },
             {
               q: "I already have a website. Can you redo it?",
@@ -413,7 +413,7 @@ export default function WebsitesPage() {
                 </h2>
                 <p className="mt-4 max-w-md text-base leading-relaxed text-text-muted">
                   A few quick questions and we&rsquo;ll reach out by the end of the next business day to set up a short
-                  call. You&rsquo;ll get a fixed price, not a sales pitch.
+                  call. You&rsquo;ll get a price in writing, not a sales pitch.
                 </p>
                 <p className="mt-6 text-sm text-text-muted">
                   Rather email?{" "}
