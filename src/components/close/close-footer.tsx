@@ -14,6 +14,7 @@ const service = [
 const company = [
   { href: "https://app.latchpointstudios.com", label: "Sign in" },
   { href: "https://realestate.latchpointstudios.com", label: "Latchpoint Real Estate" },
+  { href: "https://websites.latchpointstudios.com", label: "Latchpoint Websites" },
   { href: "https://latchpointstudios.com", label: "Latchpoint Studios" },
   { href: "mailto:hello@latchpointstudios.com", label: "Email me" },
   { href: "https://app.latchpointstudios.com/privacy", label: "Privacy" },

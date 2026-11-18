@@ -17,6 +17,8 @@ const product = [
 const company = [
   { href: "https://app.latchpointstudios.com", label: "Sign in" },
   { href: "https://latchpointstudios.com", label: "Latchpoint Studios" },
+  { href: "https://close.latchpointstudios.com", label: "Latchpoint Close" },
+  { href: "https://websites.latchpointstudios.com", label: "Latchpoint Websites" },
   { href: "mailto:hello@latchpointstudios.com", label: "Email us" },
   { href: "https://app.latchpointstudios.com/privacy", label: "Privacy" },
   { href: "https://app.latchpointstudios.com/terms", label: "Terms" },

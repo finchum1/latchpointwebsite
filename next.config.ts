@@ -7,6 +7,7 @@ const MAIN_ORIGIN = "https://latchpointstudios.com";
 const SUBDOMAIN_PAGES = [
   { host: "realestate.latchpointstudios.com", path: "/realestate" },
   { host: "close.latchpointstudios.com", path: "/close" },
+  { host: "websites.latchpointstudios.com", path: "/websites" },
 ];
 
 // Studio-site sections. Requested on a subdomain, they go to the main domain.
