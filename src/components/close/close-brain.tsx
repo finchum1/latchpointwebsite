@@ -45,9 +45,10 @@ const config: BrainConfig = {
     at: [83, 198],
     label: "Send a file",
     ariaLabel: "Send me a file: yours is next",
-    href: "#start",
-    info: { title: "Send me a file", blurb: "Send the executed contract and I'll open the file, set the dates, and send you both links.", tag: "Start here", href: "#start", cta: "Send me a file" },
+    href: "/contact",
+    info: { title: "Send me a file", blurb: "Send the executed contract and I'll open the file, set the dates, and send you both links.", tag: "Start here", href: "/contact", cta: "Send me a file" },
   },
+  plainLinks: true,
   defaultInfo: {
     title: "Everything on the file, handled.",
     blurb: "Hover or tap anything to see what I do around it. Every step runs on the same board.",

@@ -17,6 +17,7 @@ const variants: Record<Variant, string> = {
 
 export function Button({
   href,
+  plain = false,
   variant = "primary",
   showArrow = true,
   className = "",
@@ -24,13 +25,15 @@ export function Button({
   ...props
 }: {
   href: string;
+  /** A plain anchor (a full page load) instead of a client-side Link, for sub-sites whose paths are rewritten by host. */
+  plain?: boolean;
   variant?: Variant;
   showArrow?: boolean;
   className?: string;
   children: React.ReactNode;
 } & Omit<ComponentPropsWithoutRef<typeof Link>, "href">) {
-  return (
-    <Link href={href} className={`${base} ${variants[variant]} ${className}`} {...props}>
+  const inner = (
+    <>
       {children}
       {showArrow && (
         <ArrowRight
@@ -38,6 +41,18 @@ export function Button({
           className="size-[15px] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5"
         />
       )}
+    </>
+  );
+  if (plain) {
+    return (
+      <a href={href} className={`${base} ${variants[variant]} ${className}`} {...(props as Omit<ComponentPropsWithoutRef<"a">, "href">)}>
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={`${base} ${variants[variant]} ${className}`} {...props}>
+      {inner}
     </Link>
   );
 }

@@ -45,9 +45,10 @@ const config: BrainConfig = {
     at: [83, 198],
     label: "Your business",
     ariaLabel: "Get a free quote: yours is next",
-    href: "#start",
-    info: { title: "Yours is next", blurb: "Tell us what you do and we'll show you what your site could look like and what it costs.", tag: "Start here", href: "#start", cta: "Get a free quote" },
+    href: "/contact",
+    info: { title: "Yours is next", blurb: "Tell us what you do and we'll show you what your site could look like and what it costs.", tag: "Start here", href: "/contact", cta: "Get a free quote" },
   },
+  plainLinks: true,
   defaultInfo: {
     title: "Every kind of business, built to fit.",
     blurb: "Hover or tap a business to see what its website does for it.",

@@ -57,6 +57,8 @@ export type BrainConfig = {
   /** The dashed empty slot that points at the next step (optional). */
   idea?: { at: [number, number]; label: string; ariaLabel: string; href: string; info: BrainInfo };
   defaultInfo: BrainInfo;
+  /** Use plain anchors for paths, not client-side Links: for sites on a subdomain whose paths are rewritten by host. */
+  plainLinks?: boolean;
 };
 
 type Edge = { id: string; a: string; b: string; from: [number, number]; to: [number, number]; ghost?: boolean };
@@ -80,7 +82,7 @@ const dust = Array.from({ length: 22 }, (_, i) => {
 });
 
 /** An internal path uses Link, anything else a plain anchor. */
-function Anchor({ href, external, children, ...rest }: { href: string; external?: boolean; children: ReactNode } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+function Anchor({ href, external, plain, children, ...rest }: { href: string; external?: boolean; plain?: boolean; children: ReactNode } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" {...rest}>
@@ -88,7 +90,7 @@ function Anchor({ href, external, children, ...rest }: { href: string; external?
       </a>
     );
   }
-  if (href.startsWith("/")) {
+  if (href.startsWith("/") && !plain) {
     return (
       <Link href={href} {...rest}>
         {children}
@@ -278,7 +280,7 @@ export function BrainMap({ config }: { config: BrainConfig }) {
             return (
               <div key={p.id} className="brain-node" data-kind="product" data-state={nodeState(p.id)} style={at(p.id)}>
                 {p.href ? (
-                  <Anchor href={p.href} external={p.external} onClick={tap(p.id)} {...common}>
+                  <Anchor href={p.href} external={p.external} plain={config.plainLinks} onClick={tap(p.id)} {...common}>
                     {inner}
                   </Anchor>
                 ) : (
@@ -293,7 +295,7 @@ export function BrainMap({ config }: { config: BrainConfig }) {
           {/* the empty slot */}
           {idea && (
             <div className="brain-node" data-kind="idea" data-state={nodeState("idea")} style={at("idea")}>
-              <Anchor href={idea.href} className="brain-hit" aria-label={idea.ariaLabel} style={{ ["--delay" as string]: "1.5s" }} onClick={tap("idea")} {...bind("idea")}>
+              <Anchor href={idea.href} plain={config.plainLinks} className="brain-hit" aria-label={idea.ariaLabel} style={{ ["--delay" as string]: "1.5s" }} onClick={tap("idea")} {...bind("idea")}>
                 <span className="brain-pill brain-ghost">
                   <span className="brain-dot" />
                   {idea.label}

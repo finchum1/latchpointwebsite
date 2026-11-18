@@ -3,12 +3,12 @@ import { CloseWordmark } from "./close-wordmark";
 
 // Same shape as the real estate footer (components/realestate/re-footer.tsx), with this page's links.
 const service = [
-  { href: "/#agent", label: "For agents" },
-  { href: "/#client", label: "For clients" },
-  { href: "/#handled", label: "What I handle" },
-  { href: "/#pricing", label: "Pricing" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#start", label: "Send me a file" },
+  { href: "/links", label: "The links" },
+  { href: "/services", label: "What I handle" },
+  { href: "/process", label: "How it works" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Send me a file" },
 ];
 
 const company = [
