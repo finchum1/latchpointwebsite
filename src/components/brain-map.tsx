@@ -39,6 +39,8 @@ export type BrainItem = {
   uses: string[];
   href?: string;
   external?: boolean;
+  /** This company's own colour for the pill (dot, hover and active states), instead of the page accent. */
+  accent?: string;
 };
 
 export type BrainInfo = { title: string; blurb: string; tag?: string; href?: string; cta?: string; external?: boolean };
@@ -278,7 +280,17 @@ export function BrainMap({ config }: { config: BrainConfig }) {
               ...bind(p.id),
             };
             return (
-              <div key={p.id} className="brain-node" data-kind="product" data-state={nodeState(p.id)} style={at(p.id)}>
+              <div
+                key={p.id}
+                className="brain-node"
+                data-kind="product"
+                data-state={nodeState(p.id)}
+                style={
+                  p.accent
+                    ? { ...at(p.id), ["--accent" as string]: p.accent, ["--accent-soft" as string]: `color-mix(in srgb, ${p.accent} 16%, transparent)` }
+                    : at(p.id)
+                }
+              >
                 {p.href ? (
                   <Anchor href={p.href} external={p.external} plain={config.plainLinks} onClick={tap(p.id)} {...common}>
                     {inner}

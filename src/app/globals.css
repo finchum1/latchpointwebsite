@@ -17,8 +17,16 @@
     - Cards / panels: 20px  (--radius-card)
     - Inputs: 10px          (--radius-input)
 
-  Color rule: one accent, "ember" (a desaturated burnt orange), used
-  identically in both themes. No secondary accent hues anywhere on the site.
+  Color rule: each Latchpoint company has ONE accent, used identically in both
+  themes, and no secondary accent hues:
+    - Latchpoint Studios: "ember", a desaturated burnt orange, plus a warm cream
+      that replaces the cool whites/greys (cream text on dark, a cream page in light mode).
+    - Latchpoint Real Estate: sapphire blue, cool neutrals.
+    - Latchpoint Close: jade green, cool neutrals.
+    - Latchpoint Websites: violet, cool neutrals.
+  The Agency (its own app, listings-app) uses Agency Red plus Alabaster cream.
+  The product sites opt in with a data-brand wrapper in their layout; see the
+  "company colors" block at the bottom of this file.
 */
 
 :root {
@@ -27,9 +35,12 @@
   --bg-elevated-2: #17191d;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
-  --text: #f5f5f4;
-  --text-muted: #a4a5ac;
-  --text-faint: #6c6e76;
+  --text: #f3ecdf;
+  --text-muted: #aaa699;
+  --text-faint: #6f6c63;
+  --cream: #efe4cf;
+  --cream-soft: rgba(239, 228, 207, 0.12);
+  --ghost: rgba(239, 228, 207, 0.1);
 
   --accent: #e8623f;
   --accent-hover: #f2794f;
@@ -58,14 +69,16 @@
 }
 
 :root[data-theme="light"] {
-  --bg: #fafafa;
-  --bg-elevated: #f2f2f0;
-  --bg-elevated-2: #e8e8e5;
-  --border: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.14);
-  --text: #16171a;
-  --text-muted: #55565e;
-  --text-faint: #83848c;
+  --bg: #f6f0e3;
+  --bg-elevated: #efe8d8;
+  --bg-elevated-2: #e6decb;
+  --border: rgba(40, 30, 10, 0.1);
+  --border-strong: rgba(40, 30, 10, 0.16);
+  --text: #1b1914;
+  --text-muted: #5b574c;
+  --text-faint: #8b8678;
+  --cream: #6a5a3c;
+  --cream-soft: rgba(106, 90, 60, 0.12);
 
   --accent: #e8623f;
   --accent-hover: #d9522f;
@@ -75,14 +88,14 @@
 
   --glass-grad-1: rgba(255, 255, 255, 0.75);
   --glass-grad-2: rgba(255, 255, 255, 0.35);
-  --glass-base: rgba(255, 255, 255, 0.55);
+  --glass-base: rgba(246, 240, 227, 0.55);
   --glass-border: rgba(0, 0, 0, 0.08);
   --glass-inset-top: rgba(255, 255, 255, 0.9);
   --glass-inset-bottom: rgba(0, 0, 0, 0.04);
   --glass-shadow: rgba(0, 0, 0, 0.12);
   --glass-highlight: rgba(255, 255, 255, 0.6);
-  --glass-fallback: rgba(250, 250, 250, 0.97);
-  --glass-dense-base: rgba(251, 251, 250, 0.95);
+  --glass-fallback: rgba(246, 240, 227, 0.97);
+  --glass-dense-base: rgba(247, 242, 231, 0.95);
 }
 
 @theme inline {
@@ -99,6 +112,8 @@
   --color-accent-press: var(--accent-press);
   --color-accent-soft: var(--accent-soft);
   --color-accent-foreground: var(--accent-foreground);
+  --color-cream: var(--cream);
+  --color-cream-soft: var(--cream-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --radius-card: var(--radius-card);
@@ -233,4 +248,96 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/*
+  ---- company colors ----
+  A product site opts in by wrapping its layout in <div data-brand="..." class="contents">.
+  :has() on body lets the whole page (body background, selection, nav) pick the brand up
+  without the root layout knowing which site it is serving. Studios needs no wrapper:
+  it is the default above (ember + cream).
+
+  Real Estate, Close and Websites drop the cream and go back to the cool neutrals, so each one reads as
+  its own colour: sapphire for Real Estate, jade for Close.
+*/
+body:has([data-brand="realestate"]),
+body:has([data-brand="close"]),
+body:has([data-brand="websites"]) {
+  --bg: #08090b;
+  --bg-elevated: #101215;
+  --bg-elevated-2: #17191d;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text: #f5f5f4;
+  --text-muted: #a4a5ac;
+  --text-faint: #6c6e76;
+  --cream: #f5f5f4;
+  --cream-soft: rgba(245, 245, 244, 0.1);
+  --ghost: rgba(245, 245, 244, 0.1); /* footers are always dark, so the ghost word is light in both themes */
+}
+:root[data-theme="light"] body:has([data-brand="realestate"]),
+:root[data-theme="light"] body:has([data-brand="close"]),
+:root[data-theme="light"] body:has([data-brand="websites"]) {
+  --bg: #fafafa;
+  --bg-elevated: #f2f2f0;
+  --bg-elevated-2: #e8e8e5;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --text: #16171a;
+  --text-muted: #55565e;
+  --text-faint: #83848c;
+  --cream: #16171a;
+  --cream-soft: rgba(22, 23, 26, 0.08);
+  --ghost: rgba(245, 245, 244, 0.1);
+  --glass-base: rgba(255, 255, 255, 0.55);
+  --glass-fallback: rgba(250, 250, 250, 0.97);
+  --glass-dense-base: rgba(251, 251, 250, 0.95);
+}
+
+/* Latchpoint Real Estate: sapphire */
+body:has([data-brand="realestate"]) {
+  --accent: #5b8def;
+  --accent-hover: #7aa3f5;
+  --accent-press: #416fd0;
+  --accent-soft: rgba(91, 141, 239, 0.15);
+  --accent-foreground: #07101f;
+}
+:root[data-theme="light"] body:has([data-brand="realestate"]) {
+  --accent: #3b72dc;
+  --accent-hover: #2f63c6;
+  --accent-press: #2552a8;
+  --accent-soft: rgba(59, 114, 220, 0.12);
+  --accent-foreground: #ffffff;
+}
+
+/* Latchpoint Close: jade */
+body:has([data-brand="close"]) {
+  --accent: #3fb58a;
+  --accent-hover: #58c79d;
+  --accent-press: #2c9470;
+  --accent-soft: rgba(63, 181, 138, 0.15);
+  --accent-foreground: #04120c;
+}
+:root[data-theme="light"] body:has([data-brand="close"]) {
+  --accent: #23805d;
+  --accent-hover: #1b6b4d;
+  --accent-press: #155640;
+  --accent-soft: rgba(35, 128, 93, 0.12);
+  --accent-foreground: #ffffff;
+}
+
+/* Latchpoint Websites: violet */
+body:has([data-brand="websites"]) {
+  --accent: #9b84f5;
+  --accent-hover: #b09cf8;
+  --accent-press: #7d65dc;
+  --accent-soft: rgba(155, 132, 245, 0.15);
+  --accent-foreground: #0b0719;
+}
+:root[data-theme="light"] body:has([data-brand="websites"]) {
+  --accent: #6a4fd6;
+  --accent-hover: #5a40c0;
+  --accent-press: #4a33a3;
+  --accent-soft: rgba(106, 79, 214, 0.12);
+  --accent-foreground: #ffffff;
 }

@@ -20,9 +20,9 @@ const caps: BrainCap[] = [
 
 const items: BrainItem[] = [
   { id: "finchum", label: "Terrence Finchum", blurb: "A personal agent website built around one listing at a time.", at: [161, 127], href: "/work#terrence-finchum", uses: ["websites"] },
-  { id: "realestate", label: "Real Estate", title: "Latchpoint Real Estate", blurb: "Latchpoint Real Estate: an agent's website and the back office behind it.", at: [300, 80], href: "/work#latchpoint-real-estate", uses: ["websites", "dashboards", "crms", "portals", "ai"] },
-  { id: "close", label: "Close", title: "Latchpoint Close", blurb: "Latchpoint Close: transaction coordination with a live link to every file.", at: [439, 127], href: "https://close.latchpointstudios.com", external: true, uses: ["portals", "dashboards"] },
-  { id: "lp-websites", label: "Websites", title: "Latchpoint Websites", blurb: "Latchpoint Websites: websites for small businesses, live in about two weeks.", at: [514, 245], href: "https://websites.latchpointstudios.com", external: true, uses: ["websites"] },
+  { id: "realestate", label: "Real Estate", title: "Latchpoint Real Estate", blurb: "Latchpoint Real Estate: an agent's website and the back office behind it.", at: [300, 80], href: "/work#latchpoint-real-estate", accent: "#4f86ec", uses: ["websites", "dashboards", "crms", "portals", "ai"] },
+  { id: "close", label: "Close", title: "Latchpoint Close", blurb: "Latchpoint Close: transaction coordination with a live link to every file.", at: [439, 127], href: "https://close.latchpointstudios.com", external: true, accent: "#37ab81", uses: ["portals", "dashboards"] },
+  { id: "lp-websites", label: "Websites", title: "Latchpoint Websites", blurb: "Latchpoint Websites: websites for small businesses, live in about two weeks.", at: [514, 245], href: "https://websites.latchpointstudios.com", external: true, accent: "#8b72f0", uses: ["websites"] },
   { id: "film", label: "Oklahoma Film", blurb: "Oklahoma Film Solutions: a film-services site and the private back office behind it.", at: [496, 392], href: "/work#oklahoma-film-solutions", uses: ["websites", "dashboards"] },
   { id: "solobooks", label: "Solo Books", blurb: "Books, budgets, bank matching, and payroll for every business you run.", at: [226, 468], href: "/work#solo-books", uses: ["apps", "dashboards", "ai"] },
   { id: "shine", label: "Shine Ministries", blurb: "A public ministry site and the back office the team runs on.", at: [104, 392], href: "/work#shine-ministries", uses: ["websites", "dashboards", "apps"] },

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const WEBSITES_URL = "https://websites.latchpointstudios.com";
 
 const SHARE = {
-  url: `${WEBSITES_URL}/websites/og-websites-2.jpg`,
+  url: `${WEBSITES_URL}/websites/og-websites-3.jpg`,
   width: 2400,
   height: 1260,
   alt: "Latchpoint Websites: websites for small businesses",

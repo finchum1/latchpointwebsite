@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const REALESTATE_URL = "https://realestate.latchpointstudios.com";
 
 const SHARE = {
-  url: `${REALESTATE_URL}/realestate/og-map.jpg`,
+  url: `${REALESTATE_URL}/realestate/og-map-2.jpg`,
   width: 2400,
   height: 1260,
   alt: "Latchpoint Real Estate",

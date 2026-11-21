@@ -43,7 +43,7 @@ export function GhostWordmark({ view, path }: { view: string; path: string }) {
         }}
       >
         <svg viewBox={view} style={{ display: "block", width: "100%", height: "auto" }}>
-          <path fill="rgba(245, 245, 244, 0.1)" d={path} />
+          <path style={{ fill: "var(--ghost, rgba(245, 245, 244, 0.1))" }} d={path} />
         </svg>
       </div>
     </div>

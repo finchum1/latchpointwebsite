@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const CLOSE_URL = "https://close.latchpointstudios.com";
 
 const SHARE = {
-  url: `${CLOSE_URL}/close/og-latchpoint-close.jpg`,
+  url: `${CLOSE_URL}/close/og-latchpoint-close-2.jpg`,
   width: 2400,
   height: 1260,
   alt: "Latchpoint Close: transaction coordination for Oklahoma agents",
