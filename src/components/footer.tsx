@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Wordmark } from "./logomark";
+import { StudiosWordmark } from "./studios-wordmark";
 import { solutions } from "@/lib/solutions";
 
 const columns = [
@@ -27,7 +28,7 @@ const columns = [
 export function Footer() {
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-0 pt-16 lg:px-8">
         <div className="flex flex-col justify-between gap-12 lg:flex-row">
           <div className="max-w-sm">
             <Wordmark animated />
@@ -67,6 +68,7 @@ export function Footer() {
           </p>
         </div>
       </div>
+      <StudiosWordmark />
     </footer>
   );
 }
