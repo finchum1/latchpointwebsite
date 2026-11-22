@@ -342,3 +342,8 @@ body:has([data-brand="websites"]) {
   --accent-soft: rgba(106, 79, 214, 0.12);
   --accent-foreground: #ffffff;
 }
+
+/* "More from Latchpoint" cards: each company's own dot color (set inline as --fam / --fam-light). */
+.family-dot { background: var(--fam); }
+:root[data-theme="light"] .family-dot { background: var(--fam-light); }
+.family-card:hover .family-dot { box-shadow: 0 0 0 4px color-mix(in srgb, var(--fam) 22%, transparent); }
