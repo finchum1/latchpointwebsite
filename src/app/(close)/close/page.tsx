@@ -5,6 +5,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { BrowserFrame } from "@/components/realestate/frames";
 import { Eyebrow, CtaBand } from "@/components/subsite/parts";
 import { CloseBrain } from "@/components/close/close-brain";
+import { CloseReviews } from "@/components/close/close-reviews";
 import { closeMetadata } from "@/components/close/meta";
 
 export const metadata: Metadata = closeMetadata("", "Latchpoint Close: transaction coordination for Oklahoma agents", "Contract-to-close coordination for Oklahoma real estate agents. You get a private link that shows the whole file, and your client gets a closing timeline in plain English. Flat fee per file.");
@@ -149,6 +150,7 @@ export default function CloseHome() {
         </Reveal>
       </section>
 
+      <CloseReviews />
       <CtaBand title="Got a file under contract?" body="Send me the contract and I'll open the file, set the dates, and send you both links." label="Send me a file" />
     </>
   );

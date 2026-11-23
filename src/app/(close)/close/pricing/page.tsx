@@ -3,6 +3,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { OrbitNode } from "@/components/orbit-node";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { Eyebrow, Bullets, CtaBand } from "@/components/subsite/parts";
+import { CloseReviews } from "@/components/close/close-reviews";
 import { closeMetadata } from "@/components/close/meta";
 
 export const metadata: Metadata = closeMetadata("/pricing", "Pricing: Latchpoint Close", "$300 per file, paid at closing. No monthly fee and no contract. Volume pricing for teams.");
@@ -60,6 +61,7 @@ export default function ClosePricing() {
           </RevealGroup>
         </div>
       </section>
+      <CloseReviews />
       <CtaBand title="Got a file under contract?" body="Send me the contract and I'll open the file, set the dates, and send you both links." label="Send me a file" />
     </>
   );
