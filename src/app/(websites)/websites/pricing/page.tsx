@@ -3,6 +3,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/reveal";
 import { OrbitNode } from "@/components/orbit-node";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { Eyebrow, Bullets, CtaBand } from "@/components/subsite/parts";
+import { WebsitesReviews } from "@/components/websites/websites-reviews";
 import { websitesMetadata } from "@/components/websites/meta";
 
 export const metadata: Metadata = websitesMetadata("/pricing", "Pricing: Latchpoint Websites", "$500 to set up, then $100 a month, with hosting, backups, updates and small edits included. Custom sites are quoted after a short call.");
@@ -72,6 +73,7 @@ export default function WebsitesPricing() {
           </Reveal>
         </div>
       </section>
+      <WebsitesReviews />
       <CtaBand title="Ready for a website that works?" body="Tell us about your business and we'll reach out by the end of the next business day." label="Get a free quote" />
     </>
   );

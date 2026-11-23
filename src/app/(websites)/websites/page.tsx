@@ -6,6 +6,7 @@ import { BrowserFrame } from "@/components/realestate/frames";
 import { Eyebrow, CtaBand } from "@/components/subsite/parts";
 import { INCLUDED, WORK } from "@/components/websites/data";
 import { WebsitesBrain } from "@/components/websites/websites-brain";
+import { WebsitesReviews } from "@/components/websites/websites-reviews";
 import { websitesMetadata } from "@/components/websites/meta";
 
 export const metadata: Metadata = websitesMetadata("", "Latchpoint Websites: websites for small businesses", "Websites for small businesses and anyone with something to share. Designed around your business, fast on phones, easy to find on Google. Starts at $500 to set up, then $100 a month, and live in about two weeks.");
@@ -178,6 +179,7 @@ export default function WebsitesHome() {
         </div>
       </section>
 
+      <WebsitesReviews />
       <CtaBand title="Ready for a website that works?" body="Tell us about your business and we'll reach out by the end of the next business day." label="Get a free quote" />
     </>
   );
